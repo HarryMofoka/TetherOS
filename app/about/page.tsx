@@ -58,11 +58,8 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          <div className="relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-muted to-background">
-            <div className="absolute inset-0 grid grid-cols-6 opacity-30">
-              {Array.from({ length: 48 }).map((_, i) => <div key={i} className="border border-border/40" />)}
-            </div>
-            <div className="relative scale-150"><Logo /></div>
+          <div className="relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-2xl border border-border">
+            <img src="/about-hero.png" alt="LifeOS Hero Graphic" className="absolute inset-0 h-full w-full object-cover" />
           </div>
         </div>
       </section>

@@ -1,10 +1,9 @@
-import { PhoneFrame } from "./PhoneFrame";
 import { CheckSquare, Calendar as CalIcon, Activity, MessageSquare, ChevronRight } from "lucide-react";
 
 export function TodayPhone() {
   return (
-    <PhoneFrame>
-      <div className="space-y-3 p-4">
+    <div className="w-[320px] rounded-2xl border border-border bg-card p-6 shadow-xl">
+      <div className="space-y-4">
         <div>
           <div className="text-lg font-bold">Today</div>
           <div className="text-[10px] text-muted-foreground">Tuesday, 11 February</div>
@@ -42,6 +41,6 @@ export function TodayPhone() {
           </div>
         </div>
       </div>
-    </PhoneFrame>
+    </div>
   );
 }

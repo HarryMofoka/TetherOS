@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Check, ChevronRight, Calendar as CalIcon } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTABanner } from "@/components/site/CTABanner";
-import { PhoneFrame } from "@/components/mock/PhoneFrame";
 import { LifeScoreRing, MiniLineChart, ProgressRing } from "@/components/mock/charts";
 import { MemorySection, PrivacySection, OfflineSection, FaqSection } from "@/components/site/sections";
 
@@ -220,8 +219,8 @@ function EventRow({ time, title, sub, duration, active }: { time: string; title:
 
 function TodayMiniPhone() {
   return (
-    <PhoneFrame>
-      <div className="space-y-2 p-3">
+    <div className="w-[280px] mx-auto rounded-2xl border border-border bg-card p-4 shadow-sm">
+      <div className="space-y-2 p-1">
         <div className="text-sm font-bold">Today</div>
         <div className="text-[9px] text-muted-foreground">Tuesday, 11 February</div>
         <div className="rounded-lg border border-border p-2">
@@ -235,7 +234,7 @@ function TodayMiniPhone() {
         <div className="text-[9px] font-semibold text-muted-foreground">Up Next</div>
         <div className="rounded-lg border border-border p-2"><div className="text-[11px] font-semibold">Deep Work Session</div><div className="text-[9px] text-muted-foreground">08:00 – 10:00</div></div>
       </div>
-    </PhoneFrame>
+    </div>
   );
 }
 
@@ -248,8 +247,8 @@ function HabitsPhone() {
     { name: "Journal", streak: "7 Day Streak" },
   ];
   return (
-    <PhoneFrame>
-      <div className="space-y-2 p-3">
+    <div className="w-[280px] mx-auto rounded-2xl border border-border bg-card p-4 shadow-sm">
+      <div className="space-y-3 p-1">
         <div className="flex items-center gap-2 text-[10px]">
           <span className="rounded-full bg-foreground px-2 py-0.5 text-background">All</span>
           <span className="text-muted-foreground">Active</span>
@@ -266,14 +265,14 @@ function HabitsPhone() {
         ))}
         <button className="mt-2 w-full rounded-lg bg-foreground py-2 text-[10px] font-semibold text-background">+ Add New Habit</button>
       </div>
-    </PhoneFrame>
+    </div>
   );
 }
 
 function JournalPhone() {
   return (
-    <PhoneFrame>
-      <div className="space-y-2 p-3">
+    <div className="w-[280px] mx-auto rounded-2xl border border-border bg-card p-4 shadow-sm">
+      <div className="space-y-3 p-1">
         <div className="text-sm font-bold">Journal</div>
         <div className="text-[9px] text-muted-foreground">Write. Reflect. Grow.</div>
         <div className="grid grid-cols-7 gap-1 text-center text-[9px]">
@@ -288,7 +287,7 @@ function JournalPhone() {
           Today was productive. I finally finished the authentication flow and it feels good to see things coming together. Had a deep work session in the morning which really helped. Grateful for the progress.
         </p>
       </div>
-    </PhoneFrame>
+    </div>
   );
 }
 
