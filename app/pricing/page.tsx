@@ -5,10 +5,10 @@ import Link from "next/link";
 import { FaqSection, TestimonialsSection, TrustBadges } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "Pricing — LifeOS",
+  title: "Pricing â€” TetherOS",
   description: "Plans for every stage of your journey. Start free, upgrade anytime.",
   openGraph: {
-    title: "Pricing — LifeOS",
+    title: "Pricing â€” TetherOS",
     description: "Simple, transparent pricing.",
     url: "/pricing",
   },
@@ -42,11 +42,11 @@ const plans = [
 ];
 
 const compare = [
-  ["Tasks", "✓", "✓", "✓", "✓"],
+  ["Tasks", "âœ“", "âœ“", "âœ“", "âœ“"],
   ["Habits", "Up to 3", "Unlimited", "Unlimited", "Unlimited"],
   ["AI Coach", "Limited", "Unlimited", "Unlimited", "Unlimited"],
-  ["Projects", "—", "Unlimited", "Unlimited", "Unlimited"],
-  ["Team Collaboration", "—", "—", "✓", "✓"],
+  ["Projects", "â€”", "Unlimited", "Unlimited", "Unlimited"],
+  ["Team Collaboration", "â€”", "â€”", "âœ“", "âœ“"],
   ["Analytics", "Basic", "Advanced", "Advanced", "Advanced+"],
 ];
 
@@ -81,7 +81,7 @@ export default function PricingPage() {
                 {p.per && <span className="text-xs text-muted-foreground">{p.per}</span>}
               </div>
               {p.sub && <div className="mt-1 text-[11px] text-muted-foreground">{p.sub}</div>}
-              <Link href={p.name === "Enterprise" ? "mailto:sales@lifeos.com" : "/signup"} className={`mt-5 w-full block text-center rounded-full px-4 py-2.5 text-sm font-medium ${p.featured ? "bg-foreground text-background hover:opacity-90" : "border border-border bg-background hover:bg-muted"}`}>{p.cta}</Link>
+              <Link href={p.name === "Enterprise" ? "mailto:sales@tetheros.com" : "/signup"} className={`mt-5 w-full block text-center rounded-full px-4 py-2.5 text-sm font-medium ${p.featured ? "bg-foreground text-background hover:opacity-90" : "border border-border bg-background hover:bg-muted"}`}>{p.cta}</Link>
               {p.inherit && <div className="mt-6 text-xs font-medium text-muted-foreground">{p.inherit}</div>}
               <ul className="mt-4 space-y-2.5">
                 {p.features.map((f) => (
@@ -99,7 +99,7 @@ export default function PricingPage() {
         <div className="rounded-2xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center justify-between">
             <div className="text-sm font-semibold">Compare all features</div>
-            <a href="#" className="text-xs text-muted-foreground">See all features →</a>
+            <a href="#" className="text-xs text-muted-foreground">See all features â†’</a>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -117,7 +117,7 @@ export default function PricingPage() {
                   <tr key={row[0]} className="border-b border-border/60">
                     {row.map((cell, i) => (
                       <td key={i} className={`py-3 ${i===0 ? "font-medium" : "text-muted-foreground"}`}>
-                        {cell === "✓" ? <Check className="h-4 w-4 text-[color:var(--brand-green)]" /> : cell}
+                        {cell === "âœ“" ? <Check className="h-4 w-4 text-[color:var(--brand-green)]" /> : cell}
                       </td>
                     ))}
                   </tr>
@@ -133,7 +133,7 @@ export default function PricingPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-muted text-[color:var(--brand-blue)]"><Star className="h-6 w-6" /></div>
           <div>
             <div className="font-semibold">Not sure which plan is right for you?</div>
-            <div className="text-xs text-muted-foreground">Try LifeOS free for 14 days. No credit card required.</div>
+            <div className="text-xs text-muted-foreground">Try TetherOS free for 14 days. No credit card required.</div>
           </div>
           <Link href="/signup" className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90">Get Started Free <ArrowRight className="h-4 w-4" /></Link>
         </div>
@@ -142,10 +142,10 @@ export default function PricingPage() {
       <TrustBadges />
       <TestimonialsSection />
       <FaqSection title="Pricing FAQs" items={[
-        { q: "Do you offer a free trial on paid plans?", a: "Yes — Pro and Team include a 14-day free trial. No credit card required to start." },
+        { q: "Do you offer a free trial on paid plans?", a: "Yes â€” Pro and Team include a 14-day free trial. No credit card required to start." },
         { q: "Can I switch plans anytime?", a: "Yes. Upgrades apply immediately; downgrades take effect at the end of your current billing cycle." },
         { q: "How does billing work for Team?", a: "Team is billed per active seat per month, with a single centralized invoice and volume discounts on the annual plan." },
-        { q: "Is my data private on paid plans?", a: "All plans are zero-knowledge — your journal, tasks, and reflections are encrypted on-device before anything reaches our servers." },
+        { q: "Is my data private on paid plans?", a: "All plans are zero-knowledge â€” your journal, tasks, and reflections are encrypted on-device before anything reaches our servers." },
         { q: "Do you offer discounts for students or non-profits?", a: "Yes. Verified students and registered non-profits get 50% off Pro. Contact us with proof of eligibility." },
         { q: "What payment methods do you accept?", a: "All major credit cards, Apple Pay, Google Pay, and bank transfer for annual Enterprise contracts." },
       ]} />

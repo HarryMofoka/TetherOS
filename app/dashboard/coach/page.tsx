@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MessageSquare, ArrowUp, Clock, Calendar as CalIcon, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AI Coach — LifeOS",
+  title: "AI Coach â€” TetherOS",
   description: "Personalized guidance and insights.",
 };
 
@@ -26,7 +26,7 @@ export default function CoachPage() {
               <MessageSquare className="h-4 w-4" />
             </div>
             <div className="flex-1 space-y-2">
-              <div className="font-semibold text-sm">LifeOS Coach</div>
+              <div className="font-semibold text-sm">TetherOS Coach</div>
               <div className="text-sm text-foreground/90 bg-muted/40 p-4 rounded-2xl rounded-tl-sm border border-border leading-relaxed">
                 Good morning, Harry! Based on your activity this week, your deep work sessions are 20% longer when you schedule them before 11 AM. 
                 <br/><br/>
@@ -55,7 +55,7 @@ export default function CoachPage() {
               <MessageSquare className="h-4 w-4" />
             </div>
             <div className="flex-1 space-y-2">
-              <div className="font-semibold text-sm">LifeOS Coach</div>
+              <div className="font-semibold text-sm">TetherOS Coach</div>
               <div className="text-sm text-foreground/90 bg-muted/40 p-4 rounded-2xl rounded-tl-sm border border-border leading-relaxed">
                 Here's a quick look at your week so far. You're doing great on habit consistency, but your sleep has been slightly irregular.
                 
@@ -63,7 +63,7 @@ export default function CoachPage() {
                   <div className="bg-background rounded-xl p-3 border border-border">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Clock className="h-3 w-3" /> Focus Time</div>
                     <div className="font-bold text-lg">14h 20m</div>
-                    <div className="text-[10px] text-green-500 mt-1">↑ 12% vs last week</div>
+                    <div className="text-[10px] text-green-500 mt-1">â†‘ 12% vs last week</div>
                   </div>
                   <div className="bg-background rounded-xl p-3 border border-border">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><CalIcon className="h-3 w-3" /> Habits</div>

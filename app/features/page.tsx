@@ -6,10 +6,10 @@ import { LifeScoreRing, MiniLineChart, ProgressRing } from "@/components/mock/ch
 import { MemorySection, PrivacySection, OfflineSection, FaqSection } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "Features — LifeOS",
+  title: "Features â€” TetherOS",
   description: "Planning, habit building, productivity tools, and AI guidance in one intelligent system.",
   openGraph: {
-    title: "Features — LifeOS",
+    title: "Features â€” TetherOS",
     description: "Everything you need. All in one intelligent system.",
     url: "/features",
   },
@@ -26,11 +26,11 @@ export default function FeaturesPage() {
           All in one <span className="text-muted-foreground/70">intelligent system.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-sm text-muted-foreground">
-          LifeOS combines planning, habit building, productivity tools, and AI guidance to help you take control of your life.
+          TetherOS combines planning, habit building, productivity tools, and AI guidance to help you take control of your life.
         </p>
       </section>
 
-      {/* Feature 1 — Calendar */}
+      {/* Feature 1 â€” Calendar */}
       <FeatureRow
         n="01"
         icon={<CalIcon className="h-5 w-5" />}
@@ -71,7 +71,7 @@ export default function FeaturesPage() {
                 <div className="flex items-start justify-between">
                   <LifeScoreRing size={100} />
                   <div className="space-y-2 text-right text-xs">
-                    <div><div className="text-muted-foreground">Days with LifeOS</div><div className="text-base font-bold">47</div></div>
+                    <div><div className="text-muted-foreground">Days with TetherOS</div><div className="text-base font-bold">47</div></div>
                     <div><div className="text-muted-foreground">Goals Completed</div><div className="text-base font-bold">12</div></div>
                     <div><div className="text-muted-foreground">Current Streak</div><div className="text-base font-bold">9 days</div></div>
                   </div>
@@ -83,7 +83,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Feature 4 — AI Coach */}
+      {/* Feature 4 â€” AI Coach */}
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="rounded-2xl border border-border bg-card p-8">
           <div className="grid gap-10 md:grid-cols-3">
@@ -132,7 +132,7 @@ export default function FeaturesPage() {
                 ))}
               </ul>
               <div className="mt-5 grid grid-cols-3 gap-3">
-                {["📅", "N", "♥", "🎵", "+"].map((i, idx) => (
+                {["ðŸ“…", "N", "â™¥", "ðŸŽµ", "+"].map((i, idx) => (
                   <div key={idx} className="flex h-12 items-center justify-center rounded-xl border border-border bg-background text-lg">{i}</div>
                 ))}
               </div>
@@ -147,10 +147,10 @@ export default function FeaturesPage() {
       <FaqSection title="Feature FAQs" items={[
         { q: "Can I time-block right from my task list?", a: "Yes. Drag any task from the priority list onto the Planner sheet to schedule it into a time block, GTD-style." },
         { q: "How are streaks calculated when I travel?", a: "Streaks use 24-hour offsets tied to your local timezone at log time, so a red-eye flight won't reset a habit you actually completed." },
-        { q: "What does the Life Timeline actually show?", a: "A single chronological feed of task completions, habit logs, and journal entries — with emotional index values and semantic tags." },
+        { q: "What does the Life Timeline actually show?", a: "A single chronological feed of task completions, habit logs, and journal entries â€” with emotional index values and semantic tags." },
         { q: "How does semantic search work offline?", a: "Journal entries are embedded locally with Transformers.js (all-MiniLM-L6-v2) and stored in an on-device vector index. Search runs in under 100ms without a network." },
       ]} />
-      <CTABanner title="Ready to experience LifeOS?" description="Join thousands of people who are organizing their life and achieving their goals with AI." secondary="See How It Works" />
+      <CTABanner title="Ready to experience TetherOS?" description="Join thousands of people who are organizing their life and achieving their goals with AI." secondary="See How It Works" />
     </SiteLayout>
   );
 }
@@ -183,7 +183,7 @@ function CalendarMock() {
     <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="text-lg font-bold">Calendar</div>
-        <div className="text-xs text-muted-foreground">‹ Today ›</div>
+        <div className="text-xs text-muted-foreground">â€¹ Today â€º</div>
       </div>
       <div className="mt-3 text-sm font-semibold">February 2025</div>
       <div className="mt-3 grid grid-cols-7 gap-1 text-center text-[10px] text-muted-foreground">
@@ -194,7 +194,7 @@ function CalendarMock() {
       </div>
       <div className="mt-4 flex items-center justify-between">
         <div className="text-xs font-semibold">Tuesday, 11 February</div>
-        <div className="text-[10px] text-[color:var(--brand-blue)]">✨ Plan with AI</div>
+        <div className="text-[10px] text-[color:var(--brand-blue)]">âœ¨ Plan with AI</div>
       </div>
       <div className="mt-2 space-y-2">
         <EventRow time="08:00" title="Deep Work Session" sub="Build Authentication Flow" duration="2h 30m" />
@@ -212,7 +212,7 @@ function EventRow({ time, title, sub, duration, active }: { time: string; title:
         <div className="text-xs font-semibold">{title}</div>
         <div className="text-[10px] text-muted-foreground">{sub}</div>
       </div>
-      <div className="text-[10px] text-muted-foreground">⏱ {duration}</div>
+      <div className="text-[10px] text-muted-foreground">â± {duration}</div>
     </div>
   );
 }
@@ -232,7 +232,7 @@ function TodayMiniPhone() {
         <div className="rounded-lg border border-border p-2"><div className="text-[9px] text-muted-foreground">Habits</div><div className="text-[11px] font-semibold">9 Day Streak</div></div>
         <div className="rounded-lg border border-border p-2"><div className="text-[9px] text-muted-foreground">AI Coach</div><div className="text-[11px] font-semibold">Check-in at 07:30 AM</div></div>
         <div className="text-[9px] font-semibold text-muted-foreground">Up Next</div>
-        <div className="rounded-lg border border-border p-2"><div className="text-[11px] font-semibold">Deep Work Session</div><div className="text-[9px] text-muted-foreground">08:00 – 10:00</div></div>
+        <div className="rounded-lg border border-border p-2"><div className="text-[11px] font-semibold">Deep Work Session</div><div className="text-[9px] text-muted-foreground">08:00 â€“ 10:00</div></div>
       </div>
     </div>
   );
@@ -294,11 +294,11 @@ function JournalPhone() {
 function AICoachMock() {
   return (
     <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
-      <div className="flex items-center gap-2 text-xs font-semibold">✨ AI Coach</div>
+      <div className="flex items-center gap-2 text-xs font-semibold">âœ¨ AI Coach</div>
       <div className="mt-3 flex gap-2">
         <div className="h-8 w-8 shrink-0 rounded-full bg-muted" />
         <div className="rounded-xl border border-border bg-background p-3 text-xs">
-          You&apos;ve been consistently productive in the mornings. Consider scheduling your most important tasks between 8–11 AM.
+          You&apos;ve been consistently productive in the mornings. Consider scheduling your most important tasks between 8â€“11 AM.
         </div>
       </div>
       <div className="mt-3 flex flex-wrap gap-2 text-[10px]">
@@ -307,7 +307,7 @@ function AICoachMock() {
         ))}
       </div>
       <div className="mt-3 flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-[11px] text-muted-foreground">
-        Ask your AI Coach anything... <span className="ml-auto">↗</span>
+        Ask your AI Coach anything... <span className="ml-auto">â†—</span>
       </div>
     </div>
   );
@@ -316,7 +316,7 @@ function AICoachMock() {
 function ProjectsMock() {
   const items = [
     { name: "AI Resume Builder", status: "Active", note: "Due Feb Today", pct: 67 },
-    { name: "LifeOS Mobile App", status: "Active", note: "Due Mar 5, 2025", pct: 42 },
+    { name: "TetherOS Mobile App", status: "Active", note: "Due Mar 5, 2025", pct: 42 },
     { name: "Personal Website", status: "On Hold", note: "No deadline", pct: 25 },
   ];
   return (
@@ -335,10 +335,10 @@ function ProjectsMock() {
       <div className="mt-3 space-y-2">
         {items.map(p => (
           <div key={p.name} className="flex items-center gap-3 rounded-xl border border-border p-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-xs">📦</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-xs">ðŸ“¦</div>
             <div className="flex-1">
               <div className="text-xs font-semibold">{p.name}</div>
-              <div className="text-[10px] text-muted-foreground">{p.status} · {p.note}</div>
+              <div className="text-[10px] text-muted-foreground">{p.status} Â· {p.note}</div>
             </div>
             <ProgressRing value={p.pct} />
           </div>

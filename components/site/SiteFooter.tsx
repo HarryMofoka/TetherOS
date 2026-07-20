@@ -33,7 +33,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="mt-12 flex items-center justify-between border-t border-border/60 pt-6">
-          <p className="text-xs text-muted-foreground">© 2025 LifeOS. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">Â© 2025 TetherOS. All rights reserved.</p>
           <div className="flex items-center gap-4 text-muted-foreground">
             <a href="#" aria-label="Twitter"><Globe className="h-4 w-4" /></a>
             <a href="#" aria-label="Instagram"><AtSign className="h-4 w-4" /></a>

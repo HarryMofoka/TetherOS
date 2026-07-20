@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Play, MoreHorizontal } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Today — LifeOS",
+  title: "Today â€” TetherOS",
   description: "Focus on today's goals.",
 };
 
@@ -10,7 +10,7 @@ export default function TodayPage() {
   return (
     <>
       <div className="px-8 pt-6">
-        <h1 className="text-2xl font-bold">Today's Focus 🎯</h1>
+        <h1 className="text-2xl font-bold">Today's Focus ðŸŽ¯</h1>
         <p className="text-xs text-muted-foreground">Make today count.</p>
       </div>
       <div className="px-8 py-6 max-w-4xl">
@@ -46,7 +46,7 @@ function PlanRow({ time, title, sub, duration, active }: { time: string; title: 
             <div className="text-xs text-muted-foreground mt-0.5">{sub}</div>
           </div>
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            {duration && <span className="bg-background px-2 py-1 rounded-md border border-border">⏱ {duration}</span>}
+            {duration && <span className="bg-background px-2 py-1 rounded-md border border-border">â± {duration}</span>}
             {active ? <Play className="h-4 w-4 text-[color:var(--brand-blue)]" /> : <MoreHorizontal className="h-4 w-4" />}
           </div>
         </div>

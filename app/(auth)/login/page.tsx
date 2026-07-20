@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Log in — LifeOS",
-  description: "Log in to your LifeOS account.",
+  title: "Log in â€” TetherOS",
+  description: "Log in to your TetherOS account.",
 };
 
 export default function LoginPage() {
@@ -32,7 +32,7 @@ export default function LoginPage() {
             </div>
             <input 
               type="password" 
-              placeholder="••••••••" 
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
               className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20"
             />
           </div>

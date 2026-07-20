@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus, MoreHorizontal, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Tasks — LifeOS",
+  title: "Tasks â€” TetherOS",
   description: "Manage your to-dos.",
 };
 
@@ -11,7 +11,7 @@ export default function TasksPage() {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-8 pt-6">
         <div>
-          <h1 className="text-2xl font-bold">Tasks ✅</h1>
+          <h1 className="text-2xl font-bold">Tasks âœ…</h1>
           <p className="text-xs text-muted-foreground">Manage your workflow.</p>
         </div>
         <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">

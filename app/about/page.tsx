@@ -6,11 +6,11 @@ import { Logo } from "@/components/site/Logo";
 import { FaqSection, PrivacySection } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "About — LifeOS",
-  description: "We built LifeOS to help people take control of their lives.",
+  title: "About â€” TetherOS",
+  description: "We built TetherOS to help people take control of their lives.",
   openGraph: {
-    title: "About — LifeOS",
-    description: "Our story, mission, and the founders behind LifeOS.",
+    title: "About â€” TetherOS",
+    description: "Our story, mission, and the founders behind TetherOS.",
     url: "/about",
   },
   alternates: { canonical: "/about" },
@@ -45,9 +45,9 @@ export default function AboutPage() {
           <div>
             <span className="inline-block rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium tracking-wider text-muted-foreground">OUR STORY</span>
             <h1 className="mt-6 text-4xl font-bold leading-tight md:text-5xl">
-              We built LifeOS to help people take control of <span className="text-muted-foreground/70">their lives.</span>
+              We built TetherOS to help people take control of <span className="text-muted-foreground/70">their lives.</span>
             </h1>
-            <p className="mt-5 max-w-md text-sm text-muted-foreground">LifeOS is more than a productivity app. It&apos;s an AI-powered operating system for your life.</p>
+            <p className="mt-5 max-w-md text-sm text-muted-foreground">TetherOS is more than a productivity app. It&apos;s an AI-powered operating system for your life.</p>
             <p className="mt-3 max-w-md text-sm text-muted-foreground">We believe that when you plan better, build better habits, and reflect daily, you become the best version of yourself.</p>
             <div className="mt-8 grid grid-cols-4 gap-4">
               {stats.map((s) => (
@@ -59,7 +59,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="relative flex aspect-[5/4] items-center justify-center overflow-hidden rounded-2xl border border-border">
-            <img src="/about-hero.png" alt="LifeOS Hero Graphic" className="absolute inset-0 h-full w-full object-cover" />
+            <img src="/about-hero.png" alt="TetherOS Hero Graphic" className="absolute inset-0 h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -72,7 +72,7 @@ export default function AboutPage() {
           </div>
           <div>
             <h2 className="text-xl font-bold">Our vision</h2>
-            <p className="mt-3 max-w-md text-sm text-muted-foreground">A world where technology aligns with human potential — helping millions of people build better lives, every day.</p>
+            <p className="mt-3 max-w-md text-sm text-muted-foreground">A world where technology aligns with human potential â€” helping millions of people build better lives, every day.</p>
           </div>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function AboutPage() {
             { tag: "SHIPPED", title: "Local vault & encryption", desc: "Zero-knowledge AES-256 vault with biometric unlock." },
             { tag: "SHIPPED", title: "Mission Control dashboard", desc: "Unified daily view with progress rings and rollover." },
             { tag: "IN PROGRESS", title: "Memory Synapse RAG", desc: "On-device semantic search feeding the reflection coach." },
-            { tag: "NEXT", title: "Native mobile client", desc: "iOS & Android with full offline parity — Milestone 7." },
+            { tag: "NEXT", title: "Native mobile client", desc: "iOS & Android with full offline parity â€” Milestone 7." },
           ].map((r) => (
             <div key={r.title} className="rounded-2xl border border-border bg-card p-5">
               <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold">Principles we build by</h2>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              A short list we return to whenever we&apos;re deciding what to add — and, more often, what to leave out.
+              A short list we return to whenever we&apos;re deciding what to add â€” and, more often, what to leave out.
             </p>
           </div>
           <ul className="space-y-4">
@@ -163,19 +163,19 @@ export default function AboutPage() {
       </section>
 
       <PrivacySection />
-      <FaqSection title="About LifeOS" items={[
-        { q: "Who is LifeOS for?", a: "Anyone who wants to close the gap between their intentions and their actions — students, founders, engineers, creatives, and quietly ambitious humans." },
-        { q: "How is LifeOS funded?", a: "Subscriptions. No ads, no data sales, no venture-scale pressure to squeeze users. If you pay, we work for you." },
+      <FaqSection title="About TetherOS" items={[
+        { q: "Who is TetherOS for?", a: "Anyone who wants to close the gap between their intentions and their actions â€” students, founders, engineers, creatives, and quietly ambitious humans." },
+        { q: "How is TetherOS funded?", a: "Subscriptions. No ads, no data sales, no venture-scale pressure to squeeze users. If you pay, we work for you." },
         { q: "Is the company remote?", a: "Yes, fully remote across four timezones. We meet in person twice a year." },
-        { q: "How can I get involved?", a: "Join our public beta, share feedback in our community, or apply from the Careers page — we're hiring thoughtfully." },
+        { q: "How can I get involved?", a: "Join our public beta, share feedback in our community, or apply from the Careers page â€” we're hiring thoughtfully." },
       ]} />
 
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-card p-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"><Send className="h-5 w-5" /></div>
           <div>
-            <div className="font-semibold">Join thousands building better lives with LifeOS.</div>
-            <div className="text-xs text-muted-foreground">Start your journey today — it changes everything.</div>
+            <div className="font-semibold">Join thousands building better lives with TetherOS.</div>
+            <div className="text-xs text-muted-foreground">Start your journey today â€” it changes everything.</div>
           </div>
           <Link href="/signup" className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background">Get Started Free <ArrowRight className="h-4 w-4" /></Link>
         </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bookmark, Search, Plus, ExternalLink, Globe, Layout, Palette, Code } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bookmarks — LifeOS",
+  title: "Bookmarks â€” TetherOS",
   description: "Saved links and resources.",
 };
 

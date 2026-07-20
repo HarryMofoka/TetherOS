@@ -9,10 +9,10 @@ import { LifeScoreRing } from "@/components/mock/charts";
 import { PrivacySection, MemorySection, OfflineSection, TestimonialsSection, FaqSection, TrustBadges } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "LifeOS — Your life. Organized. Powered by AI.",
+  title: "TetherOS â€” Your life. Organized. Powered by AI.",
   description: "One intelligent system to plan your day, build better habits, and become who you're meant to be.",
   openGraph: {
-    title: "LifeOS — Your life. Organized.",
+    title: "TetherOS â€” Your life. Organized.",
     description: "AI-powered planning, habits, and reflection in one system.",
     url: "/",
   },
@@ -117,7 +117,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
-            <h2 className="text-3xl font-bold md:text-4xl">How LifeOS works</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">How TetherOS works</h2>
             <div className="mt-10 space-y-8">
               {steps.map((s) => (
                 <div key={s.n} className="flex gap-5">
@@ -133,13 +133,13 @@ export default function Home() {
           <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-base font-bold">Good morning, Harry 👋</div>
+                <div className="text-base font-bold">Good morning, Harry ðŸ‘‹</div>
                 <div className="text-xs text-muted-foreground">Let&apos;s make today productive.</div>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3">
               <MiniStat label="Life Score" value="82" />
-              <MiniStat label="Days with LifeOS" value="47" />
+              <MiniStat label="Days with TetherOS" value="47" />
               <MiniStat label="Goals Completed" value="12" />
             </div>
             <div className="mt-4 rounded-xl border border-border p-3">

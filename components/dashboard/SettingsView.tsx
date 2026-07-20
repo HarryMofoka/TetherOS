@@ -158,7 +158,7 @@ function NotificationsTab() {
         <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           <ToggleRow label="Weekly Digest" desc="Receive a weekly summary of your productivity and habits." defaultChecked />
           <ToggleRow label="Product Updates" desc="News, feature releases, and announcements." defaultChecked={false} />
-          <ToggleRow label="Tips & Tutorials" desc="Advice on how to get the most out of LifeOS." defaultChecked />
+          <ToggleRow label="Tips & Tutorials" desc="Advice on how to get the most out of TetherOS." defaultChecked />
         </div>
       </section>
 
@@ -186,7 +186,7 @@ function BillingTab() {
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[color:var(--brand-blue)]/10 text-[color:var(--brand-blue)] text-[10px] font-bold uppercase tracking-widest mb-3">
                 <CheckCircle2 className="h-3 w-3" /> Active
               </div>
-              <h4 className="text-2xl font-bold mb-1">LifeOS Pro</h4>
+              <h4 className="text-2xl font-bold mb-1">TetherOS Pro</h4>
               <p className="text-sm text-muted-foreground mb-6">Unlimited projects, AI Coach, and priority support.</p>
               <div className="flex items-baseline gap-1">
                 <span className="text-3xl font-black">$12</span>
@@ -239,11 +239,11 @@ function SecurityTab() {
           <div className="space-y-4 max-w-sm">
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Current Password</label>
-              <input type="password" placeholder="••••••••" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
             </div>
             <div className="grid gap-2">
               <label className="text-xs font-semibold">New Password</label>
-              <input type="password" placeholder="••••••••" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
             </div>
             <button className="mt-2 px-4 py-2 bg-foreground text-background text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
               Update Password
@@ -365,7 +365,7 @@ function DeviceRow({ icon, name, location, time, current }: { icon: React.ReactN
             <div className="font-semibold text-sm">{name}</div>
             {current && <span className="text-[9px] font-bold uppercase tracking-wider text-[color:var(--brand-blue)] bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 rounded-sm">Current</span>}
           </div>
-          <div className="text-xs text-muted-foreground mt-0.5">{location} • {time}</div>
+          <div className="text-xs text-muted-foreground mt-0.5">{location} â€¢ {time}</div>
         </div>
       </div>
       {!current && (

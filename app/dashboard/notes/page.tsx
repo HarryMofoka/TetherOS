@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus, FileText, MoreVertical, Search } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Notes — LifeOS",
+  title: "Notes â€” TetherOS",
   description: "Capture quick thoughts.",
 };
 

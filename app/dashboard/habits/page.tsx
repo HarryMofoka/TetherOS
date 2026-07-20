@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus, Activity } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Habits — LifeOS",
+  title: "Habits â€” TetherOS",
   description: "Track daily routines.",
 };
 
@@ -11,7 +11,7 @@ export default function HabitsPage() {
     <>
       <div className="flex items-center justify-between px-8 pt-6">
         <div>
-          <h1 className="text-2xl font-bold">Habits 🌱</h1>
+          <h1 className="text-2xl font-bold">Habits ðŸŒ±</h1>
           <p className="text-xs text-muted-foreground">Build consistency.</p>
         </div>
         <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">
@@ -26,11 +26,11 @@ export default function HabitsPage() {
             <div className="text-xs text-muted-foreground">Avg: 78% Completion</div>
           </div>
           <div className="space-y-6">
-            <HabitRowExpanded name="Workout" streak={6} filled={24} total={30} emoji="💪" />
-            <HabitRowExpanded name="Read Books" streak={12} filled={28} total={30} emoji="📚" />
-            <HabitRowExpanded name="Meditate" streak={4} filled={15} total={30} emoji="🧘" />
-            <HabitRowExpanded name="No Sugar" streak={7} filled={26} total={30} emoji="🚫" />
-            <HabitRowExpanded name="Journal" streak={2} filled={10} total={30} emoji="📓" />
+            <HabitRowExpanded name="Workout" streak={6} filled={24} total={30} emoji="ðŸ’ª" />
+            <HabitRowExpanded name="Read Books" streak={12} filled={28} total={30} emoji="ðŸ“š" />
+            <HabitRowExpanded name="Meditate" streak={4} filled={15} total={30} emoji="ðŸ§˜" />
+            <HabitRowExpanded name="No Sugar" streak={7} filled={26} total={30} emoji="ðŸš«" />
+            <HabitRowExpanded name="Journal" streak={2} filled={10} total={30} emoji="ðŸ““" />
           </div>
         </div>
       </div>

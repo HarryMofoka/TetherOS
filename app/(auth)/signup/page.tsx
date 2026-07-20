@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sign up — LifeOS",
-  description: "Create your LifeOS account.",
+  title: "Sign up â€” TetherOS",
+  description: "Create your TetherOS account.",
 };
 
 export default function SignupPage() {

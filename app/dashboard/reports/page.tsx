@@ -3,7 +3,7 @@ import { BarChart, BarChart3, TrendingUp, Download } from "lucide-react";
 import { LifeScoreRing, Donut, MiniLineChart } from "@/components/mock/charts";
 
 export const metadata: Metadata = {
-  title: "Reports — LifeOS",
+  title: "Reports â€” TetherOS",
   description: "Analytics & progress.",
 };
 

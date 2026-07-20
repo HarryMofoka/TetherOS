@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plug, Settings, Calendar as CalIcon, MessageSquare, Music, FileText, Grid, Database, Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Integrations — LifeOS",
+  title: "Integrations â€” TetherOS",
   description: "Connect your apps.",
 };
 

@@ -1,5 +1,5 @@
-export function LifeScoreRing({ value = 82, size = 120 }: { value?: number; size?: number }) {
-  const stroke = 10;
+export function LifeScoreRing({ value = 82, size = 120, showText = true, strokeWidth = 10 }: { value?: number; size?: number; showText?: boolean; strokeWidth?: number }) {
+  const stroke = strokeWidth;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const offset = c - (value / 100) * c;
@@ -12,8 +12,12 @@ export function LifeScoreRing({ value = 82, size = 120 }: { value?: number; size
         transform={`rotate(-90 ${size / 2} ${size / 2})`}
         className="fill-none stroke-[color:var(--brand-blue)]"
       />
-      <text x="50%" y="48%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground text-[22px] font-bold">{value}</text>
-      <text x="50%" y="66%" textAnchor="middle" dominantBaseline="middle" className="fill-muted-foreground text-[9px]">Great progress</text>
+      {showText && (
+        <>
+          <text x="50%" y="48%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground text-[22px] font-bold">{value}</text>
+          <text x="50%" y="66%" textAnchor="middle" dominantBaseline="middle" className="fill-muted-foreground text-[9px]">Great progress</text>
+        </>
+      )}
     </svg>
   );
 }

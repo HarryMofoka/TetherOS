@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ChevronLeft, ChevronRight, Calendar as CalIcon } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Calendar — LifeOS",
+  title: "Calendar â€” TetherOS",
   description: "Schedule & events.",
 };
 
@@ -18,7 +18,7 @@ export default function CalendarPage() {
     <>
       <div className="flex items-center justify-between px-8 pt-6">
         <div>
-          <h1 className="text-2xl font-bold">Calendar 📅</h1>
+          <h1 className="text-2xl font-bold">Calendar ðŸ“…</h1>
           <p className="text-xs text-muted-foreground">Plan your weeks ahead.</p>
         </div>
         <div className="flex items-center gap-2 rounded-lg border border-border bg-card p-1">
@@ -49,9 +49,9 @@ export default function CalendarPage() {
         
         <div className="mt-6 space-y-4 max-w-2xl">
           <h3 className="font-semibold text-lg">Upcoming</h3>
-          <EventCard month="FEB" day="12" title="Team Standup" time="10:00 AM – 10:30 AM" />
-          <EventCard month="FEB" day="14" title="Product Review" time="02:00 PM – 03:00 PM" />
-          <EventCard month="FEB" day="18" title="Design Meeting" time="11:00 AM – 12:00 PM" />
+          <EventCard month="FEB" day="12" title="Team Standup" time="10:00 AM â€“ 10:30 AM" />
+          <EventCard month="FEB" day="14" title="Product Review" time="02:00 PM â€“ 03:00 PM" />
+          <EventCard month="FEB" day="18" title="Design Meeting" time="11:00 AM â€“ 12:00 PM" />
         </div>
       </div>
     </>

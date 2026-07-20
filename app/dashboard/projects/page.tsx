@@ -3,7 +3,7 @@ import { Plus, MoreHorizontal, Folder } from "lucide-react";
 import { ProgressRing } from "@/components/mock/charts";
 
 export const metadata: Metadata = {
-  title: "Projects — LifeOS",
+  title: "Projects â€” TetherOS",
   description: "Organize bigger goals.",
 };
 
@@ -12,7 +12,7 @@ export default function ProjectsPage() {
     <>
       <div className="flex items-center justify-between px-8 pt-6">
         <div>
-          <h1 className="text-2xl font-bold">Projects 🚀</h1>
+          <h1 className="text-2xl font-bold">Projects ðŸš€</h1>
           <p className="text-xs text-muted-foreground">Turn ideas into reality.</p>
         </div>
         <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">
@@ -31,8 +31,8 @@ export default function ProjectsPage() {
             dueDate="Mar 15, 2025" 
           />
           <ProjectCard 
-            title="LifeOS Mobile App" 
-            desc="React Native companion app for LifeOS dashboard." 
+            title="TetherOS Mobile App" 
+            desc="React Native companion app for TetherOS dashboard." 
             status="Behind" 
             pct={42} 
             color="oklch(0.62 0.22 25)" 

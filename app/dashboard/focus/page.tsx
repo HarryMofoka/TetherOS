@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Play, Pause, RotateCcw, Settings2, Coffee, Music, Headphones } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Focus Timer — LifeOS",
+  title: "Focus Timer â€” TetherOS",
   description: "Deep work sessions.",
 };
 
@@ -55,7 +55,7 @@ export default function FocusPage() {
             <span className="text-[10px] bg-muted px-2 py-1 rounded text-muted-foreground font-semibold uppercase tracking-wider">Premium</span>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <SoundToggle icon={<Coffee className="h-5 w-5" />} label="Café" active />
+            <SoundToggle icon={<Coffee className="h-5 w-5" />} label="CafÃ©" active />
             <SoundToggle icon={<Music className="h-5 w-5" />} label="Lo-Fi" />
             <SoundToggle icon={<Headphones className="h-5 w-5" />} label="Binaural" />
           </div>

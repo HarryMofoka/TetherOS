@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PenLine, Calendar as CalIcon, Save } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Journal — LifeOS",
+  title: "Journal â€” TetherOS",
   description: "Reflect and review.",
 };
 
@@ -12,7 +12,7 @@ export default function JournalPage() {
       {/* Sidebar for Journal entries */}
       <div className="w-80 border-r border-border bg-card/50 flex flex-col h-full shrink-0">
         <div className="p-6 border-b border-border">
-          <h1 className="text-2xl font-bold">Journal 📓</h1>
+          <h1 className="text-2xl font-bold">Journal ðŸ““</h1>
           <p className="text-xs text-muted-foreground mt-1">Reflect on your days.</p>
           <button className="mt-4 w-full flex items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-2.5 text-sm font-medium text-background">
             <PenLine className="h-4 w-4" /> New Entry
