@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sign up â€” TetherOS",
+  title: "Sign up - TetherOS",
   description: "Create your TetherOS account.",
 };
 
@@ -21,7 +21,7 @@ export default function SignupPage() {
             <label className="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider">Full Name</label>
             <input 
               type="text" 
-              placeholder="Harry Mofoka" 
+              placeholder="HarryMofoka" 
               className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20"
             />
           </div>

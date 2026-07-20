@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { SiteLayout } from "@/components/site/SiteLayout";
 
 export const metadata: Metadata = {
-  title: "How it Works â€” TetherOS",
+  title: "How it Works - TetherOS",
   description: "Plan, act, reflect. See how TetherOS helps you build a better life.",
   openGraph: { url: "/how-it-works" },
   alternates: { canonical: "/how-it-works" },
 };
 
 const steps = [
-  { n: 1, title: "Plan your day", desc: "Use AI to plan tasks, set priorities and schedule your time â€” all in one place." },
+  { n: 1, title: "Plan your day", desc: "Use AI to plan tasks, set priorities and schedule your time - all in one place." },
   { n: 2, title: "Take action", desc: "Stay focused with your plan, build habits, and track progress in real time." },
   { n: 3, title: "Reflect & improve", desc: "Review your day, reflect with AI, and keep getting better week over week." },
 ];

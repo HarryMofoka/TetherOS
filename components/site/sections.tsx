@@ -7,8 +7,8 @@ export function PrivacySection() {
   const items = [
     { icon: Lock, title: "Zero-knowledge encryption", desc: "Argon2/PBKDF2 keys and AES-GCM 256-bit encryption. Your data is unlocked only on your device." },
     { icon: WifiOff, title: "Local-first architecture", desc: "IndexedDB and WebAssembly SQLite keep everything on-device. Sync only what you choose." },
-    { icon: Fingerprint, title: "Biometric unlock", desc: "Unlock your second brain with Face ID, Touch ID, or a password you own â€” never a corporate login." },
-    { icon: Cloud, title: "Optional, encrypted sync", desc: "Last-Write-Wins sync with version checks â€” encrypted before it ever leaves your device." },
+    { icon: Fingerprint, title: "Biometric unlock", desc: "Unlock your second brain with Face ID, Touch ID, or a password you own - never a corporate login." },
+    { icon: Cloud, title: "Optional, encrypted sync", desc: "Last-Write-Wins sync with version checks - encrypted before it ever leaves your device." },
   ];
   return (
     <section className="mx-auto max-w-7xl px-6 py-24">
@@ -16,7 +16,7 @@ export function PrivacySection() {
         <span className="inline-block rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium tracking-wider text-muted-foreground">PRIVACY BY DESIGN</span>
         <h2 className="mt-6 text-3xl font-bold md:text-4xl">Your second brain. <span className="text-muted-foreground/70">Yours alone.</span></h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-          TetherOS is built local-first with zero-knowledge encryption. Not us, not our servers, not a data broker â€” no one but you can read your notes, habits, or reflections.
+          TetherOS is built local-first with zero-knowledge encryption. Not us, not our servers, not a data broker - no one but you can read your notes, habits, or reflections.
         </p>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-4">
@@ -42,7 +42,7 @@ export function MemorySection() {
             Every reflection, ready when you need it.
           </h2>
           <p className="mt-4 max-w-md text-sm text-muted-foreground">
-            TetherOS turns your journal, tasks, and habits into a searchable memory graph. Semantic embeddings (all-MiniLM-L6-v2) run entirely on-device, so you can ask questions in plain English and get answers in under 100ms â€” offline.
+            TetherOS turns your journal, tasks, and habits into a searchable memory graph. Semantic embeddings (all-MiniLM-L6-v2) run entirely on-device, so you can ask questions in plain English and get answers in under 100ms - offline.
           </p>
           <ul className="mt-6 space-y-3 text-sm">
             {[
@@ -65,7 +65,7 @@ export function MemorySection() {
           <div className="mt-4 space-y-2">
             {[
               { date: "Nov 12, 2024", tag: "Journal", text: "Feeling blocked on the auth flow. Emotion 4/10." },
-              { date: "Aug 03, 2024", tag: "Reflection", text: "Similar plateau on the launch checklist â€” took a walk, unblocked in an hour." },
+              { date: "Aug 03, 2024", tag: "Reflection", text: "Similar plateau on the launch checklist - took a walk, unblocked in an hour." },
               { date: "Feb 21, 2024", tag: "Habit", text: "Broke a 30-day streak. Started deep-work windows the next week." },
             ].map((m) => (
               <div key={m.date} className="rounded-xl border border-border p-3">
@@ -92,7 +92,7 @@ export function OfflineSection() {
             <span className="inline-block rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium tracking-wider text-muted-foreground">OFFLINE-FIRST</span>
             <h2 className="mt-6 text-3xl font-bold md:text-4xl">Works on a plane. Works on a mountain.</h2>
             <p className="mt-4 max-w-md text-sm text-muted-foreground">
-              Create tasks, log habits, search memories â€” with or without a connection. When you come back online, encrypted deltas sync in the background using Last-Write-Wins reconciliation.
+              Create tasks, log habits, search memories - with or without a connection. When you come back online, encrypted deltas sync in the background using Last-Write-Wins reconciliation.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -116,7 +116,7 @@ export function OfflineSection() {
 
 const testimonials = [
   { name: "Amelia R.", role: "Product Designer", text: "The gap between what I planned and what I actually did used to haunt me. TetherOS quietly closed it.", avatar: 0 },
-  { name: "Jordan K.", role: "Founder", text: "The weekly AI reflection reads like a therapist who's actually read my journal â€” because it has, privately, on my laptop.", avatar: 1 },
+  { name: "Jordan K.", role: "Founder", text: "The weekly AI reflection reads like a therapist who's actually read my journal - because it has, privately, on my laptop.", avatar: 1 },
   { name: "Priya S.", role: "PhD Student", text: "Semantic search over three years of notes changed how I think. Everything I've ever written is one question away.", avatar: 2 },
   { name: "Marcus T.", role: "Engineer", text: "Finally an app that respects both my time and my data. Offline-first is not a buzzword here.", avatar: 3 },
 ];
@@ -128,7 +128,7 @@ export function TestimonialsSection() {
         <h2 className="text-3xl font-bold md:text-4xl">Loved by people who take their inner life seriously.</h2>
         <div className="mt-4 flex items-center justify-center gap-1 text-yellow-500">
           {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-          <span className="ml-2 text-sm text-muted-foreground">4.9 Â· 2,300+ reviews</span>
+          <span className="ml-2 text-sm text-muted-foreground">4.9 * 2,300+ reviews</span>
         </div>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -152,7 +152,7 @@ export function TestimonialsSection() {
 
 const defaultFaq = [
   { q: "Is TetherOS really offline-first?", a: "Yes. The app runs on your device against a local IndexedDB + WebAssembly SQLite store. You can create tasks, log habits, journal, and run semantic searches with no network at all." },
-  { q: "How does the AI reflection coach work without leaking my data?", a: "Locally-computed embeddings retrieve the most relevant slices of your timeline. Only that anonymized context is proxied to a cloud LLM (Gemini Pro / Claude) via our REST proxy â€” never your full database." },
+  { q: "How does the AI reflection coach work without leaking my data?", a: "Locally-computed embeddings retrieve the most relevant slices of your timeline. Only that anonymized context is proxied to a cloud LLM (Gemini Pro / Claude) via our REST proxy - never your full database." },
   { q: "What happens if I forget my password?", a: "Because encryption is zero-knowledge, we cannot recover it. We recommend storing your recovery phrase in a password manager the moment you set up your vault." },
   { q: "Can I use TetherOS on multiple devices?", a: "Yes. Optional encrypted sync uses Last-Write-Wins with version checks. Ciphertext is all our servers ever see." },
   { q: "Do you offer a native mobile app?", a: "A native client is planned for Milestone 7. In the meantime, the web app installs to your home screen and works fully offline." },

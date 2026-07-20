@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TetherOS
+
+TetherOS is a comprehensive, local-first personal life operating system and task manager. It elegantly integrates task management, habit tracking, journaling, calendar events, and productivity tools (like focus timers) into a single, cohesive dashboard with an AI Coach. 
+
+TetherOS enforces a strict, premium monochrome aesthetic (blacks, greys, and whites), ensuring deep focus while letting essential data visualizations (like progress rings and charts) stand out with subtle, deliberate color accents.
+
+## Features
+- **Dashboard Overview**: Get a high-level view of tasks, habits, and upcoming events.
+- **Task Management**: Kanban-style "To Do", "In Progress", and "Done" boards.
+- **Habit Tracking**: Daily streaks, consistency visualization, and habit logging.
+- **Calendar & Events**: Manage upcoming appointments and deep work blocks.
+- **Journaling**: Secure, reflective journaling interface.
+- **Focus Timer**: Built-in Pomodoro-style deep work timer.
+- **AI Coach**: A personalized guide providing data-driven productivity advice.
+- **Local-First Mock Architecture**: Operates smoothly offline (currently leveraging global context and local storage for state management).
+
+## Tech Stack
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Charts**: Recharts
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Documentation
+- [Product Requirements Document (PRD)](./PRD.md)
+- [Technical Design Document (TDD)](./TDD.md)
+- [App Flow](./APP_FLOW.md)
+- [Backend Schema](./BACKEND_SCHEMA.md)
+- [Design Brief](./DESIGN_BRIEF.md)

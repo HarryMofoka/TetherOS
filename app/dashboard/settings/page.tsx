@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SettingsView } from "@/components/dashboard/SettingsView";
 
 export const metadata: Metadata = {
-  title: "Settings â€” TetherOS",
+  title: "Settings - TetherOS",
   description: "Manage your preferences.",
 };
 

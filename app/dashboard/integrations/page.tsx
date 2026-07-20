@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
-import { Plug, Settings, Calendar as CalIcon, MessageSquare, Music, FileText, Grid, Database, Check } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Integrations â€” TetherOS",
-  description: "Connect your apps.",
-};
+import { useState } from "react";
+import { Plug, Settings, Calendar as CalIcon, MessageSquare, Music, FileText, Grid, Database, Check } from "lucide-react";
 
 export default function IntegrationsPage() {
   return (
@@ -27,37 +24,37 @@ export default function IntegrationsPage() {
             name="Google Calendar" 
             desc="Two-way sync for all your events and meetings."
             icon={<CalIcon className="h-6 w-6 text-blue-500" />}
-            status="connected"
+            initialConnected={true}
           />
           <IntegrationCard 
             name="Notion" 
             desc="Import notes, tasks, and project databases."
             icon={<FileText className="h-6 w-6 text-foreground" />}
-            status="connected"
+            initialConnected={true}
           />
           <IntegrationCard 
             name="Slack" 
             desc="Send Focus Timer statuses to your workspace."
             icon={<MessageSquare className="h-6 w-6 text-purple-500" />}
-            status="disconnected"
+            initialConnected={false}
           />
           <IntegrationCard 
             name="Spotify" 
             desc="Control your ambient and deep work playlists directly."
             icon={<Music className="h-6 w-6 text-green-500" />}
-            status="connected"
+            initialConnected={true}
           />
           <IntegrationCard 
             name="Linear" 
             desc="Sync your engineering tickets and sprints."
             icon={<Grid className="h-6 w-6 text-indigo-500" />}
-            status="disconnected"
+            initialConnected={false}
           />
           <IntegrationCard 
             name="GitHub" 
             desc="Track pull requests and commit activity."
             icon={<Database className="h-6 w-6 text-foreground" />}
-            status="disconnected"
+            initialConnected={false}
           />
         </div>
       </div>
@@ -65,18 +62,21 @@ export default function IntegrationsPage() {
   );
 }
 
-function IntegrationCard({ name, desc, icon, status }: { name: string; desc: string; icon: React.ReactNode; status: "connected" | "disconnected" }) {
-  const isConnected = status === "connected";
+function IntegrationCard({ name, desc, icon, initialConnected }: { name: string; desc: string; icon: React.ReactNode; initialConnected: boolean }) {
+  const [isConnected, setIsConnected] = useState(initialConnected);
   
   return (
-    <div className={`rounded-2xl border bg-card p-6 transition-all flex flex-col ${isConnected ? "border-[color:var(--brand-blue)]/50 shadow-sm" : "border-border"}`}>
+    <div className={`rounded-2xl border bg-card p-6 transition-all flex flex-col ${isConnected ? "border-foreground/50 shadow-sm" : "border-border"}`}>
       <div className="flex items-start justify-between mb-4">
         <div className="h-12 w-12 rounded-xl bg-muted/50 flex items-center justify-center border border-border">
           {icon}
         </div>
-        <div className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 ${isConnected ? "bg-[color:var(--brand-blue)]" : "bg-muted"}`}>
+        <div 
+          onClick={() => setIsConnected(!isConnected)}
+          className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 ${isConnected ? "bg-foreground" : "bg-muted"}`}
+        >
           <span className="sr-only">Use setting</span>
-          <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${isConnected ? "translate-x-4" : "translate-x-0"}`} />
+          <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-background shadow-lg ring-0 transition duration-200 ease-in-out ${isConnected ? "translate-x-4" : "translate-x-0"}`} />
         </div>
       </div>
       
@@ -92,7 +92,7 @@ function IntegrationCard({ name, desc, icon, status }: { name: string; desc: str
             <button className="text-[10px] font-semibold text-muted-foreground hover:text-foreground">Configure</button>
           </>
         ) : (
-          <button className="w-full text-xs font-semibold bg-foreground text-background py-2 rounded-lg hover:opacity-90 transition-opacity">
+          <button onClick={() => setIsConnected(true)} className="w-full text-xs font-semibold bg-foreground text-background py-2 rounded-lg hover:opacity-90 transition-opacity">
             Connect
           </button>
         )}

@@ -9,10 +9,10 @@ import { LifeScoreRing } from "@/components/mock/charts";
 import { PrivacySection, MemorySection, OfflineSection, TestimonialsSection, FaqSection, TrustBadges } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "TetherOS â€” Your life. Organized. Powered by AI.",
+  title: "TetherOS - Your life. Organized. Powered by AI.",
   description: "One intelligent system to plan your day, build better habits, and become who you're meant to be.",
   openGraph: {
-    title: "TetherOS â€” Your life. Organized.",
+    title: "TetherOS - Your life. Organized.",
     description: "AI-powered planning, habits, and reflection in one system.",
     url: "/",
   },
@@ -133,7 +133,7 @@ export default function Home() {
           <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-base font-bold">Good morning, Harry ðŸ‘‹</div>
+                <div className="text-base font-bold">Good morning, Harry</div>
                 <div className="text-xs text-muted-foreground">Let&apos;s make today productive.</div>
               </div>
             </div>

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TetherOS â€” Your life. Organized. Powered by AI.",
+  title: "TetherOS - Your life. Organized. Powered by AI.",
   description: "TetherOS is an AI-powered life operating system to plan your day, build better habits, and take control of your life.",
   openGraph: {
-    title: "TetherOS â€” Your life. Organized.",
+    title: "TetherOS - Your life. Organized.",
     description: "AI-powered planning, habits, and reflection in one intelligent system.",
     type: "website",
     siteName: "TetherOS",

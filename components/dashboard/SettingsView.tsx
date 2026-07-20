@@ -77,7 +77,7 @@ function AccountTab() {
           <div className="space-y-4">
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Display Name</label>
-              <input type="text" defaultValue="Harry Mofoka" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="text" defaultValue="HarryMofoka" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
             </div>
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Job Title</label>
@@ -239,11 +239,11 @@ function SecurityTab() {
           <div className="space-y-4 max-w-sm">
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Current Password</label>
-              <input type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="password" placeholder="********" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
             </div>
             <div className="grid gap-2">
               <label className="text-xs font-semibold">New Password</label>
-              <input type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="password" placeholder="********" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
             </div>
             <button className="mt-2 px-4 py-2 bg-foreground text-background text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
               Update Password
@@ -365,7 +365,7 @@ function DeviceRow({ icon, name, location, time, current }: { icon: React.ReactN
             <div className="font-semibold text-sm">{name}</div>
             {current && <span className="text-[9px] font-bold uppercase tracking-wider text-[color:var(--brand-blue)] bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 rounded-sm">Current</span>}
           </div>
-          <div className="text-xs text-muted-foreground mt-0.5">{location} â€¢ {time}</div>
+          <div className="text-xs text-muted-foreground mt-0.5">{location} * {time}</div>
         </div>
       </div>
       {!current && (

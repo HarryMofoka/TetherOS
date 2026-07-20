@@ -6,10 +6,10 @@ import { Logo } from "@/components/site/Logo";
 import { FaqSection, PrivacySection } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "About â€” TetherOS",
+  title: "About - TetherOS",
   description: "We built TetherOS to help people take control of their lives.",
   openGraph: {
-    title: "About â€” TetherOS",
+    title: "About - TetherOS",
     description: "Our story, mission, and the founders behind TetherOS.",
     url: "/about",
   },
@@ -72,7 +72,7 @@ export default function AboutPage() {
           </div>
           <div>
             <h2 className="text-xl font-bold">Our vision</h2>
-            <p className="mt-3 max-w-md text-sm text-muted-foreground">A world where technology aligns with human potential â€” helping millions of people build better lives, every day.</p>
+            <p className="mt-3 max-w-md text-sm text-muted-foreground">A world where technology aligns with human potential - helping millions of people build better lives, every day.</p>
           </div>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function AboutPage() {
             { tag: "SHIPPED", title: "Local vault & encryption", desc: "Zero-knowledge AES-256 vault with biometric unlock." },
             { tag: "SHIPPED", title: "Mission Control dashboard", desc: "Unified daily view with progress rings and rollover." },
             { tag: "IN PROGRESS", title: "Memory Synapse RAG", desc: "On-device semantic search feeding the reflection coach." },
-            { tag: "NEXT", title: "Native mobile client", desc: "iOS & Android with full offline parity â€” Milestone 7." },
+            { tag: "NEXT", title: "Native mobile client", desc: "iOS & Android with full offline parity - Milestone 7." },
           ].map((r) => (
             <div key={r.title} className="rounded-2xl border border-border bg-card p-5">
               <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold">Principles we build by</h2>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              A short list we return to whenever we&apos;re deciding what to add â€” and, more often, what to leave out.
+              A short list we return to whenever we&apos;re deciding what to add - and, more often, what to leave out.
             </p>
           </div>
           <ul className="space-y-4">
@@ -164,10 +164,10 @@ export default function AboutPage() {
 
       <PrivacySection />
       <FaqSection title="About TetherOS" items={[
-        { q: "Who is TetherOS for?", a: "Anyone who wants to close the gap between their intentions and their actions â€” students, founders, engineers, creatives, and quietly ambitious humans." },
+        { q: "Who is TetherOS for?", a: "Anyone who wants to close the gap between their intentions and their actions - students, founders, engineers, creatives, and quietly ambitious humans." },
         { q: "How is TetherOS funded?", a: "Subscriptions. No ads, no data sales, no venture-scale pressure to squeeze users. If you pay, we work for you." },
         { q: "Is the company remote?", a: "Yes, fully remote across four timezones. We meet in person twice a year." },
-        { q: "How can I get involved?", a: "Join our public beta, share feedback in our community, or apply from the Careers page â€” we're hiring thoughtfully." },
+        { q: "How can I get involved?", a: "Join our public beta, share feedback in our community, or apply from the Careers page - we're hiring thoughtfully." },
       ]} />
 
       <section className="mx-auto max-w-7xl px-6 py-10">
@@ -175,7 +175,7 @@ export default function AboutPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"><Send className="h-5 w-5" /></div>
           <div>
             <div className="font-semibold">Join thousands building better lives with TetherOS.</div>
-            <div className="text-xs text-muted-foreground">Start your journey today â€” it changes everything.</div>
+            <div className="text-xs text-muted-foreground">Start your journey today - it changes everything.</div>
           </div>
           <Link href="/signup" className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background">Get Started Free <ArrowRight className="h-4 w-4" /></Link>
         </div>

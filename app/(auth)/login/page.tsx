@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Log in â€” TetherOS",
+  title: "Log in - TetherOS",
   description: "Log in to your TetherOS account.",
 };
 
@@ -32,7 +32,7 @@ export default function LoginPage() {
             </div>
             <input 
               type="password" 
-              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
+              placeholder="********" 
               className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20"
             />
           </div>

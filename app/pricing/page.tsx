@@ -5,10 +5,10 @@ import Link from "next/link";
 import { FaqSection, TestimonialsSection, TrustBadges } from "@/components/site/sections";
 
 export const metadata: Metadata = {
-  title: "Pricing â€” TetherOS",
+  title: "Pricing - TetherOS",
   description: "Plans for every stage of your journey. Start free, upgrade anytime.",
   openGraph: {
-    title: "Pricing â€” TetherOS",
+    title: "Pricing - TetherOS",
     description: "Simple, transparent pricing.",
     url: "/pricing",
   },
@@ -42,11 +42,11 @@ const plans = [
 ];
 
 const compare = [
-  ["Tasks", "âœ“", "âœ“", "âœ“", "âœ“"],
+  ["Tasks", "Yes", "Yes", "Yes", "Yes"],
   ["Habits", "Up to 3", "Unlimited", "Unlimited", "Unlimited"],
   ["AI Coach", "Limited", "Unlimited", "Unlimited", "Unlimited"],
-  ["Projects", "â€”", "Unlimited", "Unlimited", "Unlimited"],
-  ["Team Collaboration", "â€”", "â€”", "âœ“", "âœ“"],
+  ["Projects", "-", "Unlimited", "Unlimited", "Unlimited"],
+  ["Team Collaboration", "-", "-", "Yes", "Yes"],
   ["Analytics", "Basic", "Advanced", "Advanced", "Advanced+"],
 ];
 
@@ -99,7 +99,7 @@ export default function PricingPage() {
         <div className="rounded-2xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center justify-between">
             <div className="text-sm font-semibold">Compare all features</div>
-            <a href="#" className="text-xs text-muted-foreground">See all features â†’</a>
+            <a href="#" className="text-xs text-muted-foreground">See all features -></a>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -117,7 +117,7 @@ export default function PricingPage() {
                   <tr key={row[0]} className="border-b border-border/60">
                     {row.map((cell, i) => (
                       <td key={i} className={`py-3 ${i===0 ? "font-medium" : "text-muted-foreground"}`}>
-                        {cell === "âœ“" ? <Check className="h-4 w-4 text-[color:var(--brand-green)]" /> : cell}
+                        {cell === "Yes" ? <Check className="h-4 w-4 text-[color:var(--brand-green)]" /> : cell}
                       </td>
                     ))}
                   </tr>
@@ -142,10 +142,10 @@ export default function PricingPage() {
       <TrustBadges />
       <TestimonialsSection />
       <FaqSection title="Pricing FAQs" items={[
-        { q: "Do you offer a free trial on paid plans?", a: "Yes â€” Pro and Team include a 14-day free trial. No credit card required to start." },
+        { q: "Do you offer a free trial on paid plans?", a: "Yes - Pro and Team include a 14-day free trial. No credit card required to start." },
         { q: "Can I switch plans anytime?", a: "Yes. Upgrades apply immediately; downgrades take effect at the end of your current billing cycle." },
         { q: "How does billing work for Team?", a: "Team is billed per active seat per month, with a single centralized invoice and volume discounts on the annual plan." },
-        { q: "Is my data private on paid plans?", a: "All plans are zero-knowledge â€” your journal, tasks, and reflections are encrypted on-device before anything reaches our servers." },
+        { q: "Is my data private on paid plans?", a: "All plans are zero-knowledge - your journal, tasks, and reflections are encrypted on-device before anything reaches our servers." },
         { q: "Do you offer discounts for students or non-profits?", a: "Yes. Verified students and registered non-profits get 50% off Pro. Contact us with proof of eligibility." },
         { q: "What payment methods do you accept?", a: "All major credit cards, Apple Pay, Google Pay, and bank transfer for annual Enterprise contracts." },
       ]} />
