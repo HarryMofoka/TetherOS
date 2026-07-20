@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check, ArrowRight, Star } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import Link from "next/link";
 import { FaqSection, TestimonialsSection, TrustBadges } from "@/components/site/sections";
 
 export const metadata: Metadata = {
@@ -80,7 +81,7 @@ export default function PricingPage() {
                 {p.per && <span className="text-xs text-muted-foreground">{p.per}</span>}
               </div>
               {p.sub && <div className="mt-1 text-[11px] text-muted-foreground">{p.sub}</div>}
-              <button className={`mt-5 w-full rounded-full px-4 py-2.5 text-sm font-medium ${p.featured ? "bg-foreground text-background" : "border border-border bg-background hover:bg-muted"}`}>{p.cta}</button>
+              <Link href={p.name === "Enterprise" ? "mailto:sales@lifeos.com" : "/signup"} className={`mt-5 w-full block text-center rounded-full px-4 py-2.5 text-sm font-medium ${p.featured ? "bg-foreground text-background hover:opacity-90" : "border border-border bg-background hover:bg-muted"}`}>{p.cta}</Link>
               {p.inherit && <div className="mt-6 text-xs font-medium text-muted-foreground">{p.inherit}</div>}
               <ul className="mt-4 space-y-2.5">
                 {p.features.map((f) => (
@@ -134,7 +135,7 @@ export default function PricingPage() {
             <div className="font-semibold">Not sure which plan is right for you?</div>
             <div className="text-xs text-muted-foreground">Try LifeOS free for 14 days. No credit card required.</div>
           </div>
-          <button className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background">Get Started Free <ArrowRight className="h-4 w-4" /></button>
+          <Link href="/signup" className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90">Get Started Free <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
 

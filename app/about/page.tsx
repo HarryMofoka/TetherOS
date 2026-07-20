@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, Send, Activity, MessageSquare, Shield, Heart, Plug, Globe, Mail } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import Link from "next/link";
 import { Logo } from "@/components/site/Logo";
 import { FaqSection, PrivacySection } from "@/components/site/sections";
 
@@ -179,7 +180,7 @@ export default function AboutPage() {
             <div className="font-semibold">Join thousands building better lives with LifeOS.</div>
             <div className="text-xs text-muted-foreground">Start your journey today — it changes everything.</div>
           </div>
-          <button className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background">Get Started Free <ArrowRight className="h-4 w-4" /></button>
+          <Link href="/signup" className="ml-auto inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background">Get Started Free <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </section>
     </SiteLayout>

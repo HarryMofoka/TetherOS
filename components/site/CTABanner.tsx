@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function CTABanner({
   title,
@@ -19,13 +20,13 @@ export function CTABanner({
         </div>
         <p className="mt-3 max-w-sm text-sm text-muted-foreground md:mt-0">{description}</p>
         <div className="mt-5 flex flex-wrap gap-3 md:mt-0">
-          <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90">
+          <Link href="/signup" className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90">
             {primary} <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
           {secondary && (
-            <button className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-medium hover:bg-muted">
+            <Link href="/features" className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-medium hover:bg-muted">
               {secondary} <ArrowRight className="h-4 w-4" />
-            </button>
+            </Link>
           )}
         </div>
       </div>

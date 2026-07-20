@@ -31,9 +31,9 @@ export function SiteHeader() {
             );
           })}
         </nav>
-        <div className="flex items-center gap-3">
-          <button className="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted">Log in</button>
-          <button className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background hover:opacity-90">Get Started</button>
+        <div className="flex items-center gap-4">
+          <Link href="/login" className="rounded-full border border-border bg-background px-5 py-2 text-sm font-medium hover:bg-muted">Log in</Link>
+          <Link href="/signup" className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background hover:opacity-90">Get Started</Link>
         </div>
       </div>
     </header>
