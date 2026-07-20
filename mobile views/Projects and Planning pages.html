@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Weekly Planner &amp; Projects</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-styles">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .mobile-container {
+      width: 390px;
+      height: 844px;
+      background-color: #ffffff;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Hide scrollbar for clean look */
+    .scroll-hidden::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll-hidden {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .progress-bar-striped {
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.8) 0px,
+        rgba(0,0,0,0.8) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+    }
+    .progress-bar-striped-light {
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.1) 0px,
+        rgba(0,0,0,0.1) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+    }
+
+    /* Circular Progress */
+    .circular-chart {
+      display: block;
+      margin: 0 auto;
+      max-width: 80%;
+      max-height: 250px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #eee;
+      stroke-width: 2.5;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      animation: progress 1s ease-out forwards;
+    }
+    @keyframes progress {
+      0% {
+        stroke-dasharray: 0 100;
+      }
+    }
+    .percentage {
+      fill: #111;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+  </style>
+</head>
+<body>
+<!-- BEGIN: Weekly Planner Screen -->
+<div class="mobile-container flex flex-col" data-purpose="weekly-planner-screen">
+<!-- Status Bar -->
+<div class="flex justify-between items-center px-6 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex items-center space-x-2">
+<i class="fa-solid fa-signal"></i>
+<i class="fa-solid fa-wifi"></i>
+<i class="fa-solid fa-battery-full"></i>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 pt-4 pb-2">
+<div class="flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-bold text-gray-900">Weekly Planner</h1>
+<p class="text-sm text-gray-500 mt-1">Plan your week. Stay consistent.</p>
+</div>
+<div class="flex space-x-2">
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
+<i class="fa-regular fa-calendar-days"></i>
+</button>
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Area (Scrollable) -->
+<main class="flex-1 overflow-y-auto scroll-hidden pb-24">
+<!-- Week Calendar -->
+<section class="px-6 py-4">
+<div class="flex justify-between">
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Mon</span>
+<span class="text-base font-semibold text-gray-900">10</span>
+<div class="w-1 h-1 bg-blue-500 rounded-full mt-1"></div>
+</div>
+<!-- Day Active -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-900 font-bold mb-1 uppercase">Tue</span>
+<div class="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-base font-semibold">
+              11
+            </div>
+<div class="w-1 h-1 bg-blue-500 rounded-full mt-1"></div>
+</div>
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Wed</span>
+<span class="text-base font-semibold text-gray-900 mt-1">12</span>
+<div class="w-1 h-1 bg-gray-300 rounded-full mt-1"></div>
+</div>
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Thu</span>
+<span class="text-base font-semibold text-gray-900 mt-1">13</span>
+<div class="w-1 h-1 bg-transparent rounded-full mt-1"></div>
+</div>
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Fri</span>
+<span class="text-base font-semibold text-gray-900 mt-1">14</span>
+<div class="w-1 h-1 bg-transparent rounded-full mt-1"></div>
+</div>
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Sat</span>
+<span class="text-base font-semibold text-gray-900 mt-1">15</span>
+<div class="w-1 h-1 bg-transparent rounded-full mt-1"></div>
+</div>
+<!-- Day -->
+<div class="flex flex-col items-center">
+<span class="text-[10px] text-gray-500 font-medium mb-1 uppercase">Sun</span>
+<span class="text-base font-semibold text-gray-900 mt-1">16</span>
+<div class="w-1 h-1 bg-gray-300 rounded-full mt-1"></div>
+</div>
+</div>
+</section>
+<!-- Weekly Goal -->
+<section class="px-6 py-2">
+<div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+<p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Weekly Goal</p>
+<div class="flex justify-between items-end mb-2">
+<h3 class="text-base font-semibold text-gray-900">Build AI Resume Builder</h3>
+<span class="text-sm font-bold text-gray-900">67%</span>
+</div>
+<div class="h-4 w-full flex rounded-sm overflow-hidden">
+<div class="w-[67%] h-full progress-bar-striped"></div>
+<div class="w-[33%] h-full progress-bar-striped-light"></div>
+</div>
+</div>
+</section>
+<!-- Week Plan List -->
+<section class="px-6 py-4">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Week Plan</h2>
+<button class="flex items-center text-blue-600 text-xs font-semibold bg-blue-50 px-3 py-1.5 rounded-full">
+<i class="fa-solid fa-wand-magic-sparkles mr-1.5 text-[10px]"></i> Plan with AI
+          </button>
+</div>
+<div class="space-y-4">
+<!-- Task Mon -->
+<div class="flex relative">
+<div class="flex flex-col items-center mr-4 w-8 flex-shrink-0 z-10 bg-white">
+<div class="w-5 h-5 rounded-full bg-black flex items-center justify-center text-white mt-1">
+<i class="fa-solid fa-check text-[10px]"></i>
+</div>
+<span class="text-[10px] font-bold text-gray-500 uppercase mt-1">Mon</span>
+<span class="text-sm font-bold text-gray-900">10</span>
+</div>
+<div class="absolute left-2.5 top-8 bottom-[-24px] w-[1px] bg-gray-200 z-0"></div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-semibold text-gray-900">Research &amp; Planning</h4>
+<div class="flex items-center space-x-2">
+<span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">3/3</span>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</div>
+</div>
+<ul class="text-xs text-gray-500 space-y-1">
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Market research</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Define core features</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Create project roadmap</li>
+</ul>
+</div>
+</div>
+<!-- Task Tue -->
+<div class="flex relative">
+<div class="flex flex-col items-center mr-4 w-8 flex-shrink-0 z-10 bg-white">
+<div class="w-5 h-5 rounded-full bg-black flex items-center justify-center text-white mt-1">
+<i class="fa-solid fa-check text-[10px]"></i>
+</div>
+<span class="text-[10px] font-bold text-gray-500 uppercase mt-1">Tue</span>
+<span class="text-sm font-bold text-gray-900">11</span>
+</div>
+<div class="absolute left-2.5 top-8 bottom-[-24px] w-[1px] bg-gray-200 z-0"></div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-semibold text-gray-900">Authentication System</h4>
+<div class="flex items-center space-x-2">
+<span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">2/3</span>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</div>
+</div>
+<ul class="text-xs text-gray-500 space-y-1">
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Set up auth flow</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Build login &amp; register</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Connect to database</li>
+</ul>
+</div>
+</div>
+<!-- Task Wed (Active) -->
+<div class="flex relative">
+<div class="flex flex-col items-center mr-4 w-8 flex-shrink-0 z-10">
+<div class="w-5 h-5 rounded-full border-2 border-blue-500 mt-1"></div>
+<span class="text-[10px] font-bold text-blue-500 uppercase mt-1">Wed</span>
+<span class="text-sm font-bold text-gray-900">12</span>
+</div>
+<div class="absolute left-2.5 top-8 bottom-[-24px] w-[1px] bg-gray-200 z-0"></div>
+<div class="flex-1 bg-blue-50/50 rounded-xl p-3 -mt-2 -ml-2 mb-2">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-semibold text-gray-900">Resume Builder Core</h4>
+<div class="flex items-center space-x-2">
+<span class="text-xs text-gray-500 bg-white px-2 py-0.5 rounded-full">0/3</span>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</div>
+</div>
+<ul class="text-xs text-gray-600 space-y-1">
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Resume editor UI</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Save &amp; update resume</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Export as PDF</li>
+</ul>
+</div>
+</div>
+<!-- Task Thu -->
+<div class="flex relative">
+<div class="flex flex-col items-center mr-4 w-8 flex-shrink-0 z-10 bg-white">
+<div class="w-5 h-5 rounded-full border border-gray-300 mt-1"></div>
+<span class="text-[10px] font-bold text-gray-400 uppercase mt-1">Thu</span>
+<span class="text-sm font-bold text-gray-900">13</span>
+</div>
+<div class="absolute left-2.5 top-8 bottom-[-24px] w-[1px] bg-gray-200 z-0"></div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-semibold text-gray-900">AI Integration</h4>
+<div class="flex items-center space-x-2">
+<span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">0/3</span>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</div>
+</div>
+<ul class="text-xs text-gray-500 space-y-1">
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Improve resume with AI</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Content suggestions</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Optimization score</li>
+</ul>
+</div>
+</div>
+<!-- Task Fri -->
+<div class="flex relative">
+<div class="flex flex-col items-center mr-4 w-8 flex-shrink-0 z-10 bg-white">
+<div class="w-5 h-5 rounded-full border border-gray-300 mt-1"></div>
+<span class="text-[10px] font-bold text-gray-400 uppercase mt-1">Fri</span>
+<span class="text-sm font-bold text-gray-900">14</span>
+</div>
+<div class="flex-1 pb-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-semibold text-gray-900">Testing &amp; Improvements</h4>
+<div class="flex items-center space-x-2">
+<span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">0/3</span>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</div>
+</div>
+<ul class="text-xs text-gray-500 space-y-1">
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Fix bugs</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Improve UI/UX</li>
+<li class="flex items-center"><span class="w-1 h-1 bg-gray-400 rounded-full mr-2"></span> Performance check</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 pb-8 pt-3 px-6 z-50">
+<div class="flex justify-between items-center relative">
+<a class="flex flex-col items-center text-gray-900" href="#">
+<i class="fa-solid fa-house text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<i class="fa-regular fa-clock text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</a>
+<!-- FAB -->
+<div class="absolute left-1/2 -translate-x-1/2 -top-6">
+<button class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center text-2xl shadow-lg">
+<i class="fa-solid fa-plus"></i>
+</button>
+</div>
+<a class="flex flex-col items-center text-gray-400 pl-8" href="#">
+<i class="fa-regular fa-face-smile text-xl mb-1"></i>
+<span class="text-[10px] font-medium">AI</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<i class="fa-regular fa-user text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+<!-- Home Indicator -->
+<div class="w-32 h-1 bg-gray-900 rounded-full mx-auto mt-6"></div>
+</nav>
+</div>
+<!-- END: Weekly Planner Screen -->
+<!-- BEGIN: Projects Screen -->
+<div class="mobile-container flex flex-col" data-purpose="projects-screen">
+<!-- Status Bar -->
+<div class="flex justify-between items-center px-6 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex items-center space-x-2">
+<i class="fa-solid fa-signal"></i>
+<i class="fa-solid fa-wifi"></i>
+<i class="fa-solid fa-battery-full"></i>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 pt-4 pb-4">
+<div class="flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-bold text-gray-900">Projects</h1>
+<p class="text-sm text-gray-500 mt-1">Track all your projects in one place.</p>
+</div>
+<div class="flex space-x-2">
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
+<i class="fa-solid fa-magnifying-glass"></i>
+</button>
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Filters -->
+<section class="px-6 pb-4">
+<div class="flex justify-between items-center">
+<div class="flex space-x-2 overflow-x-auto scroll-hidden">
+<button class="px-4 py-1.5 bg-black text-white text-sm font-medium rounded-full whitespace-nowrap">All</button>
+<button class="px-4 py-1.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-full whitespace-nowrap">Active</button>
+<button class="px-4 py-1.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-full whitespace-nowrap">On Hold</button>
+<button class="px-4 py-1.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-full whitespace-nowrap">Completed</button>
+</div>
+<button class="text-sm font-medium text-gray-600 flex items-center ml-2 whitespace-nowrap">
+          Newest <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+</button>
+</div>
+</section>
+<!-- Content Area (Scrollable) -->
+<main class="flex-1 overflow-y-auto scroll-hidden px-6 pb-28 space-y-4">
+<!-- Project Card 1 -->
+<div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm relative flex justify-between">
+<button class="absolute top-4 right-4 text-gray-400"><i class="fa-solid fa-ellipsis"></i></button>
+<div class="flex flex-1">
+<div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center flex-shrink-0 relative">
+<i class="fa-solid fa-code text-white text-xl"></i>
+<div class="w-2.5 h-2.5 bg-blue-500 rounded-full absolute -bottom-1 -right-1 border-2 border-white"></div>
+</div>
+<div class="ml-4 flex-1">
+<h3 class="text-base font-bold text-gray-900">AI Resume Builder</h3>
+<p class="text-xs text-blue-600 font-medium mb-1">Active</p>
+<p class="text-xs text-gray-500 line-clamp-2 mb-3 pr-2">AI-powered resume builder that helps users create ATS-friendly resumes in minutes.</p>
+<div class="flex -space-x-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEQHSaIVIerg7MlDR2hM_EEUkLxxnSFvtUPUkw9kmKrn8d3QOYs5-x1GsMycdc2GYLxse9Q9sn6L-mXyYZGLtan9ohQa1z_dxLyGJ7g1QiBqMy5Is0n5s8FDS1Ss-iYOccUQisvOW5QKiRtProfk4mOiBW9Htje14nFFVZ-5r3DouygB44izJkBNYJ5CAmd3_6r0cnIWuLMDxfRESsdvQC0OZftf7OhrZFMTjwCt1vyRrDd4phnFPcmfJlsX0MihM0YJfWXsiIo_uH"/>
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFY8j5ZvpeFRetupxq940zcXBtOrCS2-wcuMKc-SkV5XM5dS6JOdVM-6iFnxzOclJx_XqAn-7-d4jOKU3dRPzi_IrbWtRCKfPjU6dwOBnzjj_ybzSps0vnVVMee_Pq0PsWce-NNepoK8xmck2CSJItfq67wDodwi0WFa8HEOwQqplC9_DUNBEZFSfktYQl6mbVZ5xwDldW44nNjAuIbdHBIEOy6i9lskEAozX_xHQPRjD38Zd1rxxa2goOV0YCLhbyRZY5QcKh9lkP"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-medium text-gray-600 z-10">+2</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-between w-20">
+<div class="relative w-14 h-14">
+<svg class="circular-chart text-blue-600" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="67, 100"></path>
+<text class="percentage" x="18" y="20.35">67%</text>
+</svg>
+</div>
+<div class="text-center mt-2">
+<p class="text-[10px] font-bold text-blue-600">On Track</p>
+<p class="text-[9px] text-gray-400">Due Feb 18, 2025</p>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm relative flex justify-between">
+<button class="absolute top-4 right-4 text-gray-400"><i class="fa-solid fa-ellipsis"></i></button>
+<div class="flex flex-1">
+<div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center flex-shrink-0 relative">
+<i class="fa-solid fa-lock text-white text-xl"></i>
+<div class="w-2.5 h-2.5 bg-blue-500 rounded-full absolute -bottom-1 -right-1 border-2 border-white"></div>
+</div>
+<div class="ml-4 flex-1">
+<h3 class="text-base font-bold text-gray-900">LifeOS Mobile App</h3>
+<p class="text-xs text-blue-600 font-medium mb-1">Active</p>
+<p class="text-xs text-gray-500 line-clamp-2 mb-3 pr-2">Your life operating system. AI-powered productivity and accountability companion.</p>
+<div class="flex -space-x-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDglXBXHomVe05siG3pnQLOzYfqDU9zRLJp4DzkrGMRLpb0CpzQYK9Sm64JVR8vJpElcZQ1BE4HRYll0to2GWT-8tjX0g7Vx9jLfgfOUsRIgyVmXKtdKPpLUJ8muz2LtShFmvKCt_TVYiGwcSoll1tSM1-X9s1ClkI7tVfcGp0NdEtTgH5QXcHhr5w0hK_DBKkficNJk6y_KpQNfBIsT9n33d0XwXg-eeqPAYIiwtMabnJ1xZBIlsgL4_xu6e1h2qgoLTozAZsefRny"/>
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLIxwpTh25LserbciWA3plLCaUXR788YsQLTKXbJ9WhsH1ujk-Wbr-y5TIvkhyoYzHtxjvFYlCaCxFVR78P-gzwvhD5NcxOAH9b6Km3TSG33XSn8eqPRDlJiBZN-xq7AagXd_YveA-lWRfAOu8_IyanFsfF6tPnGpCb_945KJgyIO27vwrnB1pWxWWYYinyCY48qWWHlxRPWwtINm9UqtopgJV9YZtpr-59o9hVhMFsHLI5UDfwBnmAR6GzZSTfXzQakINpliBjPPd"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-medium text-gray-600 z-10">+1</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-between w-20">
+<div class="relative w-14 h-14">
+<svg class="circular-chart text-orange-500" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="42, 100"></path>
+<text class="percentage" x="18" y="20.35">42%</text>
+</svg>
+</div>
+<div class="text-center mt-2">
+<p class="text-[10px] font-bold text-orange-500">Behind</p>
+<p class="text-[9px] text-gray-400">Due Mar 5, 2025</p>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm relative flex justify-between">
+<button class="absolute top-4 right-4 text-gray-400"><i class="fa-solid fa-ellipsis"></i></button>
+<div class="flex flex-1">
+<div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center flex-shrink-0 relative">
+<i class="fa-solid fa-store text-white text-xl"></i>
+<div class="w-2.5 h-2.5 bg-gray-400 rounded-full absolute -bottom-1 -right-1 border-2 border-white"></div>
+</div>
+<div class="ml-4 flex-1">
+<h3 class="text-base font-bold text-gray-900">Personal Website</h3>
+<p class="text-xs text-gray-500 font-medium mb-1">On Hold</p>
+<p class="text-xs text-gray-500 line-clamp-2 mb-3 pr-2">Personal portfolio website to showcase my work and projects.</p>
+<div class="flex -space-x-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALBa64A-c8q40_k6TeK3fXaQZ6zXQZhHkOHeMJs9J4mJPsqtl9ay_XJojxE2KN9S6Vt21uWrRjkEQXzZ8TThSPm9TyGkLKzUC7V7nwNmlILRP3g5CK90MVVinY95jCjReh8IMrJ_RTJ8FEHXSYCDYC_KlCQyEbhY4-TuzaT1Ao6LZ3DbaFzU71lr8gL3fj0FNo7js6dgGLwJVv9Y6YBrOwqZlsOG2QAaTY6CqbhB0VcZ_jJnsslJphOgn_-sp1muXw-_kQ9uh4e9xF"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-between w-20">
+<div class="relative w-14 h-14">
+<svg class="circular-chart text-gray-700" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="25, 100"></path>
+<text class="percentage" x="18" y="20.35">25%</text>
+</svg>
+</div>
+<div class="text-center mt-2">
+<p class="text-[10px] font-bold text-gray-500">On Hold</p>
+<p class="text-[9px] text-gray-400">No deadline</p>
+</div>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm relative flex justify-between">
+<button class="absolute top-4 right-4 text-gray-400"><i class="fa-solid fa-ellipsis"></i></button>
+<div class="flex flex-1">
+<div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center flex-shrink-0 relative">
+<i class="fa-solid fa-book-open text-white text-xl"></i>
+<div class="w-2.5 h-2.5 bg-blue-500 rounded-full absolute -bottom-1 -right-1 border-2 border-white"></div>
+</div>
+<div class="ml-4 flex-1">
+<h3 class="text-base font-bold text-gray-900">Reading Tracker</h3>
+<p class="text-xs text-blue-600 font-medium mb-1">Active</p>
+<p class="text-xs text-gray-500 line-clamp-2 mb-3 pr-2">Track books, notes, highlights and reading progress.</p>
+<div class="flex -space-x-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODlXcQJAhEI-XjlcRiNqsNHpsLf0c-tsEsj1dRSqi_TI-WKMqjWaFQJwcA-xXUZF8Z6zFjbBb-nzsFxZrni8ocQTYH3CXm_vFMnsJSs8duJFfn8laDO-uSwrIC1d33mNOEzqDbzFG593myLqeAgvkztItakAg6Up4xyhl-RA5Y3Bqz3aOdqqedMT7RQEY4fa7G-mo5A6zGoBqCciC0Si4HV8hJXGOk1q_DE-rRXWNAMYERk5t_PW3HGYCOIkMLias6nPFEK-QkL8R"/>
+<img alt="Avatar" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWa3i54rlUjXTWTWugXa7kirnyAy1vUJm27eNAnPnlcQo7CsuWFGAAXBaMjo8jjjzE8QfD9eT9thOjeAJJKep0wmsFL8QkQTndfZHUTNhMRX55y1RYXGbgVMy-GGAyxagjZTBCP7CsFEIhccY7iqZ12BTjzG490TI_Lf0FnFFuAKF5qKQETGAFItQ5yxWPWtlFyUiUeRIJl2rsTVqnbkOODLGhaJrlfNmz_zoi-8Jo3PwsP5DI4k_evWJfLA4MbVIYBbnjutJfq0Yt"/>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-medium text-gray-600 z-10">+3</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-between w-20">
+<div class="relative w-14 h-14">
+<svg class="circular-chart text-green-600" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="80, 100"></path>
+<text class="percentage" x="18" y="20.35">80%</text>
+</svg>
+</div>
+<div class="text-center mt-2">
+<p class="text-[10px] font-bold text-green-600">On Track</p>
+<p class="text-[9px] text-gray-400">Due Feb 25, 2025</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 pb-8 pt-3 px-6 z-50">
+<div class="flex justify-between items-center relative">
+<a class="flex flex-col items-center text-gray-400" href="#">
+<i class="fa-solid fa-house text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<i class="fa-regular fa-clock text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</a>
+<!-- FAB -->
+<div class="absolute left-1/2 -translate-x-1/2 -top-6">
+<button class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center text-2xl shadow-lg">
+<i class="fa-solid fa-plus"></i>
+</button>
+</div>
+<a class="flex flex-col items-center text-gray-400 pl-8" href="#">
+<i class="fa-regular fa-face-smile text-xl mb-1"></i>
+<span class="text-[10px] font-medium">AI</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<i class="fa-regular fa-user text-xl mb-1"></i>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+<!-- Home Indicator -->
+<div class="w-32 h-1 bg-gray-900 rounded-full mx-auto mt-6"></div>
+</nav>
+</div>
+<!-- END: Projects Screen -->
+</body></html>

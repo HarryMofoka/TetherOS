@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS App Clone</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6; /* Light gray background to separate screens if viewed on desktop */
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .app-screen {
+      width: 375px;
+      height: 812px; /* iOS standard height */
+      background-color: #ffffff;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Hide scrollbar for clean look */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- BEGIN: Journal Screen -->
+<div class="app-screen" data-purpose="journal-screen">
+<!-- Top Status Bar (Mock) -->
+<div class="flex justify-between items-center px-6 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex gap-1.5 items-center">
+<i class="fa-solid fa-signal text-[10px]"></i>
+<i class="fa-solid fa-wifi text-[10px]"></i>
+<i class="fa-solid fa-battery-full text-lg"></i>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 py-4 flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-bold">Journal</h1>
+<p class="text-gray-500 text-sm mt-1">Write. Reflect. Grow.</p>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+<i class="fa-solid fa-magnifying-glass"></i>
+</button>
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+<i class="fa-solid fa-ellipsis"></i>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-24">
+<!-- Date Selector -->
+<div class="flex justify-between items-center mb-6 pt-2">
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Mon</span>
+<span class="text-sm font-semibold">10</span>
+<div class="w-1 h-1 rounded-full bg-blue-500"></div>
+</div>
+<!-- Active Day Item -->
+<div class="flex flex-col items-center gap-1 bg-black text-white px-2.5 py-1.5 rounded-full">
+<span class="text-[10px] font-semibold uppercase">Tue</span>
+<span class="text-sm font-bold">11</span>
+</div>
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Wed</span>
+<span class="text-sm font-semibold text-gray-400">12</span>
+<div class="w-1 h-1 rounded-full bg-gray-300"></div>
+</div>
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Thu</span>
+<span class="text-sm font-semibold text-gray-400">13</span>
+<div class="w-1 h-1 rounded-full bg-gray-300"></div>
+</div>
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Fri</span>
+<span class="text-sm font-semibold text-gray-400">14</span>
+<div class="w-1 h-1 rounded-full bg-gray-300"></div>
+</div>
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Sat</span>
+<span class="text-sm font-semibold text-gray-400">15</span>
+<div class="w-1 h-1 rounded-full bg-gray-300"></div>
+</div>
+<!-- Day Item -->
+<div class="flex flex-col items-center gap-1">
+<span class="text-xs text-gray-400 font-medium uppercase">Sun</span>
+<span class="text-sm font-semibold text-gray-400">16</span>
+<div class="w-1 h-1 rounded-full bg-gray-300"></div>
+</div>
+</div>
+<!-- Journal Entry Box -->
+<article class="bg-gray-50 rounded-3xl p-5 mb-6 border border-gray-100">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-semibold text-gray-900 text-sm">Tuesday, 11 February 2025</h2>
+<div class="flex items-center gap-3">
+<span class="text-yellow-500 text-xs font-semibold flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-full">
+<i class="fa-regular fa-face-smile"></i> Good
+            </span>
+<button class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<h3 class="text-xl font-medium text-gray-400 mb-4">How was your day?</h3>
+<div class="text-gray-800 text-sm leading-relaxed space-y-4 mb-6">
+<p>Today was productive. I finally finished the authentication flow and it feels good to see things coming together.</p>
+<p>Had a deep work session in the morning which really helped. Need to work on staying consistent with workouts.</p>
+<p>Grateful for the progress.</p>
+</div>
+<div class="flex justify-between items-center text-gray-400">
+<div class="flex gap-4">
+<button class="hover:text-gray-600"><i class="fa-regular fa-image"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-tag"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-location-dot"></i></button>
+</div>
+<span class="text-xs">273 / 1000</span>
+</div>
+</article>
+<!-- AI Reflection Card -->
+<article class="bg-white rounded-3xl p-5 mb-8 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+<div class="flex items-center gap-2 mb-3">
+<i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i>
+<div>
+<h4 class="font-bold text-gray-900 text-sm">AI Reflection</h4>
+<span class="text-[10px] text-gray-400 uppercase tracking-wider">Today</span>
+</div>
+</div>
+<p class="text-gray-700 text-sm leading-relaxed mb-4">
+          You showed strong focus in the morning and made solid progress on your main goal. Consistency is your key to long-term success.
+        </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
+<span>🦉</span> Deep work helps you most
+          </span>
+<span class="bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
+<span>💪</span> Consistency is your challenge
+          </span>
+</div>
+</article>
+<!-- Previous Entries -->
+<div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-gray-900">Previous Entries</h3>
+<a class="text-xs text-gray-500 font-medium" href="#">See all</a>
+</div>
+<article class="border border-gray-100 rounded-2xl p-4 mb-4">
+<div class="flex justify-between items-center mb-2">
+<h4 class="font-semibold text-gray-900 text-sm">Monday, 10 February 2025</h4>
+<div class="flex items-center gap-2">
+<span class="text-orange-400 text-xs font-semibold flex items-center gap-1">
+<i class="fa-regular fa-face-meh"></i> Okay
+              </span>
+<button class="text-gray-400"><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<p class="text-gray-600 text-sm line-clamp-2">
+            Felt a bit unmotivated in the morning. Took time to get started but ended the day with a good workout...
+          </p>
+</article>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-2 flex justify-between items-center pb-8">
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-solid fa-house text-xl"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-clock text-xl"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</button>
+<!-- FAB -->
+<button class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-lg">
+<i class="fa-solid fa-plus"></i>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-face-smile text-xl"></i>
+<span class="text-[10px] font-medium">AI</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-black">
+<i class="fa-regular fa-user text-xl font-bold"></i>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full"></div>
+</div>
+<!-- END: Journal Screen -->
+<!-- BEGIN: Profile Screen -->
+<div class="app-screen" data-purpose="profile-screen">
+<!-- Top Status Bar (Mock) -->
+<div class="flex justify-between items-center px-6 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex gap-1.5 items-center">
+<i class="fa-solid fa-signal text-[10px]"></i>
+<i class="fa-solid fa-wifi text-[10px]"></i>
+<i class="fa-solid fa-battery-full text-lg"></i>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 py-4 flex justify-between items-center">
+<div>
+<h1 class="text-3xl font-bold">Profile</h1>
+<p class="text-gray-500 text-sm mt-1">Your journey. Your story.</p>
+</div>
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+<i class="fa-solid fa-gear"></i>
+</button>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-24">
+<!-- User Profile Card -->
+<section class="border border-gray-100 rounded-3xl p-5 mb-6 flex items-center gap-5">
+<div class="w-20 h-20 rounded-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<!-- Placeholder for Avatar -->
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDzcLgnZJFIcSOlYUFeFumROjQTjJ-J502Lub6EIbN_t_K8OnIHjcDJqG4oYBcJYSnuyhXsEAHSY4LOjxOp8vGF3gAUj40U8PwclEE4RIGwX1xW9MthB-Ss0XhHQO31UPcgKnRNjeNSw3x4nZZCCu4sRDcM_BnyvCY0rNON7UPeVFmZ2WWCNf-qnqcqxUWcXJmS43q_ql9qnGa4SwfSITcAbjErMJYuV01QprrAsW2qogmlGJf_sv4u9yWRJ5NflqnQtiCcu8V1PS7"/>
+</div>
+<div>
+<h2 class="text-xl font-bold text-gray-900">Harry</h2>
+<p class="text-gray-500 text-sm mb-1">Software Engineer</p>
+<p class="text-gray-400 text-xs italic mb-2">"Discipline today. Freedom tomorrow."</p>
+<button class="text-xs font-medium border border-gray-200 px-3 py-1 rounded-full text-gray-600 flex items-center gap-1">
+<i class="fa-solid fa-pen text-[10px]"></i> Edit
+          </button>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-3 gap-4 mb-8 text-center">
+<div>
+<p class="text-xs text-gray-500 mb-1">Life Score</p>
+<p class="text-3xl font-bold text-gray-900">82</p>
+<p class="text-[10px] text-gray-400 mt-1">Great progress</p>
+</div>
+<div>
+<p class="text-xs text-gray-500 mb-1">Days with LifeOS</p>
+<p class="text-3xl font-bold text-gray-900">47</p>
+<p class="text-[10px] text-gray-400 mt-1">Days</p>
+</div>
+<div>
+<p class="text-xs text-gray-500 mb-1">Goals Completed</p>
+<p class="text-3xl font-bold text-gray-900">12</p>
+<p class="text-[10px] text-gray-400 mt-1">This year</p>
+</div>
+</section>
+<!-- Current Focus -->
+<section class="bg-gray-50 rounded-2xl p-4 mb-8">
+<div class="flex items-center gap-2 mb-3">
+<i class="fa-solid fa-bullseye text-gray-600"></i>
+<h3 class="font-semibold text-gray-900 text-sm">Current Focus</h3>
+</div>
+<div class="flex justify-between items-end mb-2">
+<p class="font-medium text-gray-900">Build AI Resume Builder</p>
+<span class="font-bold text-sm">67%</span>
+</div>
+<!-- Progress Bar Mock -->
+<div class="flex gap-0.5">
+<!-- Filled bars -->
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<div class="w-1.5 h-3 bg-black rounded-sm"></div>
+<!-- Empty bars -->
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-gray-200 rounded-sm"></div>
+</div>
+</section>
+<!-- Key Streaks -->
+<section class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-gray-900">Key Streaks</h3>
+<a class="text-xs text-gray-500 font-medium" href="#">See all</a>
+</div>
+<div class="flex justify-between">
+<!-- Streak Item -->
+<div class="border border-gray-100 rounded-2xl p-3 flex flex-col items-center justify-center w-[72px] h-[90px]">
+<i class="fa-solid fa-code text-gray-600 mb-2"></i>
+<span class="text-[10px] text-gray-500 font-medium mb-1">Coding</span>
+<span class="font-bold text-lg leading-none">9</span>
+<span class="text-[9px] text-gray-400">days</span>
+</div>
+<!-- Streak Item -->
+<div class="border border-gray-100 rounded-2xl p-3 flex flex-col items-center justify-center w-[72px] h-[90px]">
+<i class="fa-solid fa-dumbbell text-gray-600 mb-2"></i>
+<span class="text-[10px] text-gray-500 font-medium mb-1">Workout</span>
+<span class="font-bold text-lg leading-none">6</span>
+<span class="text-[9px] text-gray-400">days</span>
+</div>
+<!-- Streak Item -->
+<div class="border border-gray-100 rounded-2xl p-3 flex flex-col items-center justify-center w-[72px] h-[90px]">
+<i class="fa-solid fa-book-open text-gray-600 mb-2"></i>
+<span class="text-[10px] text-gray-500 font-medium mb-1">Reading</span>
+<span class="font-bold text-lg leading-none">12</span>
+<span class="text-[9px] text-gray-400">days</span>
+</div>
+<!-- Streak Item -->
+<div class="border border-gray-100 rounded-2xl p-3 flex flex-col items-center justify-center w-[72px] h-[90px]">
+<i class="fa-solid fa-pen-nib text-gray-600 mb-2"></i>
+<span class="text-[10px] text-gray-500 font-medium mb-1">Journaling</span>
+<span class="font-bold text-lg leading-none">7</span>
+<span class="text-[9px] text-gray-400">days</span>
+</div>
+</div>
+</section>
+<!-- Recent Achievements -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-gray-900">Recent Achievements</h3>
+<a class="text-xs text-gray-500 font-medium" href="#">See all</a>
+</div>
+<div class="space-y-4">
+<!-- Achievement Item -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">
+<i class="fa-solid fa-code"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-gray-900">Completed Authentication Module</p>
+</div>
+<span class="text-xs text-gray-400">Feb 11, 2025</span>
+</div>
+<!-- Achievement Item -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">
+<i class="fa-solid fa-bolt"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-gray-900">7-Day Coding Streak</p>
+</div>
+<span class="text-xs text-gray-400">Feb 8, 2025</span>
+</div>
+<!-- Achievement Item -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs">
+<i class="fa-solid fa-clock"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-gray-900">Longest Focus Session (2h 45m)</p>
+</div>
+<span class="text-xs text-gray-400">Feb 6, 2025</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-2 flex justify-between items-center pb-8">
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-solid fa-house text-xl"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-clock text-xl"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</button>
+<!-- FAB -->
+<button class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-lg">
+<i class="fa-solid fa-plus"></i>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-face-smile text-xl"></i>
+<span class="text-[10px] font-medium">AI</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-black">
+<i class="fa-solid fa-user text-xl"></i>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full"></div>
+</div>
+<!-- END: Profile Screen -->
+<!-- BEGIN: Settings Screen -->
+<div class="app-screen" data-purpose="settings-screen">
+<!-- Top Status Bar (Mock) -->
+<div class="flex justify-between items-center px-6 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex gap-1.5 items-center">
+<i class="fa-solid fa-signal text-[10px]"></i>
+<i class="fa-solid fa-wifi text-[10px]"></i>
+<i class="fa-solid fa-battery-full text-lg"></i>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 py-2 flex flex-col">
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 mb-4 self-start">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+<div>
+<h1 class="text-3xl font-bold">Settings</h1>
+<p class="text-gray-500 text-sm mt-1">Customize your experience.</p>
+</div>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-24 mt-4">
+<!-- Preferences Group -->
+<section class="mb-8">
+<h3 class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Preferences</h3>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-robot w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">AI Personality</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">Brutally Honest</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-palette w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Accent Color</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<div class="w-4 h-4 rounded-full bg-orange-500"></div>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-regular fa-clock w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Daily Check-In Time</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">07:30 AM</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-regular fa-calendar w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Date &amp; Time</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-ruler w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Units</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">Metric</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+</div>
+</section>
+<!-- Notifications Group -->
+<section class="mb-8">
+<h3 class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Notifications</h3>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-regular fa-bell w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Push Notifications</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">On</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-regular fa-calendar-check w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Daily Reminders</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">On</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-moon w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Goal Reminders</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">On</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-fire w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Streak Alerts</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">On</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+</div>
+</section>
+<!-- Integrations Group -->
+<section class="mb-8">
+<h3 class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Integrations</h3>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-brands fa-google w-5 text-center text-blue-500"></i>
+<span class="text-sm font-medium">Google Calendar</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">Connected</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-heart w-5 text-center text-red-500"></i>
+<span class="text-sm font-medium">Apple Health</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">Connected</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3">
+<div class="flex items-center gap-3 text-gray-700">
+<div class="w-5 h-5 bg-black text-white text-[10px] flex justify-center items-center rounded-sm font-serif">N</div>
+<span class="text-sm font-medium">Notion</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<span class="text-xs">Connected</span>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Group -->
+<section class="mb-4">
+<h3 class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3">Account</h3>
+<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-lock w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Privacy &amp; Data</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3 border-b border-gray-50">
+<div class="flex items-center gap-3 text-gray-700">
+<i class="fa-solid fa-file-export w-5 text-center text-gray-400"></i>
+<span class="text-sm font-medium">Export My Data</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+<div class="flex justify-between items-center px-4 py-3">
+<div class="flex items-center gap-3 text-red-500">
+<span class="text-sm font-medium pl-8">Delete Account</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-2 flex justify-between items-center pb-8">
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-solid fa-house text-xl"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-clock text-xl"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</button>
+<!-- FAB -->
+<button class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-lg">
+<i class="fa-solid fa-plus"></i>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<i class="fa-regular fa-face-smile text-xl"></i>
+<span class="text-[10px] font-medium">AI</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-black">
+<i class="fa-solid fa-user text-xl"></i>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full"></div>
+</div>
+<!-- END: Settings Screen -->
+</body></html>

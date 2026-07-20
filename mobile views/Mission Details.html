@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Today's Mission Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAFAFA;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="custom-utilities">
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 44px); }
+    
+    /* Custom Progress Bar Styling */
+    .progress-dashes {
+      display: flex;
+      gap: 2px;
+      height: 16px;
+      width: 100%;
+    }
+    .progress-dash {
+      flex: 1;
+      background-color: #E5E7EB;
+      border-radius: 9999px;
+    }
+    .progress-dash.filled {
+      background-color: #111827;
+    }
+  </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="min-h-screen flex flex-col relative pb-[100px]">
+<!-- BEGIN: Header -->
+<header class="pt-safe px-5 pb-4 flex justify-between items-center sticky top-0 bg-[#FAFAFA] z-10" data-purpose="top-navigation">
+<button aria-label="Go back" class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm">
+<i class="fa-solid fa-arrow-left text-gray-700"></i>
+</button>
+<button aria-label="More options" class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm">
+<i class="fa-solid fa-ellipsis text-gray-700"></i>
+</button>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Content -->
+<main class="flex-1 px-5 flex flex-col gap-8 pb-8" data-purpose="main-content">
+<!-- BEGIN: Mission Header Info -->
+<section class="flex flex-col gap-2" data-purpose="mission-title-section">
+<p class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Today's Mission</p>
+<h1 class="text-4xl font-bold tracking-tight text-gray-900 leading-tight">Build Authentication</h1>
+<div class="flex items-center gap-4 text-sm text-gray-500 mt-2">
+<div class="flex items-center gap-1.5">
+<i class="fa-regular fa-clock"></i>
+<span>2h 00m estimated</span>
+</div>
+<div class="flex items-center gap-1.5 border-l border-gray-300 pl-4">
+<i class="fa-regular fa-flag text-gray-400"></i>
+<span>High Priority</span>
+</div>
+<div class="flex items-center gap-1.5 border-l border-gray-300 pl-4">
+<i class="fa-solid fa-tag text-gray-400 text-xs transform rotate-90"></i>
+<span>Development</span>
+</div>
+</div>
+</section>
+<!-- END: Mission Header Info -->
+<!-- BEGIN: Why This Matters Card -->
+<section class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] border border-gray-100 flex items-start gap-4" data-purpose="why-matters-card">
+<div class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center shrink-0 mt-0.5">
+<i class="fa-solid fa-wand-magic-sparkles text-white text-xs"></i>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-semibold text-gray-900 mb-1">Why this matters</h3>
+<p class="text-sm text-gray-500 leading-relaxed pr-6">Authentication is the foundation of your app. Getting this right today will unlock everything else.</p>
+</div>
+<button class="text-gray-400 shrink-0 mt-1">
+<i class="fa-solid fa-chevron-down text-xs"></i>
+</button>
+</section>
+<!-- END: Why This Matters Card -->
+<!-- BEGIN: Progress Section -->
+<section class="flex flex-col gap-3" data-purpose="progress-section">
+<div class="flex justify-between items-baseline">
+<h2 class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Progress</h2>
+</div>
+<div class="flex justify-between items-end mb-1">
+<div class="text-4xl font-bold text-gray-900">67%</div>
+<div class="text-sm text-gray-900 font-medium">1h 20m <span class="text-gray-400 font-normal">/ 2h 00m</span></div>
+</div>
+<!-- Custom dashed progress bar to match design -->
+<div aria-label="Progress: 67%" class="progress-dashes">
+<!-- Generating ~50 dashes, roughly 67% filled -->
+<!-- Filled -->
+<div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div>
+<div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div>
+<div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div>
+<div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div><div class="progress-dash filled"></div>
+<!-- Unfilled -->
+<div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div>
+<div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div><div class="progress-dash"></div>
+</div>
+</section>
+<!-- END: Progress Section -->
+<!-- BEGIN: Subtasks Section -->
+<section class="flex flex-col gap-3" data-purpose="subtasks-section">
+<div class="flex justify-between items-center px-1">
+<h2 class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Subtasks</h2>
+<span class="text-xs text-gray-500 font-medium">3/5 completed</span>
+</div>
+<div class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] overflow-hidden">
+<!-- Subtask 1: Completed -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-check text-white text-xs"></i>
+</div>
+<span class="text-sm text-gray-900 font-medium">Set up authentication flow</span>
+</div>
+<div class="flex items-center gap-3 text-gray-400">
+<div class="flex items-center gap-1 text-xs">
+<i class="fa-regular fa-clock"></i>
+<span>30m</span>
+</div>
+<button><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<!-- Subtask 2: Completed -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-check text-white text-xs"></i>
+</div>
+<span class="text-sm text-gray-900 font-medium">Create login screen</span>
+</div>
+<div class="flex items-center gap-3 text-gray-400">
+<div class="flex items-center gap-1 text-xs">
+<i class="fa-regular fa-clock"></i>
+<span>20m</span>
+</div>
+<button><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<!-- Subtask 3: Completed -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-check text-white text-xs"></i>
+</div>
+<span class="text-sm text-gray-900 font-medium">Implement email &amp; password login</span>
+</div>
+<div class="flex items-center gap-3 text-gray-400">
+<div class="flex items-center gap-1 text-xs">
+<i class="fa-regular fa-clock"></i>
+<span>45m</span>
+</div>
+<button><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<!-- Subtask 4: Pending -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center shrink-0">
+</div>
+<span class="text-sm text-gray-900 font-medium">Add validation &amp; error handling</span>
+</div>
+<div class="flex items-center gap-3 text-gray-400">
+<div class="flex items-center gap-1 text-xs">
+<i class="fa-regular fa-clock"></i>
+<span>15m</span>
+</div>
+<button><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+<!-- Subtask 5: Pending -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center shrink-0">
+</div>
+<span class="text-sm text-gray-900 font-medium">Test the flow</span>
+</div>
+<div class="flex items-center gap-3 text-gray-400">
+<div class="flex items-center gap-1 text-xs">
+<i class="fa-regular fa-clock"></i>
+<span>10m</span>
+</div>
+<button><i class="fa-solid fa-ellipsis"></i></button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Subtasks Section -->
+<!-- BEGIN: Timers Section -->
+<section class="grid grid-cols-2 gap-4" data-purpose="timers-section">
+<!-- Focus Timer -->
+<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] relative overflow-hidden">
+<h3 class="text-xs font-semibold text-gray-500 tracking-wider uppercase mb-2">Focus Timer</h3>
+<div class="text-3xl font-bold text-gray-900 mb-1">25:00</div>
+<p class="text-xs text-gray-500">Start deep work</p>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center shadow-sm">
+<i class="fa-solid fa-play text-white ml-0.5"></i>
+</button>
+</div>
+<!-- Break Timer -->
+<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] relative overflow-hidden">
+<h3 class="text-xs font-semibold text-gray-500 tracking-wider uppercase mb-2">Break Timer</h3>
+<div class="text-3xl font-bold text-gray-900 mb-1">05:00</div>
+<p class="text-xs text-gray-500">Take a short break</p>
+<button class="absolute bottom-4 right-4 w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center shadow-sm">
+<i class="fa-solid fa-play text-gray-900 ml-0.5"></i>
+</button>
+</div>
+</section>
+<!-- END: Timers Section -->
+<!-- BEGIN: Notes Section -->
+<section class="flex flex-col gap-3" data-purpose="notes-section">
+<h2 class="text-xs font-semibold text-gray-500 tracking-wider uppercase px-1">Notes</h2>
+<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] flex items-center gap-3">
+<i class="fa-regular fa-file-lines text-gray-400 text-lg"></i>
+<input class="flex-1 bg-transparent border-none outline-none text-sm text-gray-900 placeholder-gray-400 p-0 focus:ring-0" placeholder="Add notes about this mission..." type="text"/>
+<button class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-600">
+<i class="fa-regular fa-pen-to-square text-sm"></i>
+</button>
+</div>
+</section>
+<!-- END: Notes Section -->
+<!-- BEGIN: AI Coach Section -->
+<section class="flex flex-col gap-3" data-purpose="ai-coach-section">
+<h2 class="text-xs font-semibold text-gray-500 tracking-wider uppercase px-1">AI Coach</h2>
+<div class="bg-[#F9F7F5] rounded-2xl p-4 flex items-start gap-4">
+<!-- Placeholder for Avatar -->
+<div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden shrink-0 flex items-center justify-center">
+<img alt="AI Coach Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaqAXXkNWN1qwAhGAw4KFG6e_K6uWKyGhzq-ORD5C3D_S346jrtb4DVBWCPYdxGK6wSlK7-gKSFj2W3KFbz8YnI48XUJcNpNe0yeZ275XqwoaNbZJTS38-xqwAvpCYh6nCuF-n4EmLsqY4aCIAvfokFnNMCk9kqWG1ridCF1O-FH5y21RGTyAtjWYDO9HPwqzIVaRr8LwoXYE4e2iSczUDqwQm-KM_qgoY_lXOjof76OqvplSQsRQtXR76GSWd-c9h8dQVf4WlMjn_"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-sm font-semibold text-gray-900">Coach Mode</h3>
+<span class="text-[10px] font-bold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded border border-orange-200">AI</span>
+</div>
+<p class="text-sm text-gray-600 leading-relaxed pr-2">You usually do your best work between 8-11 PM. Consider blocking distractions during that time.</p>
+</div>
+<button class="flex flex-col items-center justify-center bg-white rounded-xl p-2 shadow-sm border border-gray-100 shrink-0 min-w-[50px]">
+<i class="fa-solid fa-wand-magic-sparkles text-gray-900 mb-1"></i>
+<span class="text-[10px] font-semibold text-gray-900">Ask</span>
+</button>
+</div>
+</section>
+<!-- END: AI Coach Section -->
+</main>
+<!-- END: Main Content -->
+<!-- BEGIN: Bottom Fixed Action -->
+<div class="fixed bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA] to-transparent pb-safe z-20" data-purpose="fixed-bottom-action">
+<button class="w-full bg-gray-900 text-white rounded-full py-4 px-6 font-semibold flex items-center justify-center gap-2 shadow-lg">
+<i class="fa-regular fa-circle-check text-lg"></i>
+      Mark Mission as Complete
+    </button>
+</div>
+<!-- END: Bottom Fixed Action -->
+</body></html>

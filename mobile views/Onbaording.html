@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gray-900': '#111827',
+            'gray-500': '#6B7280',
+            'gray-400': '#9CA3AF',
+            'gray-100': '#F3F4F6',
+            'gray-50': '#F9FAFB',
+          },
+          boxShadow: {
+            'custom': '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 0 3px rgba(0,0,0,0.02)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white min-h-screen flex flex-col antialiased text-gray-900 overflow-x-hidden relative">
+<!-- BEGIN: Top Navigation -->
+<nav class="flex items-center justify-between px-6 pt-12 pb-4">
+<div class="flex items-center space-x-2">
+<span class="text-xl font-bold tracking-tight">LifeOS</span>
+<span class="bg-gray-100 text-gray-500 text-[10px] font-semibold px-2 py-0.5 rounded-md">AI</span>
+</div>
+<button class="w-10 h-10 border border-gray-200 rounded-xl flex items-center justify-center text-gray-900 shadow-sm">
+<i class="fa-solid fa-spinner"></i>
+</button>
+</nav>
+<!-- END: Top Navigation -->
+<!-- BEGIN: Main Content -->
+<main class="flex-1 px-6 pt-4 flex flex-col relative">
+<!-- Hero Typography -->
+<div class="mb-6 relative z-10">
+<h1 class="text-[44px] leading-[1.05] font-bold tracking-tight mb-4">
+        Your life.<br/>
+        Organized.<br/>
+<span class="text-gray-500 font-semibold">Powered by AI.</span>
+</h1>
+<p class="text-gray-500 text-[15px] leading-relaxed max-w-[280px]">
+        One intelligent system to plan your day, build better habits, and become who you're meant to be.
+      </p>
+</div>
+<!-- Background decorative circles -->
+<div class="absolute top-[280px] left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none -z-10">
+<div class="w-[300px] h-[300px] rounded-full border border-gray-100 absolute top-10"></div>
+<div class="w-[400px] h-[400px] rounded-full border border-gray-50 absolute -top-4"></div>
+<div class="w-[500px] h-[500px] rounded-full border border-gray-50/50 absolute -top-16"></div>
+</div>
+<!-- Stacked Cards Container -->
+<div class="relative w-full max-w-[320px] mx-auto h-[260px] mt-10">
+<!-- Card 4 (Bottom) - AI Coach -->
+<div class="absolute bottom-0 w-full bg-white rounded-2xl p-4 shadow-custom flex items-center justify-between border border-gray-50 z-10 transform translate-y-4 scale-95 opacity-90">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 flex items-center justify-center text-gray-900">
+<i class="fa-solid fa-sparkles text-sm"></i>
+</div>
+<div>
+<div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">AI Coach</div>
+<div class="text-[13px] font-semibold text-gray-900">Check-in at 07:30 AM</div>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
+</div>
+<!-- Card 3 - Habits -->
+<div class="absolute bottom-[48px] w-full bg-white rounded-2xl p-4 shadow-custom border border-gray-50 z-20 transform translate-y-2 scale-[0.97] opacity-95">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 flex items-center justify-center text-gray-900">
+<i class="fa-solid fa-bullseye text-sm"></i>
+</div>
+<div class="flex-1 flex items-center justify-between">
+<div>
+<div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">Habits</div>
+<div class="text-[13px] font-semibold text-gray-900">9 Day Streak</div>
+</div>
+<div class="flex space-x-1">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 - Calendar -->
+<div class="absolute bottom-[96px] w-full bg-white rounded-2xl p-4 shadow-custom border border-gray-50 z-30 transform translate-y-0 scale-[0.99] opacity-98">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 flex items-center justify-center text-gray-900">
+<i class="fa-regular fa-calendar text-sm"></i>
+</div>
+<div>
+<div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-0.5">Calendar</div>
+<div class="text-[13px] font-semibold text-gray-900 flex items-center gap-1.5">
+              3 Events Today <span class="w-1.5 h-1.5 rounded-full bg-gray-300 block"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 1 (Top) - Today's Mission -->
+<div class="absolute bottom-[144px] w-full bg-white rounded-2xl p-5 shadow-custom border border-gray-50 z-40 transform translate-y-0 scale-100">
+<div class="flex items-start space-x-4">
+<div class="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center text-white mt-1 shrink-0">
+<i class="fa-solid fa-check text-[10px]"></i>
+</div>
+<div class="flex-1 w-full">
+<div class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1">Today's Mission</div>
+<div class="text-[14px] font-semibold text-gray-900 mb-3">Build Authentication</div>
+<div class="flex items-center justify-between w-full">
+<div class="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden mr-3">
+<div class="h-full bg-gray-900 rounded-full w-[67%]"></div>
+</div>
+<span class="text-[11px] font-medium text-gray-500">67%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: Main Content -->
+<!-- BEGIN: Footer Actions -->
+<footer class="px-6 pb-10 pt-4 bg-white/80 backdrop-blur-md sticky bottom-0 z-50">
+<!-- Pagination dots -->
+<div class="flex justify-center space-x-2 mb-8">
+<div class="w-6 h-1.5 rounded-full bg-gray-900"></div>
+<div class="w-6 h-1.5 rounded-full bg-gray-200"></div>
+<div class="w-6 h-1.5 rounded-full bg-gray-200"></div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-gray-900 text-white rounded-[20px] py-4 px-6 font-semibold flex items-center justify-between shadow-lg">
+<span class="flex-1 text-center pl-4">Get Started</span>
+<i class="fa-solid fa-arrow-right text-sm"></i>
+</button>
+<button class="w-full bg-white border border-gray-200 text-gray-900 rounded-[20px] py-4 px-6 font-semibold text-center">
+        Log In
+      </button>
+</div>
+</footer>
+<!-- END: Footer Actions -->
+</body></html>

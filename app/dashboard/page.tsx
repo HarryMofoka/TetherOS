@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ChevronDown, Play, MoreHorizontal, Calendar as CalIcon } from "lucide-react";
+import { ChevronDown, Play, MoreHorizontal, Calendar as CalIcon, Flame, Folder, Timer, Plus, ArrowUpRight } from "lucide-react";
 import { LifeScoreRing, MiniLineChart, Donut, ProgressRing } from "@/components/mock/charts";
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ export default function Dashboard() {
                   <HabitRow name="Meditate" streak={4} dots={7} filled={4} />
                   <HabitRow name="No Sugar" streak={7} dots={7} filled={7} />
                 </div>
-                <button className="mt-4 w-full rounded-xl border border-dashed border-border py-2 text-xs text-muted-foreground">+ Add New Habit</button>
+                <button className="mt-4 w-full rounded-xl border border-dashed border-border py-2 text-xs text-muted-foreground flex items-center justify-center gap-1"><Plus className="h-3 w-3" /> Add New Habit</button>
               </div>
 
               <div className="rounded-2xl border border-border bg-card p-5">
@@ -147,14 +147,14 @@ export default function Dashboard() {
               ))}
             </div>
             <div className="mt-3 flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-[11px] text-muted-foreground">
-              Ask your AI Coach anything... <span className="ml-auto">↗</span>
+              Ask your AI Coach anything... <ArrowUpRight className="ml-auto h-4 w-4" />
             </div>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-4">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold">Projects</div>
-              <button className="text-[11px] text-[color:var(--brand-blue)]">+ View all</button>
+              <button className="flex items-center gap-1 text-[11px] text-[color:var(--brand-blue)]"><Plus className="h-3 w-3" /> View all</button>
             </div>
             <div className="mt-3 space-y-3">
               <ProjectRow name="AI Resume Builder" status="On Track" pct={67} color="var(--brand-blue)" />
@@ -162,7 +162,7 @@ export default function Dashboard() {
               <ProjectRow name="Personal Website" status="On Hold" pct={25} color="oklch(0.75 0.15 80)" />
               <ProjectRow name="Reading Tracker" status="On Track" pct={80} color="oklch(0.72 0.17 155)" />
             </div>
-            <button className="mt-4 w-full rounded-xl border border-dashed border-border py-2 text-xs text-muted-foreground">+ New Project</button>
+            <button className="mt-4 w-full rounded-xl border border-dashed border-border py-2 text-xs text-muted-foreground flex items-center justify-center gap-1"><Plus className="h-3 w-3" /> New Project</button>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ function PlanRow({ time, title, sub, duration, active }: { time: string; title: 
             <div className="text-[11px] text-muted-foreground">{sub}</div>
           </div>
           <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-            {duration && <span>⏱ {duration}</span>}
+            {duration && <span className="flex items-center gap-1"><Timer className="h-3 w-3" /> {duration}</span>}
             {active ? <Play className="h-3.5 w-3.5" /> : <MoreHorizontal className="h-3.5 w-3.5" />}
           </div>
         </div>
@@ -207,7 +207,7 @@ function PlanRow({ time, title, sub, duration, active }: { time: string; title: 
 function HabitRow({ name, streak, dots, filled }: { name: string; streak: number; dots: number; filled: number }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-xs">🔥</div>
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-xs"><Flame className="h-4 w-4" /></div>
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <div className="text-sm font-medium">{name}</div>
@@ -226,7 +226,7 @@ function HabitRow({ name, streak, dots, filled }: { name: string; streak: number
 function ProjectRow({ name, status, pct, color }: { name: string; status: string; pct: number; color: string }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background text-xs">📁</div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background text-xs"><Folder className="h-4 w-4" /></div>
       <div className="flex-1">
         <div className="text-xs font-semibold">{name}</div>
         <div className="text-[10px] text-muted-foreground">{status}</div>

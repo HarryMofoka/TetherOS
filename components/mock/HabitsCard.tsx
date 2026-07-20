@@ -1,4 +1,5 @@
 import React from "react";
+import { Plus } from "lucide-react";
 
 export function HabitsCard() {
   const habits = [
@@ -31,7 +32,7 @@ export function HabitsCard() {
             </div>
           ))}
         </div>
-        <button className="mt-2 w-full rounded-xl bg-foreground py-3 text-xs font-semibold text-background">+ Add New Habit</button>
+        <button className="mt-2 flex w-full items-center justify-center gap-1 rounded-xl bg-foreground py-3 text-xs font-semibold text-background"><Plus className="h-3.5 w-3.5" /> Add New Habit</button>
       </div>
     </div>
   );

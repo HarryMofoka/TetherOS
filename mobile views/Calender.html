@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-fonts">
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-utilities">
+    /* Custom scrollbar hiding for clean look if needed */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#F9FAFB',
+            surface: '#FFFFFF',
+            primary: '#111827',
+            secondary: '#6B7280',
+            accent: '#E5E7EB',
+            brand: {
+              light: '#EEF2FF',
+              DEFAULT: '#4F46E5',
+              dark: '#4338CA',
+            },
+            timeline: {
+              line: '#E5E7EB',
+              dot: '#9CA3AF',
+              activeDot: '#3B82F6'
+            }
+          },
+          boxShadow: {
+            'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+            'nav': '0 -1px 3px 0 rgba(0, 0, 0, 0.05)',
+            'floating': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-primary antialiased min-h-screen flex justify-center pb-[100px]">
+<!-- Mobile Container -->
+<div class="w-full max-w-[428px] bg-background min-h-screen relative shadow-xl overflow-hidden flex flex-col">
+<!-- BEGIN: StatusBar -->
+<div class="flex justify-between items-center px-6 py-4 text-sm font-semibold sticky top-0 bg-background z-20">
+<span>9:41</span>
+<div class="flex items-center space-x-2">
+<i class="fa-solid fa-signal text-[12px]"></i>
+<i class="fa-solid fa-wifi text-[12px]"></i>
+<i class="fa-solid fa-battery-full text-[12px]"></i>
+</div>
+</div>
+<!-- END: StatusBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto no-scrollbar px-5 pb-24">
+<!-- BEGIN: Header -->
+<header class="mt-2 mb-8">
+<div class="flex justify-between items-center mb-1">
+<h1 class="text-3xl font-bold tracking-tight">Calendar</h1>
+<div class="flex space-x-3">
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+<i class="fa-solid fa-magnifying-glass"></i>
+</button>
+<button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+<i class="fa-regular fa-calendar"></i>
+</button>
+</div>
+</div>
+<p class="text-secondary text-[15px]">Plan your time. Own your day.</p>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: CalendarSection -->
+<section class="mb-8">
+<!-- Month Navigation -->
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-xl font-bold">February 2025</h2>
+<div class="flex rounded-full border border-gray-200 bg-white overflow-hidden text-sm font-medium">
+<button class="px-3 py-1.5 hover:bg-gray-50 border-r border-gray-200 text-gray-600">
+<i class="fa-solid fa-chevron-left text-[10px]"></i>
+</button>
+<button class="px-4 py-1.5 hover:bg-gray-50 text-gray-800">
+              Today
+            </button>
+<button class="px-3 py-1.5 hover:bg-gray-50 border-l border-gray-200 text-gray-600">
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+<!-- Days Header -->
+<div class="grid grid-cols-7 gap-1 text-center mb-4">
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">MON</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">TUE</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">WED</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">THU</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">FRI</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">SAT</div>
+<div class="text-[10px] font-semibold text-gray-400 tracking-wider">SUN</div>
+</div>
+<!-- Dates -->
+<div class="grid grid-cols-7 gap-y-4 gap-x-1 text-center text-sm">
+<!-- Row 1 -->
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">27</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">28</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">29</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">30</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">31</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">1<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">2<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<!-- Row 2 -->
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">3<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">4</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">5<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">6</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">7<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">8<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">9<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<!-- Row 3 -->
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">10</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium bg-primary text-white rounded-full">11<span class="w-1 h-1 bg-orange-400 rounded-full mt-1 absolute -bottom-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">12<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">13</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">14<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">15</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">16<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<!-- Row 4 -->
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">17</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">18<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">19</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">20<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">21</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">22<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">23</div>
+<!-- Row 5 -->
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">24</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">25<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">26</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">27<span class="w-1 h-1 bg-gray-300 rounded-full mt-1"></span></div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto font-medium">28</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">1</div>
+<div class="flex flex-col items-center justify-center relative h-10 w-10 mx-auto text-gray-300">2</div>
+</div>
+</div>
+</section>
+<!-- END: CalendarSection -->
+<!-- BEGIN: DailyScheduleHeader -->
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold">Tuesday, 11 February</h3>
+<button class="flex items-center space-x-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50">
+<i class="fa-solid fa-wand-magic-sparkles text-blue-500 text-[12px]"></i>
+<span>Plan with AI</span>
+</button>
+</div>
+<!-- END: DailyScheduleHeader -->
+<!-- BEGIN: Timeline -->
+<section class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-[38px] top-4 bottom-4 w-px bg-timeline-line z-0"></div>
+<!-- 07:00 Morning Routine -->
+<div class="flex mb-4 relative z-10 group">
+<div class="w-14 text-xs font-medium text-gray-500 pt-3 text-right pr-4 shrink-0">07:00</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-timeline-dot ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex items-start gap-3 relative">
+<div class="mt-1 w-5 h-5 rounded border border-gray-300 flex-shrink-0"></div>
+<div class="flex-1">
+<h4 class="font-semibold text-[15px] leading-tight">Morning Routine</h4>
+<p class="text-gray-500 text-sm mt-0.5">Workout, Shower, Read</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0">
+<i class="fa-solid fa-rotate text-xs"></i>
+</div>
+</div>
+</div>
+<!-- 08:00 Deep Work Session -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-800 pt-3 text-right pr-4 shrink-0">08:00</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-blue-500 ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-[#F3F4F9] border border-[#E5E7F4] rounded-2xl p-3 flex items-start gap-3 relative overflow-hidden">
+<!-- Left Blue Accent Line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
+<div class="flex-1 pl-1">
+<h4 class="font-semibold text-[15px] leading-tight">Deep Work Session</h4>
+<p class="text-gray-500 text-sm mt-0.5">Build Authentication Flow</p>
+</div>
+<div class="flex items-center gap-2 mt-0.5 shrink-0">
+<div class="flex items-center text-blue-600 text-xs font-medium bg-blue-50 px-2 py-1 rounded-md">
+<i class="fa-regular fa-clock mr-1 text-[10px]"></i>
+                2h 30m
+              </div>
+<button class="text-gray-400 hover:text-gray-600 w-5 h-5 flex items-center justify-center">
+<i class="fa-solid fa-ellipsis-vertical text-sm"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- 10:30 Short Break -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-500 pt-3 text-right pr-4 shrink-0">10:30</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-timeline-dot ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded border border-gray-300 flex-shrink-0"></div>
+<div class="flex-1">
+<h4 class="font-semibold text-[15px] leading-tight">Short Break</h4>
+<p class="text-gray-500 text-sm mt-0.5">Walk, Stretch</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0">
+<i class="fa-solid fa-mug-hot text-xs"></i>
+</div>
+</div>
+</div>
+<!-- 12:30 Lunch Break -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-500 pt-3 text-right pr-4 shrink-0">12:30</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-timeline-dot ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded border border-gray-300 flex-shrink-0"></div>
+<div class="flex-1">
+<h4 class="font-semibold text-[15px] leading-tight">Lunch Break</h4>
+<p class="text-gray-500 text-sm mt-0.5">Recharge</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0">
+<i class="fa-solid fa-burger text-xs"></i>
+</div>
+</div>
+</div>
+<!-- 14:00 Implement API Endpoints -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-800 pt-3 text-right pr-4 shrink-0">14:00</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-blue-500 ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-[#F3F4F9] border border-[#E5E7F4] rounded-2xl p-3 flex items-start gap-3 relative overflow-hidden">
+<!-- Left Blue Accent Line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
+<div class="flex-1 pl-1">
+<h4 class="font-semibold text-[15px] leading-tight">Implement API Endpoints</h4>
+<p class="text-gray-500 text-sm mt-0.5">Connect login &amp; register</p>
+</div>
+<div class="flex items-center gap-2 mt-0.5 shrink-0">
+<div class="flex items-center text-blue-600 text-xs font-medium bg-blue-50 px-2 py-1 rounded-md">
+<i class="fa-regular fa-clock mr-1 text-[10px]"></i>
+                1h 30m
+              </div>
+<button class="text-gray-400 hover:text-gray-600 w-5 h-5 flex items-center justify-center">
+<i class="fa-solid fa-ellipsis-vertical text-sm"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- 16:00 Test & Debug -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-500 pt-3 text-right pr-4 shrink-0">16:00</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-timeline-dot ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded border border-gray-300 flex-shrink-0"></div>
+<div class="flex-1">
+<h4 class="font-semibold text-[15px] leading-tight">Test &amp; Debug</h4>
+<p class="text-gray-500 text-sm mt-0.5">Fix issues and test flow</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0">
+<i class="fa-solid fa-code text-xs"></i>
+</div>
+</div>
+</div>
+<!-- 18:30 Review & Reflect -->
+<div class="flex mb-4 relative z-10">
+<div class="w-14 text-xs font-medium text-gray-500 pt-3 text-right pr-4 shrink-0">18:30</div>
+<div class="w-4 flex justify-center shrink-0 pt-[14px]">
+<div class="w-2 h-2 rounded-full bg-timeline-dot ring-4 ring-background z-10"></div>
+</div>
+<div class="flex-1 ml-3 bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded border border-gray-300 flex-shrink-0"></div>
+<div class="flex-1">
+<h4 class="font-semibold text-[15px] leading-tight">Review &amp; Reflect</h4>
+<p class="text-gray-500 text-sm mt-0.5">What went well, what can improve?</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0">
+<i class="fa-regular fa-pen-to-square text-xs"></i>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Timeline -->
+</main>
+<!-- END: MainContent -->
+<!-- Floating Action Button (FAB) -->
+<button class="absolute bottom-24 right-5 w-14 h-14 bg-primary text-white rounded-full shadow-floating flex items-center justify-center hover:bg-gray-800 transition-colors z-30">
+<i class="fa-solid fa-plus text-xl"></i>
+</button>
+<!-- BEGIN: BottomNavigation -->
+<nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-2 pb-8 z-40">
+<div class="flex justify-between items-center relative">
+<!-- Mission -->
+<a class="flex flex-col items-center p-2 text-gray-400 hover:text-gray-600 transition-colors" href="#">
+<i class="fa-solid fa-house mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Mission</span>
+</a>
+<!-- Timeline (Active) -->
+<a class="flex flex-col items-center p-2 text-primary transition-colors" href="#">
+<i class="fa-solid fa-clock mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Timeline</span>
+</a>
+<!-- Center Add Button Placeholder -->
+<div class="w-12"></div>
+<!-- AI -->
+<a class="flex flex-col items-center p-2 text-gray-400 hover:text-gray-600 transition-colors" href="#">
+<i class="fa-regular fa-face-smile mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">AI</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center p-2 text-gray-400 hover:text-gray-600 transition-colors" href="#">
+<i class="fa-regular fa-user mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+<!-- Center Prominent Add Button -->
+<button class="absolute left-1/2 -translate-x-1/2 top-1 w-12 h-12 bg-primary text-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-800 transition-colors border-4 border-white">
+<i class="fa-solid fa-plus text-xl"></i>
+</button>
+</div>
+<!-- Home Indicator -->
+<div class="w-32 h-1 bg-black rounded-full mx-auto mt-4"></div>
+</nav>
+<!-- END: BottomNavigation -->
+</div>
+</body></html>
