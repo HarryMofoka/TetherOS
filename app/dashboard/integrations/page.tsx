@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Boxes, Settings, Calendar as CalIcon, MessageSquare, Music, FileText, LayoutDashboard, Database, Check } from "lucide-react";
+import { Plug, Settings, Calendar as CalIcon, MessageSquare, Music, FileText, Grid, Database, Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Integrations — LifeOS",
@@ -12,7 +12,7 @@ export default function IntegrationsPage() {
       <div className="flex items-center justify-between px-8 pt-6 pb-6">
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Boxes className="h-6 w-6 text-pink-500" /> Integrations
+            <Plug className="h-6 w-6 text-pink-500" /> Integrations
           </h1>
           <p className="text-xs text-muted-foreground mt-1">Connect your favorite tools to sync data automatically.</p>
         </div>
@@ -50,7 +50,7 @@ export default function IntegrationsPage() {
           <IntegrationCard 
             name="Linear" 
             desc="Sync your engineering tickets and sprints."
-            icon={<LayoutDashboard className="h-6 w-6 text-indigo-500" />}
+            icon={<Grid className="h-6 w-6 text-indigo-500" />}
             status="disconnected"
           />
           <IntegrationCard 

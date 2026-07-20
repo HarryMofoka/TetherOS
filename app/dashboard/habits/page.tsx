@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus, Flame } from "lucide-react";
+import { Plus, Activity } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Habits — LifeOS",
@@ -45,7 +45,7 @@ function HabitRowExpanded({ name, streak, filled, total, emoji }: { name: string
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-lg">{emoji}</div>
         <div>
           <div className="text-sm font-semibold">{name}</div>
-          <div className="text-xs flex items-center gap-1"><Flame className="h-3 w-3 text-orange-500" /> <b>{streak}</b> <span className="text-muted-foreground">days</span></div>
+          <div className="text-xs flex items-center gap-1"><Activity className="h-3 w-3 text-orange-500" /> <b>{streak}</b> <span className="text-muted-foreground">days</span></div>
         </div>
       </div>
       <div className="flex-1 overflow-x-auto w-full lg:w-auto">

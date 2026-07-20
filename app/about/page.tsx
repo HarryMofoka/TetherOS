@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Rocket, Target, Sparkles, Shield, Heart, Link2, Globe, Mail } from "lucide-react";
+import { ArrowRight, Send, Activity, MessageSquare, Shield, Heart, Plug, Globe, Mail } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Logo } from "@/components/site/Logo";
 import { FaqSection, PrivacySection } from "@/components/site/sections";
@@ -23,9 +23,9 @@ const stats = [
 ];
 
 const values = [
-  { icon: Target, title: "Clarity", desc: "We believe clarity creates momentum." },
-  { icon: Sparkles, title: "Simplicity", desc: "We build simple tools that work beautifully." },
-  { icon: Rocket, title: "Growth", desc: "We're here to help you grow, every day." },
+  { icon: Activity, title: "Clarity", desc: "We believe clarity creates momentum." },
+  { icon: MessageSquare, title: "Simplicity", desc: "We build simple tools that work beautifully." },
+  { icon: Send, title: "Growth", desc: "We're here to help you grow, every day." },
   { icon: Shield, title: "Privacy", desc: "Your data. Your life. Always protected." },
   { icon: Heart, title: "Human First", desc: "We combine AI intelligence with human understanding." },
 ];
@@ -106,7 +106,7 @@ export default function AboutPage() {
               </div>
               <p className="mt-4 text-xs text-muted-foreground">{f.desc}</p>
               <div className="mt-4 flex items-center gap-3 text-muted-foreground">
-                <Link2 className="h-4 w-4" /><Globe className="h-4 w-4" /><Mail className="h-4 w-4" />
+                <Plug className="h-4 w-4" /><Globe className="h-4 w-4" /><Mail className="h-4 w-4" />
               </div>
             </div>
           ))}
@@ -174,7 +174,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-card p-6">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"><Rocket className="h-5 w-5" /></div>
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"><Send className="h-5 w-5" /></div>
           <div>
             <div className="font-semibold">Join thousands building better lives with LifeOS.</div>
             <div className="text-xs text-muted-foreground">Start your journey today — it changes everything.</div>

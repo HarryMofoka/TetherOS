@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bookmark, Search, Plus, ExternalLink, Globe, LayoutTemplate, Palette, Code2 } from "lucide-react";
+import { Bookmark, Search, Plus, ExternalLink, Globe, Layout, Palette, Code } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Bookmarks — LifeOS",
@@ -37,8 +37,8 @@ export default function BookmarksPage() {
           <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 px-3">Collections</div>
           <div className="space-y-1">
             <FolderItem icon={<Globe className="h-4 w-4" />} label="All Bookmarks" count={124} active />
-            <FolderItem icon={<LayoutTemplate className="h-4 w-4" />} label="Design Inspiration" count={42} />
-            <FolderItem icon={<Code2 className="h-4 w-4" />} label="Engineering" count={56} />
+            <FolderItem icon={<Layout className="h-4 w-4" />} label="Design Inspiration" count={42} />
+            <FolderItem icon={<Code className="h-4 w-4" />} label="Engineering" count={56} />
             <FolderItem icon={<Palette className="h-4 w-4" />} label="Typography" count={18} />
           </div>
         </div>

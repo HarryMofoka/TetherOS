@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, WifiOff, Brain, Sparkles, ShieldCheck, Fingerprint, Database, Cloud, ChevronDown, Star, Quote } from "lucide-react";
+import { Lock, WifiOff, Cpu, MessageSquare, ShieldCheck, Fingerprint, Database, Cloud, ChevronDown, Star, Quote } from "lucide-react";
 
 export function PrivacySection() {
   const items = [
@@ -46,8 +46,8 @@ export function MemorySection() {
           </p>
           <ul className="mt-6 space-y-3 text-sm">
             {[
-              { icon: Brain, text: "On-device vector search over your whole timeline" },
-              { icon: Sparkles, text: "RAG-powered AI coach that cites your real memories" },
+              { icon: Cpu, text: "On-device vector search over your whole timeline" },
+              { icon: MessageSquare, text: "RAG-powered AI coach that cites your real memories" },
               { icon: Database, text: "Chronological life timeline: tasks, habits, journal, emotion" },
             ].map((r) => (
               <li key={r.text} className="flex items-start gap-3">
@@ -58,7 +58,7 @@ export function MemorySection() {
           </ul>
         </div>
         <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-          <div className="flex items-center gap-2 text-xs font-semibold"><Sparkles className="h-4 w-4" /> Ask your memory</div>
+          <div className="flex items-center gap-2 text-xs font-semibold"><MessageSquare className="h-4 w-4" /> Ask your memory</div>
           <div className="mt-4 rounded-xl border border-border bg-background px-4 py-3 text-sm">
             &quot;When did I last feel this stuck on a project?&quot;
           </div>

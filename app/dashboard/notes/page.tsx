@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus, StickyNote, MoreVertical, Search } from "lucide-react";
+import { Plus, FileText, MoreVertical, Search } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Notes — LifeOS",
@@ -12,7 +12,7 @@ export default function NotesPage() {
       <div className="flex items-center justify-between px-8 pt-6 pb-6">
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <StickyNote className="h-6 w-6 text-yellow-500" /> Notes
+            <FileText className="h-6 w-6 text-yellow-500" /> Notes
           </h1>
           <p className="text-xs text-muted-foreground mt-1">Your personal knowledge base.</p>
         </div>

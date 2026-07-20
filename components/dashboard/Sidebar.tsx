@@ -3,25 +3,25 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Sun, Calendar as CalIcon, CheckCircle2, Flame, FolderKanban, BookOpen, Sparkles, LineChart, Timer, StickyNote, Bookmark, Boxes, ChevronDown, Settings as SettingsIcon, ChevronLeft } from "lucide-react";
+import { Grid, Clock, Calendar as CalIcon, CheckSquare, Repeat, Folder, Book, MessageSquare, BarChart, Timer, FileText, Bookmark, Plug, ChevronDown, Settings as SettingsIcon, ChevronLeft } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 
 const sideMain = [
-  { icon: LayoutDashboard, label: "Dashboard", desc: "Your daily overview", href: "/dashboard" },
-  { icon: Sun, label: "Today", desc: "Focus on today's goals", href: "/dashboard/today" },
+  { icon: Grid, label: "Dashboard", desc: "Your daily overview", href: "/dashboard" },
+  { icon: Clock, label: "Today", desc: "Focus on today's goals", href: "/dashboard/today" },
   { icon: CalIcon, label: "Calendar", desc: "Schedule & events", href: "/dashboard/calendar" },
-  { icon: CheckCircle2, label: "Tasks", desc: "Manage your to-dos", href: "/dashboard/tasks" },
-  { icon: Flame, label: "Habits", desc: "Track daily routines", href: "/dashboard/habits" },
-  { icon: FolderKanban, label: "Projects", desc: "Organize bigger goals", href: "/dashboard/projects" },
-  { icon: BookOpen, label: "Journal", desc: "Reflect and review", href: "/dashboard/journal" },
-  { icon: Sparkles, label: "AI Coach", desc: "Personalized guidance", href: "/dashboard/coach" },
-  { icon: LineChart, label: "Reports", desc: "Analytics & progress", href: "/dashboard/reports" },
+  { icon: CheckSquare, label: "Tasks", desc: "Manage your to-dos", href: "/dashboard/tasks" },
+  { icon: Repeat, label: "Habits", desc: "Track daily routines", href: "/dashboard/habits" },
+  { icon: Folder, label: "Projects", desc: "Organize bigger goals", href: "/dashboard/projects" },
+  { icon: Book, label: "Journal", desc: "Reflect and review", href: "/dashboard/journal" },
+  { icon: MessageSquare, label: "AI Coach", desc: "Personalized guidance", href: "/dashboard/coach" },
+  { icon: BarChart, label: "Reports", desc: "Analytics & progress", href: "/dashboard/reports" },
 ];
 const sideTools = [
   { icon: Timer, label: "Focus Timer", desc: "Deep work sessions", href: "/dashboard/focus" },
-  { icon: StickyNote, label: "Notes", desc: "Capture quick thoughts", href: "/dashboard/notes" },
+  { icon: FileText, label: "Notes", desc: "Capture quick thoughts", href: "/dashboard/notes" },
   { icon: Bookmark, label: "Bookmarks", desc: "Saved links & resources", href: "/dashboard/bookmarks" },
-  { icon: Boxes, label: "Integrations", desc: "Connect your apps", href: "/dashboard/integrations" },
+  { icon: Plug, label: "Integrations", desc: "Connect your apps", href: "/dashboard/integrations" },
 ];
 
 export function Sidebar() {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Calendar, Target, CheckCircle2, BookOpen, TrendingUp, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Calendar, Activity, CheckSquare, Book, BarChart, MessageSquare, Star } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { TodayPhone } from "@/components/mock/TodayPhone";
 import { LifeScoreRing } from "@/components/mock/charts";
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 
 const features = [
   { icon: Calendar, title: "Plan Smarter", desc: "AI-powered planning that adapts to you." },
-  { icon: Target, title: "Build Habits", desc: "Track streaks and create lasting routines." },
-  { icon: CheckCircle2, title: "Stay Focused", desc: "Smart tasks, time blocks and progress tracking." },
-  { icon: BookOpen, title: "Reflect Daily", desc: "Journal prompts and AI reflections." },
-  { icon: TrendingUp, title: "Track Progress", desc: "Visualize your growth and achievements." },
-  { icon: Sparkles, title: "AI Coach", desc: "Get personalized guidance when you need it." },
+  { icon: Activity, title: "Build Habits", desc: "Track streaks and create lasting routines." },
+  { icon: CheckSquare, title: "Stay Focused", desc: "Smart tasks, time blocks and progress tracking." },
+  { icon: Book, title: "Reflect Daily", desc: "Journal prompts and AI reflections." },
+  { icon: BarChart, title: "Track Progress", desc: "Visualize your growth and achievements." },
+  { icon: MessageSquare, title: "AI Coach", desc: "Get personalized guidance when you need it." },
 ];
 
 const steps = [

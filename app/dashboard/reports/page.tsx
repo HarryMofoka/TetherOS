@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LineChart, BarChart3, TrendingUp, Download } from "lucide-react";
+import { BarChart, BarChart3, TrendingUp, Download } from "lucide-react";
 import { LifeScoreRing, Donut, MiniLineChart } from "@/components/mock/charts";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function ReportsPage() {
       <div className="flex items-center justify-between px-8 pt-6 pb-6">
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <LineChart className="h-6 w-6 text-[color:var(--brand-blue)]" /> Analytics & Reports
+            <BarChart className="h-6 w-6 text-[color:var(--brand-blue)]" /> Analytics & Reports
           </h1>
           <p className="text-xs text-muted-foreground mt-1">Deep dive into your productivity patterns.</p>
         </div>

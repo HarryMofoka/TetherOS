@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sparkles, ArrowUp, Zap, Calendar as CalIcon, BarChart3 } from "lucide-react";
+import { MessageSquare, ArrowUp, Clock, Calendar as CalIcon, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "AI Coach — LifeOS",
@@ -11,7 +11,7 @@ export default function CoachPage() {
     <div className="flex flex-col h-[calc(100vh-80px)]">
       <div className="px-8 pt-6 pb-4 shrink-0">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Sparkles className="h-6 w-6 text-purple-500" /> AI Coach
+          <MessageSquare className="h-6 w-6 text-purple-500" /> AI Coach
         </h1>
         <p className="text-xs text-muted-foreground mt-1">Your personal guide for productivity and wellness.</p>
       </div>
@@ -23,7 +23,7 @@ export default function CoachPage() {
           {/* Coach Message */}
           <div className="flex gap-4">
             <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white">
-              <Sparkles className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4" />
             </div>
             <div className="flex-1 space-y-2">
               <div className="font-semibold text-sm">LifeOS Coach</div>
@@ -52,7 +52,7 @@ export default function CoachPage() {
           {/* Coach Message with Widget */}
           <div className="flex gap-4">
             <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white">
-              <Sparkles className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4" />
             </div>
             <div className="flex-1 space-y-2">
               <div className="font-semibold text-sm">LifeOS Coach</div>
@@ -61,7 +61,7 @@ export default function CoachPage() {
                 
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   <div className="bg-background rounded-xl p-3 border border-border">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Zap className="h-3 w-3" /> Focus Time</div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Clock className="h-3 w-3" /> Focus Time</div>
                     <div className="font-bold text-lg">14h 20m</div>
                     <div className="text-[10px] text-green-500 mt-1">↑ 12% vs last week</div>
                   </div>
@@ -83,7 +83,7 @@ export default function CoachPage() {
         <div className="flex flex-wrap gap-2 mb-4">
           <Suggestion text="Plan tomorrow" icon={<CalIcon className="h-3 w-3" />} />
           <Suggestion text="Analyze my focus" icon={<BarChart3 className="h-3 w-3" />} />
-          <Suggestion text="I feel distracted" icon={<Zap className="h-3 w-3" />} />
+          <Suggestion text="I feel distracted" icon={<Clock className="h-3 w-3" />} />
         </div>
         <div className="relative">
           <input 

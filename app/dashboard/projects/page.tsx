@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus, MoreHorizontal, FolderKanban } from "lucide-react";
+import { Plus, MoreHorizontal, Folder } from "lucide-react";
 import { ProgressRing } from "@/components/mock/charts";
 
 export const metadata: Metadata = {
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
             dueDate="Feb 28, 2025" 
           />
           <div className="rounded-2xl border border-dashed border-border bg-transparent p-6 flex flex-col items-center justify-center text-muted-foreground hover:bg-muted/30 cursor-pointer transition-colors min-h-[220px]">
-            <FolderKanban className="h-8 w-8 mb-2 opacity-50" />
+            <Folder className="h-8 w-8 mb-2 opacity-50" />
             <span className="text-sm font-medium">Create New Project</span>
           </div>
         </div>

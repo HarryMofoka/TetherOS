@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, ArrowRight, Star } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { FaqSection, TestimonialsSection, TrustBadges } from "@/components/site/sections";
 
@@ -68,7 +68,11 @@ export default function PricingPage() {
         <div className="grid gap-6 md:grid-cols-4">
           {plans.map((p) => (
             <div key={p.name} className={`relative rounded-2xl border p-6 ${p.featured ? "border-[color:var(--brand-blue)]/60 bg-card shadow-lg" : "border-border bg-card"}`}>
-              {p.featured && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[color:var(--brand-blue)]/15 px-3 py-1 text-[10px] font-semibold text-[color:var(--brand-blue)]">MOST POPULAR</span>}
+              {p.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[color:var(--brand-blue)] px-3 py-1 text-[10px] font-bold tracking-wider text-white flex items-center gap-1">
+                  <Star className="h-3 w-3 fill-current" /> MOST POPULAR
+                </div>
+              )}
               <div className="text-lg font-bold">{p.name}</div>
               <p className="mt-1 text-xs text-muted-foreground">{p.desc}</p>
               <div className="mt-6 flex items-baseline gap-1">
@@ -125,7 +129,7 @@ export default function PricingPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-card p-6">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"><Sparkles className="h-5 w-5" /></div>
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-muted text-[color:var(--brand-blue)]"><Star className="h-6 w-6" /></div>
           <div>
             <div className="font-semibold">Not sure which plan is right for you?</div>
             <div className="text-xs text-muted-foreground">Try LifeOS free for 14 days. No credit card required.</div>
