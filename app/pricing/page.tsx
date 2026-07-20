@@ -99,7 +99,7 @@ export default function PricingPage() {
         <div className="rounded-2xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center justify-between">
             <div className="text-sm font-semibold">Compare all features</div>
-            <a href="#" className="text-xs text-muted-foreground">See all features -></a>
+            <a href="#" className="text-xs text-muted-foreground">See all features -&gt;</a>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

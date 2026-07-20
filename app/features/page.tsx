@@ -183,7 +183,7 @@ function CalendarMock() {
     <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="text-lg font-bold">Calendar</div>
-        <div className="text-xs text-muted-foreground">< Today ></div>
+        <div className="text-xs text-muted-foreground">&lt; Today &gt;</div>
       </div>
       <div className="mt-3 text-sm font-semibold">February 2025</div>
       <div className="mt-3 grid grid-cols-7 gap-1 text-center text-[10px] text-muted-foreground">
@@ -307,7 +307,7 @@ function AICoachMock() {
         ))}
       </div>
       <div className="mt-3 flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-[11px] text-muted-foreground">
-        Ask your AI Coach anything... <span className="ml-auto">-></span>
+        Ask your AI Coach anything... <span className="ml-auto">-&gt;</span>
       </div>
     </div>
   );
