@@ -4,7 +4,7 @@ import { SiteFooter } from "./SiteFooter";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <SiteHeader />
       <main className="pt-28">{children}</main>
       <SiteFooter />

@@ -3,6 +3,8 @@ import { ArrowRight, Calendar, Activity, CheckSquare, Book, BarChart, MessageSqu
 import { SiteLayout } from "@/components/site/SiteLayout";
 import Link from "next/link";
 import { TodayPhone } from "@/components/mock/TodayPhone";
+import { HabitsCard } from "@/components/mock/HabitsCard";
+import { JournalCard } from "@/components/mock/JournalCard";
 import { LifeScoreRing } from "@/components/mock/charts";
 import { PrivacySection, MemorySection, OfflineSection, TestimonialsSection, FaqSection, TrustBadges } from "@/components/site/sections";
 
@@ -71,8 +73,16 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="relative flex items-center justify-center">
-            <TodayPhone />
+          <div className="relative flex h-[600px] w-full items-center justify-center lg:ml-10">
+            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 shadow-2xl transition-transform hover:-translate-y-2">
+              <TodayPhone />
+            </div>
+            <div className="hidden md:block absolute left-[80%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
+              <HabitsCard />
+            </div>
+            <div className="hidden md:block absolute left-[20%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
+              <JournalCard />
+            </div>
           </div>
         </div>
       </section>
