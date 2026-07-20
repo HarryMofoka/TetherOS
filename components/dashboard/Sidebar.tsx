@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Grid, Clock, Calendar as CalIcon, CheckSquare, Repeat, Folder, Book, MessageSquare, BarChart, Timer, FileText, Bookmark, Plug, ChevronDown, Settings as SettingsIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { Grid, Clock, Calendar as CalIcon, CheckSquare, Repeat, Folder, Book, MessageSquare, BarChart, Timer, FileText, Bookmark, Plug, ChevronDown, Settings as SettingsIcon, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 
 const sideMain = [
@@ -28,32 +28,30 @@ export function Sidebar() {
   const pathname = usePathname();
   const [profileOpen, setProfileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  return (
-    <aside className={`flex flex-col border-r border-border bg-card shrink-0 transition-[width] duration-300 ease-in-out ${collapsed ? "w-[72px]" : "w-64"}`}>
-      <div className={`flex items-center p-5 ${collapsed ? "flex-col gap-4 justify-center" : "justify-between"}`}>
-        <Logo iconOnly={collapsed} />
-        <button onClick={() => setCollapsed(!collapsed)} className="rounded-lg p-1 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
-          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </button>
-      </div>
-      <nav className={`flex-1 space-y-1.5 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${collapsed ? "px-2" : "px-3"}`}>
-        {sideMain.map((i) => (
-          <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} href={i.href} active={pathname === i.href} dot={i.label === "Dashboard"} collapsed={collapsed} />
-        ))}
-        {collapsed ? (
-          <div className="pt-6 pb-2 flex justify-center"><div className="w-6 h-px bg-border" /></div>
-        ) : (
-          <div className="pt-6 pb-2 text-[10px] font-semibold tracking-widest text-muted-foreground pl-3">TOOLS</div>
-        )}
-        {sideTools.map((i) => (
-          <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} href={i.href} active={pathname === i.href} collapsed={collapsed} />
-        ))}
-      </nav>
-      <div className={`border-t border-border shrink-0 relative ${collapsed ? "p-2" : "p-3"}`}>
+  const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => (
+    <>
+      {sideMain.map((i) => (
+        <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} href={i.href} active={pathname === i.href} dot={i.label === "Dashboard"} collapsed={!isMobile && collapsed} onClick={() => isMobile && setMobileMenuOpen(false)} />
+      ))}
+      {!isMobile && collapsed ? (
+        <div className="pt-6 pb-2 flex justify-center"><div className="w-6 h-px bg-border" /></div>
+      ) : (
+        <div className="pt-6 pb-2 text-[10px] font-semibold tracking-widest text-muted-foreground pl-3">TOOLS</div>
+      )}
+      {sideTools.map((i) => (
+        <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} href={i.href} active={pathname === i.href} collapsed={!isMobile && collapsed} onClick={() => isMobile && setMobileMenuOpen(false)} />
+      ))}
+    </>
+  );
+
+  const ProfileSection = ({ isMobile = false }: { isMobile?: boolean }) => {
+    return (
+      <div className={`border-t border-border shrink-0 relative ${!isMobile && collapsed ? "p-2" : "p-3"}`}>
         
         {/* Profile Dropdown */}
-        {profileOpen && !collapsed && (
+        {profileOpen && (!collapsed || isMobile) && (
           <div className="absolute bottom-[calc(100%-12px)] left-3 w-[calc(100%-24px)] mb-2 rounded-2xl border border-border bg-card p-4 shadow-xl z-50 animate-in slide-in-from-bottom-2 fade-in duration-200">
              <div className="flex items-center gap-3 mb-4">
                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-foreground/20 to-foreground/50 shadow-sm" />
@@ -85,12 +83,12 @@ export function Sidebar() {
         )}
 
         <div 
-          onClick={() => !collapsed && setProfileOpen(!profileOpen)}
-          className={`flex items-center gap-3 rounded-xl cursor-pointer transition-colors ${profileOpen && !collapsed ? "bg-muted" : "hover:bg-muted"} ${collapsed ? "justify-center p-2" : "p-2"}`}
-          title={collapsed ? "Profile" : undefined}
+          onClick={() => (!collapsed || isMobile) && setProfileOpen(!profileOpen)}
+          className={`flex items-center gap-3 rounded-xl cursor-pointer transition-colors ${profileOpen && (!collapsed || isMobile) ? "bg-muted" : "hover:bg-muted"} ${!isMobile && collapsed ? "justify-center p-2" : "p-2"}`}
+          title={!isMobile && collapsed ? "Profile" : undefined}
         >
           <div className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-foreground/20 to-foreground/50" />
-          {!collapsed && (
+          {(!collapsed || isMobile) && (
             <>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-semibold truncate">Harry</div>
@@ -103,21 +101,67 @@ export function Sidebar() {
         
         <Link 
           href="/dashboard/settings" 
-          className={`mt-2 flex items-center gap-2 rounded-xl text-sm transition-colors ${pathname === '/dashboard/settings' ? "bg-foreground text-background" : "hover:bg-muted"} ${collapsed ? "justify-center p-3" : "p-2 w-full"}`}
-          title={collapsed ? "Settings" : undefined}
+          onClick={() => isMobile && setMobileMenuOpen(false)}
+          className={`mt-2 flex items-center gap-2 rounded-xl text-sm transition-colors ${pathname === '/dashboard/settings' ? "bg-foreground text-background" : "hover:bg-muted"} ${!isMobile && collapsed ? "justify-center p-3" : "p-2 w-full"}`}
+          title={!isMobile && collapsed ? "Settings" : undefined}
         >
-          <SettingsIcon className="h-4 w-4 shrink-0" /> {!collapsed && "Settings"}
+          <SettingsIcon className="h-4 w-4 shrink-0" /> {(!collapsed || isMobile) && "Settings"}
         </Link>
       </div>
-    </aside>
+    );
+  };
+
+  return (
+    <>
+      {/* Mobile Top Header */}
+      <div className="md:hidden flex items-center justify-between px-6 py-4 border-b border-border bg-card shrink-0 z-40">
+        <Link href="/dashboard"><Logo /></Link>
+        <button onClick={() => setMobileMenuOpen(true)} className="p-2 -mr-2 rounded-lg text-foreground hover:bg-muted transition-colors">
+          <Menu className="h-5 w-5" />
+        </button>
+      </div>
+
+      {/* Mobile Overlay & Drawer */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex justify-end">
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="relative w-72 bg-card h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-300">
+             <div className="p-4 flex justify-end border-b border-border">
+                <button onClick={() => setMobileMenuOpen(false)} className="p-2 -mr-2 rounded-lg text-foreground hover:bg-muted transition-colors">
+                  <X className="h-5 w-5" />
+                </button>
+             </div>
+             <nav className="flex-1 space-y-1.5 overflow-y-auto px-3 py-4">
+                <NavLinks isMobile={true} />
+             </nav>
+             <ProfileSection isMobile={true} />
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Sidebar */}
+      <aside className={`hidden md:flex flex-col border-r border-border bg-card shrink-0 transition-[width] duration-300 ease-in-out ${collapsed ? "w-[72px]" : "w-64"}`}>
+        <div className={`flex items-center p-5 ${collapsed ? "flex-col gap-4 justify-center" : "justify-between"}`}>
+          <Logo iconOnly={collapsed} />
+          <button onClick={() => setCollapsed(!collapsed)} className="rounded-lg p-1 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
+            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          </button>
+        </div>
+        <nav className={`flex-1 space-y-1.5 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${collapsed ? "px-2" : "px-3"}`}>
+          <NavLinks />
+        </nav>
+        <ProfileSection />
+      </aside>
+    </>
   );
 }
 
-function SideItem({ icon: Icon, label, desc, active, dot, href, collapsed }: { icon: React.ComponentType<{ className?: string }>; label: string; desc?: string; active?: boolean; dot?: boolean; href: string; collapsed?: boolean; }) {
+function SideItem({ icon: Icon, label, desc, active, dot, href, collapsed, onClick }: { icon: React.ComponentType<{ className?: string }>; label: string; desc?: string; active?: boolean; dot?: boolean; href: string; collapsed?: boolean; onClick?: () => void }) {
   return (
     <Link 
       href={href} 
       title={collapsed ? label : undefined}
+      onClick={onClick}
       className={`flex items-start gap-3 rounded-xl transition-colors ${active ? "bg-foreground text-background" : "text-foreground/80 hover:bg-muted"} ${collapsed ? "justify-center px-0 py-3" : "px-3 py-2.5 w-full"}`}
     >
       <div className={`${collapsed ? "mt-0" : "mt-0.5"} shrink-0`}><Icon className={`${collapsed ? "h-5 w-5" : "h-4 w-4"}`} /></div>

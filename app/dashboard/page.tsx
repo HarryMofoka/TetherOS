@@ -20,12 +20,12 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="px-8 pt-6">
+      <div className="px-4 md:px-8 pt-6">
         <h1 className="text-2xl font-bold">Good morning, Harry👋</h1>
         <p className="text-xs text-muted-foreground">Tuesday, 11 February 2025</p>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 px-8 py-6">
+      <div className="grid grid-cols-12 gap-6 px-4 md:px-8 py-6">
         {/* Center column */}
         <div className="col-span-12 lg:col-span-9 space-y-6">
           {/* Stats */}

@@ -5,7 +5,7 @@ import { MockDataProvider } from "@/components/providers/MockDataProvider";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <MockDataProvider>
-      <div className="flex h-screen bg-background overflow-hidden">
+      <div className="flex h-screen bg-background overflow-hidden flex-col md:flex-row">
         <Sidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
           <TopBar />
