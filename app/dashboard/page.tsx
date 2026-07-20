@@ -11,21 +11,21 @@ export const metadata: Metadata = {
 };
 
 const sideMain = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true, dot: true },
-  { icon: Sun, label: "Today" },
-  { icon: CalIcon, label: "Calendar" },
-  { icon: CheckCircle2, label: "Tasks" },
-  { icon: Flame, label: "Habits" },
-  { icon: FolderKanban, label: "Projects" },
-  { icon: BookOpen, label: "Journal" },
-  { icon: Sparkles, label: "AI Coach" },
-  { icon: LineChart, label: "Reports" },
+  { icon: LayoutDashboard, label: "Dashboard", desc: "Your daily overview", active: true, dot: true },
+  { icon: Sun, label: "Today", desc: "Focus on today's goals" },
+  { icon: CalIcon, label: "Calendar", desc: "Schedule & events" },
+  { icon: CheckCircle2, label: "Tasks", desc: "Manage your to-dos" },
+  { icon: Flame, label: "Habits", desc: "Track daily routines" },
+  { icon: FolderKanban, label: "Projects", desc: "Organize bigger goals" },
+  { icon: BookOpen, label: "Journal", desc: "Reflect and review" },
+  { icon: Sparkles, label: "AI Coach", desc: "Personalized guidance" },
+  { icon: LineChart, label: "Reports", desc: "Analytics & progress" },
 ];
 const sideTools = [
-  { icon: Timer, label: "Focus Timer" },
-  { icon: StickyNote, label: "Notes" },
-  { icon: Bookmark, label: "Bookmarks" },
-  { icon: Boxes, label: "Integrations" },
+  { icon: Timer, label: "Focus Timer", desc: "Deep work sessions" },
+  { icon: StickyNote, label: "Notes", desc: "Capture quick thoughts" },
+  { icon: Bookmark, label: "Bookmarks", desc: "Saved links & resources" },
+  { icon: Boxes, label: "Integrations", desc: "Connect your apps" },
 ];
 
 export default function Dashboard() {
@@ -37,13 +37,13 @@ export default function Dashboard() {
           <Logo />
           <button className="rounded-lg p-1 hover:bg-muted"><ChevronLeft className="h-4 w-4" /></button>
         </div>
-        <nav className="flex-1 space-y-1 px-3">
+        <nav className="flex-1 space-y-1.5 px-3 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {sideMain.map((i) => (
-            <SideItem key={i.label} icon={i.icon} label={i.label} active={i.active} dot={i.dot} />
+            <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} active={i.active} dot={i.dot} />
           ))}
-          <div className="pt-6 text-[10px] font-semibold tracking-widest text-muted-foreground pl-3">TOOLS</div>
+          <div className="pt-6 pb-2 text-[10px] font-semibold tracking-widest text-muted-foreground pl-3">TOOLS</div>
           {sideTools.map((i) => (
-            <SideItem key={i.label} icon={i.icon} label={i.label} />
+            <SideItem key={i.label} icon={i.icon} label={i.label} desc={i.desc} />
           ))}
         </nav>
         <div className="border-t border-border p-3">
@@ -234,12 +234,21 @@ export default function Dashboard() {
   );
 }
 
-function SideItem({ icon: Icon, label, active, dot }: { icon: React.ComponentType<{ className?: string }>; label: string; active?: boolean; dot?: boolean }) {
+function SideItem({ icon: Icon, label, desc, active, dot }: { icon: React.ComponentType<{ className?: string }>; label: string; desc?: string; active?: boolean; dot?: boolean }) {
   return (
-    <button className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm ${active ? "bg-foreground text-background" : "text-foreground/80 hover:bg-muted"}`}>
-      <Icon className="h-4 w-4" />
-      <span className="flex-1 text-left">{label}</span>
-      {dot && <span className="h-1.5 w-1.5 rounded-full bg-current" />}
+    <button className={`flex w-full items-start gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${active ? "bg-foreground text-background" : "text-foreground/80 hover:bg-muted"}`}>
+      <div className="mt-0.5 shrink-0"><Icon className="h-4 w-4" /></div>
+      <div className="flex-1 flex flex-col items-start min-w-0">
+        <div className="flex w-full items-center justify-between gap-2">
+          <span className="font-medium truncate">{label}</span>
+          {dot && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current" />}
+        </div>
+        {desc && (
+          <span className={`mt-0.5 text-[10px] truncate w-full text-left ${active ? "text-background/70" : "text-muted-foreground"}`}>
+            {desc}
+          </span>
+        )}
+      </div>
     </button>
   );
 }
