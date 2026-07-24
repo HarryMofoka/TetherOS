@@ -40,31 +40,31 @@ export default function Home() {
   return (
     <SiteLayout>
       {/* Hero */}
-      <section className="mx-auto max-w-7xl px-6 pt-8 pb-20">
+      <section className="mx-auto max-w-7xl px-6 pt-8 pb-20 animate-fade-in-up">
         <div className="grid gap-10 md:grid-cols-2 md:gap-6">
           <div className="pt-10">
-            <span className="inline-block rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium tracking-wider text-muted-foreground">
+            <span className="inline-block rounded-full border border-border bg-background px-3 py-1 text-[11px] font-medium tracking-wider text-muted-foreground shadow-sm">
               AI-POWERED LIFE OPERATING SYSTEM
             </span>
             <h1 className="mt-8 text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
               Your life.<br />Organized.<br />
               <span className="text-muted-foreground/70">Powered by AI.</span>
             </h1>
-            <p className="mt-6 max-w-md text-base text-muted-foreground">
+            <p className="mt-6 max-w-md text-base text-muted-foreground leading-relaxed">
               One intelligent system to plan your day, build better habits, and become who you&apos;re meant to be.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/signup" className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background hover:opacity-90">
+              <Link href="/signup" className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background hover:opacity-90 transition-all duration-200 hover:scale-105 active:scale-95 shadow-md">
                 Get Started Free <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/features" className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium hover:bg-muted">
+              <Link href="/features" className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium hover:bg-muted transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm">
                 See How It Works <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="mt-10 flex items-center gap-4">
               <div className="flex -space-x-2">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted" style={{ background: `linear-gradient(135deg, hsl(${i * 60},60%,70%), hsl(${i * 60 + 30},60%,50%))` }} />
+                  <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted transition-transform duration-200 hover:scale-110 hover:z-10" style={{ background: `linear-gradient(135deg, hsl(${i * 60},60%,70%), hsl(${i * 60 + 30},60%,50%))` }} />
                 ))}
               </div>
               <div>
@@ -74,13 +74,13 @@ export default function Home() {
             </div>
           </div>
           <div className="relative flex h-[600px] w-full items-center justify-center lg:ml-10">
-            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 shadow-2xl transition-transform hover:-translate-y-2">
+            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:scale-105 animate-float">
               <TodayPhone />
             </div>
-            <div className="hidden md:block absolute left-[80%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
+            <div className="hidden md:block absolute left-[80%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all duration-500 hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
               <HabitsCard />
             </div>
-            <div className="hidden md:block absolute left-[20%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
+            <div className="hidden md:block absolute left-[20%] top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-70 blur-[1px] transition-all duration-500 hover:z-20 hover:scale-100 hover:opacity-100 hover:blur-none hover:shadow-2xl">
               <JournalCard />
             </div>
           </div>

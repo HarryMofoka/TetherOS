@@ -23,19 +23,19 @@ export function SiteHeader() {
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           
           {/* Pill 1: Logo */}
-          <div className="pointer-events-auto rounded-full border border-border bg-background/80 px-4 py-2 backdrop-blur shadow-sm">
+          <div className="pointer-events-auto rounded-full border border-border bg-background/80 px-4 py-2 backdrop-blur shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
             <Link href="/"><Logo /></Link>
           </div>
 
           {/* Pill 2: Nav (Desktop) */}
-          <nav className="pointer-events-auto hidden items-center gap-8 rounded-full border border-border bg-background/80 px-6 py-2.5 backdrop-blur shadow-sm md:flex">
+          <nav className="pointer-events-auto hidden items-center gap-8 rounded-full border border-border bg-background/80 px-6 py-2.5 backdrop-blur shadow-sm md:flex transition-all duration-300 hover:shadow-md">
             {nav.map((item) => {
               const active = pathname === item.to;
               return (
                 <Link
                   key={item.to}
                   href={item.to}
-                  className={`text-sm transition-colors ${active ? "font-semibold text-foreground" : "text-foreground/70 hover:text-foreground"}`}
+                  className={`text-sm transition-all duration-200 hover:scale-105 ${active ? "font-semibold text-foreground" : "text-foreground/70 hover:text-foreground"}`}
                 >
                   {item.label}
                 </Link>
@@ -44,13 +44,13 @@ export function SiteHeader() {
           </nav>
 
           {/* Pill 3: Auth (Desktop) */}
-          <div className="pointer-events-auto hidden md:flex items-center gap-2 rounded-full border border-border bg-background/80 p-1.5 backdrop-blur shadow-sm">
-            <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium hover:bg-muted transition-colors">Log in</Link>
-            <Link href="/signup" className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 transition-opacity">Get Started</Link>
+          <div className="pointer-events-auto hidden md:flex items-center gap-2 rounded-full border border-border bg-background/80 p-1.5 backdrop-blur shadow-sm transition-all duration-300 hover:shadow-md">
+            <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium hover:bg-muted transition-all duration-200 active:scale-95">Log in</Link>
+            <Link href="/signup" className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm">Get Started</Link>
           </div>
 
           {/* Pill 4: Mobile Menu Toggle (Mobile) */}
-          <div className="pointer-events-auto md:hidden flex items-center justify-center rounded-full border border-border bg-background/80 p-2 backdrop-blur shadow-sm">
+          <div className="pointer-events-auto md:hidden flex items-center justify-center rounded-full border border-border bg-background/80 p-2 backdrop-blur shadow-sm transition-all duration-300 active:scale-95">
             <button onClick={() => setMobileMenuOpen(true)} className="p-1 rounded-full text-foreground hover:bg-muted transition-colors">
               <Menu className="h-5 w-5" />
             </button>

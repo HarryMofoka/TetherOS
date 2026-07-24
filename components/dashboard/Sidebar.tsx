@@ -162,14 +162,14 @@ function SideItem({ icon: Icon, label, desc, active, dot, href, collapsed, onCli
       href={href} 
       title={collapsed ? label : undefined}
       onClick={onClick}
-      className={`flex items-start gap-3 rounded-xl transition-colors ${active ? "bg-foreground text-background" : "text-foreground/80 hover:bg-muted"} ${collapsed ? "justify-center px-0 py-3" : "px-3 py-2.5 w-full"}`}
+      className={`flex items-start gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${active ? "bg-foreground text-background shadow-sm" : "text-foreground/80 hover:bg-muted"} ${collapsed ? "justify-center px-0 py-3" : "px-3 py-2.5 w-full"}`}
     >
       <div className={`${collapsed ? "mt-0" : "mt-0.5"} shrink-0`}><Icon className={`${collapsed ? "h-5 w-5" : "h-4 w-4"}`} /></div>
       {!collapsed && (
         <div className="flex-1 flex flex-col items-start min-w-0">
           <div className="flex w-full items-center justify-between gap-2">
             <span className="font-medium truncate">{label}</span>
-            {dot && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current" />}
+            {dot && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current animate-pulse" />}
           </div>
           {desc && (
             <span className={`mt-0.5 text-[10px] truncate w-full text-left ${active ? "text-background/70" : "text-muted-foreground"}`}>

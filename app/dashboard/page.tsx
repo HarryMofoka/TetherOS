@@ -19,10 +19,10 @@ export default function Dashboard() {
   const score = Math.round(((doneTasks.length + habits.filter(h => h.completedToday).length) / Math.max(tasks.length + habits.length, 1)) * 100);
 
   return (
-    <>
+    <div className="animate-fade-in-up">
       <div className="px-4 md:px-8 pt-6">
-        <h1 className="text-2xl font-bold">Good morning, Harry👋</h1>
-        <p className="text-xs text-muted-foreground">Tuesday, 11 February 2025</p>
+        <h1 className="text-2xl font-bold tracking-tight">Good morning, Harry👋</h1>
+        <p className="text-xs text-muted-foreground mt-0.5">Tuesday, 11 February 2025</p>
       </div>
 
       <div className="grid grid-cols-12 gap-6 px-4 md:px-8 py-6">
@@ -30,7 +30,7 @@ export default function Dashboard() {
         <div className="col-span-12 lg:col-span-9 space-y-6">
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-            <div className="relative col-span-2 overflow-hidden rounded-2xl border border-border bg-card p-4 md:col-span-1">
+            <div className="relative col-span-2 overflow-hidden rounded-2xl border border-border bg-card p-4 md:col-span-1 interactive-card">
               <div className="relative z-10">
                 <div className="text-[10px] font-bold tracking-wider text-muted-foreground">LIFE SCORE</div>
                 <div className="mt-1 flex items-baseline gap-1">
@@ -39,7 +39,7 @@ export default function Dashboard() {
                 <div className="mt-2 text-xs font-bold text-foreground">Great progress!</div>
                 <div className="mt-0.5 text-[10px] text-muted-foreground">Top 10% this week</div>
               </div>
-              <div className="absolute -bottom-6 -right-6 opacity-[0.15]">
+              <div className="absolute -bottom-6 -right-6 opacity-[0.15] transition-transform duration-500 hover:scale-110">
                 <LifeScoreRing size={110} showText={false} strokeWidth={16} />
               </div>
             </div>
@@ -51,7 +51,7 @@ export default function Dashboard() {
 
           {/* Today plan + Habits */}
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="rounded-2xl border border-border bg-card p-5 interactive-card">
               <div className="flex items-center justify-between">
                 <div className="font-semibold">Today's Tasks</div>
                 <Link href="/dashboard/tasks" className="text-xs text-muted-foreground hover:text-foreground">View Tasks</Link>
@@ -236,13 +236,13 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 function Stat({ label, value, unit, delta, icon: Icon }: { label: string; value: string; unit: string; delta: string; icon: any }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 transition-all hover:shadow-md">
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 interactive-card">
       <div className="relative z-10">
         <div className="text-[10px] font-bold tracking-wider text-muted-foreground">{label.toUpperCase()}</div>
         <div className="mt-1 flex items-baseline gap-1">
@@ -251,7 +251,7 @@ function Stat({ label, value, unit, delta, icon: Icon }: { label: string; value:
         </div>
         <div className="mt-2 text-[10px] font-medium text-muted-foreground">{delta}</div>
       </div>
-      <div className="absolute -bottom-6 -right-6 opacity-[0.05]">
+      <div className="absolute -bottom-6 -right-6 opacity-[0.05] transition-transform duration-500 hover:scale-110 hover:rotate-6">
         <Icon size={100} className="text-foreground" strokeWidth={2} />
       </div>
     </div>
@@ -260,17 +260,17 @@ function Stat({ label, value, unit, delta, icon: Icon }: { label: string; value:
 
 function PlanRow({ title, sub, active, completed, onToggle }: { title: string; sub: string; active?: boolean; completed?: boolean; onToggle: () => void }) {
   return (
-    <div className="flex items-center gap-3">
-      <button onClick={onToggle} className={`relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${completed ? "bg-foreground border-foreground text-background" : "border-border text-transparent hover:border-foreground"}`}>
+    <div className="flex items-center gap-3 group">
+      <button onClick={onToggle} className={`relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-all duration-200 active:scale-90 ${completed ? "bg-foreground border-foreground text-background" : "border-border text-transparent hover:border-foreground"}`}>
         <CheckCircle2 className="h-4 w-4 fill-current" />
       </button>
-      <div className={`flex-1 rounded-xl border p-3 transition-colors ${active && !completed ? "border-border bg-muted/50 shadow-sm backdrop-blur-md" : "border-border/50 bg-card/50"}`}>
+      <div className={`flex-1 rounded-xl border p-3 transition-all duration-200 group-hover:translate-x-1 ${active && !completed ? "border-border bg-muted/50 shadow-sm backdrop-blur-md" : "border-border/50 bg-card/50"}`}>
         <div className="flex items-center justify-between">
           <div>
-            <div className={`text-sm font-semibold ${(active || completed) ? "text-foreground" : ""} ${completed ? "line-through text-muted-foreground" : ""}`}>{title}</div>
+            <div className={`text-sm font-semibold transition-all ${(active || completed) ? "text-foreground" : ""} ${completed ? "line-through text-muted-foreground" : ""}`}>{title}</div>
             <div className={`text-[11px] ${completed ? "text-muted-foreground/50" : "text-muted-foreground"}`}>{sub}</div>
           </div>
-          <div className={`flex items-center gap-2 text-[11px] ${active && !completed ? "text-foreground" : "text-muted-foreground"}`}>
+          <div className={`flex items-center gap-2 text-[11px] ${active && !completed ? "text-foreground animate-pulse" : "text-muted-foreground"}`}>
             {active && !completed ? <Play className="h-3.5 w-3.5 fill-current" /> : <MoreHorizontal className="h-3.5 w-3.5" />}
           </div>
         </div>
@@ -281,9 +281,9 @@ function PlanRow({ title, sub, active, completed, onToggle }: { title: string; s
 
 function HabitRow({ name, streak, completed, onToggle }: { name: string; streak: number; completed: boolean; onToggle: () => void }) {
   return (
-    <div className="flex items-center gap-3">
-      <button onClick={onToggle} className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ring-1 ${completed ? "bg-foreground text-background ring-foreground" : "bg-muted text-muted-foreground ring-border hover:bg-muted/80"}`}>
-        <Flame className="h-4 w-4" />
+    <div className="flex items-center gap-3 group">
+      <button onClick={onToggle} className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 active:scale-90 ring-1 ${completed ? "bg-foreground text-background ring-foreground shadow-sm" : "bg-muted text-muted-foreground ring-border hover:bg-muted/80"}`}>
+        <Flame className={`h-4 w-4 ${completed ? "animate-pulse" : ""}`} />
       </button>
       <div className="flex-1">
         <div className="flex items-center justify-between">
