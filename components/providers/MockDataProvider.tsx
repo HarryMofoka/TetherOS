@@ -79,6 +79,7 @@ const defaultEvents: EventItem[] = [
 
 const MockDataContext = createContext<MockDataContextType | undefined>(undefined);
 
+// Global State Provider: Manages tasks, habits, projects, and events with local storage fallback
 export function MockDataProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
   const [habits, setHabits] = useState<Habit[]>(defaultHabits);
@@ -87,7 +88,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
 
   const [mounted, setMounted] = useState(false);
 
-  // Load from local storage
+  // Sync state from localStorage on initial client mount
   useEffect(() => {
     const storedTasks = localStorage.getItem("tetheros_tasks");
     const storedHabits = localStorage.getItem("tetheros_habits");
@@ -102,7 +103,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  // Save to local storage
+  // Persist state updates to localStorage
   useEffect(() => {
     if (mounted) {
       localStorage.setItem("tetheros_tasks", JSON.stringify(tasks));
@@ -112,14 +113,17 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     }
   }, [tasks, habits, projects, events, mounted]);
 
+  // Handler: Adds a new task with generated ID
   const addTask = (task: Omit<Task, "id">) => {
     setTasks(prev => [...prev, { ...task, id: Math.random().toString(36).substr(2, 9) }]);
   };
 
+  // Handler: Updates task completion or column status
   const updateTaskStatus = (id: string, status: TaskStatus) => {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, status } : t));
   };
 
+  // Handler: Toggles daily habit completion status & adjusts streak count
   const toggleHabit = (id: string) => {
     setHabits(prev => prev.map(h => {
       if (h.id === id) {
@@ -134,15 +138,18 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  // Handler: Adds a new project item
   const addProject = (project: Omit<Project, "id">) => {
     setProjects(prev => [...prev, { ...project, id: Math.random().toString(36).substr(2, 9) }]);
   };
 
+  // Handler: Adds a new calendar event item
   const addEvent = (event: Omit<EventItem, "id">) => {
     setEvents(prev => [...prev, { ...event, id: Math.random().toString(36).substr(2, 9) }]);
   };
 
-  if (!mounted) return <div className="h-screen w-full bg-background" />; // Prevent hydration mismatch
+  // Render blank screen until client hydration completes to prevent mismatch
+  if (!mounted) return <div className="h-screen w-full bg-background" />;
 
   return (
     <MockDataContext.Provider value={{ tasks, habits, projects, events, addTask, updateTaskStatus, toggleHabit, addProject, addEvent }}>
@@ -151,6 +158,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Custom Hook: Convenience accessor for global mock data context
 export function useMockData() {
   const context = useContext(MockDataContext);
   if (!context) {
