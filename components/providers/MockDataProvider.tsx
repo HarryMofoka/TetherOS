@@ -56,7 +56,6 @@ interface MockDataContextType {
 const MockDataContext = createContext<MockDataContextType | undefined>(undefined);
 
 export function MockDataProvider({ children }: { children: React.ReactNode }) {
-  // Start with empty arrays — real data comes from localStorage after onboarding
   const [tasks, setTasks] = useState<Task[]>([]);
   const [habits, setHabits] = useState<Habit[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -87,25 +86,51 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
   }, [tasks, habits, projects, events, mounted]);
 
   const addTask = (task: Omit<Task, "id">) => {
-    setTasks(prev => [...prev, { ...task, id: Math.random().toString(36).substr(2, 9) }]);
+    const newTask = { ...task, id: Math.random().toString(36).substr(2, 9) };
+    setTasks(prev => [...prev, newTask]);
+
+    fetch("/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask),
+    }).catch(() => {});
   };
 
   const updateTaskStatus = (id: string, status: TaskStatus) => {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, status } : t));
+
+    fetch("/api/tasks", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    }).catch(() => {});
   };
 
   const deleteTask = (id: string) => {
     setTasks(prev => prev.filter(t => t.id !== id));
+
+    fetch(`/api/tasks?id=${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   };
 
   const addHabit = (name: string) => {
-    setHabits(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), name, streak: 0, completedToday: false }]);
+    const newHabit = { id: Math.random().toString(36).substr(2, 9), name, streak: 0, completedToday: false };
+    setHabits(prev => [...prev, newHabit]);
+
+    fetch("/api/habits", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newHabit),
+    }).catch(() => {});
   };
 
   const toggleHabit = (id: string) => {
+    let isCompletedNow = false;
     setHabits(prev => prev.map(h => {
       if (h.id === id) {
         const wasCompleted = h.completedToday;
+        isCompletedNow = !wasCompleted;
         return {
           ...h,
           completedToday: !wasCompleted,
@@ -114,26 +139,58 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
       }
       return h;
     }));
+
+    fetch("/api/habits", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, completedToday: isCompletedNow }),
+    }).catch(() => {});
   };
 
   const deleteHabit = (id: string) => {
     setHabits(prev => prev.filter(h => h.id !== id));
+
+    fetch(`/api/habits?id=${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   };
 
   const addProject = (project: Omit<Project, "id">) => {
-    setProjects(prev => [...prev, { ...project, id: Math.random().toString(36).substr(2, 9) }]);
+    const newProj = { ...project, id: Math.random().toString(36).substr(2, 9) };
+    setProjects(prev => [...prev, newProj]);
+
+    fetch("/api/projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProj),
+    }).catch(() => {});
   };
 
   const deleteProject = (id: string) => {
     setProjects(prev => prev.filter(p => p.id !== id));
+
+    fetch(`/api/projects?id=${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   };
 
   const addEvent = (event: Omit<EventItem, "id">) => {
-    setEvents(prev => [...prev, { ...event, id: Math.random().toString(36).substr(2, 9) }]);
+    const newEvt = { ...event, id: Math.random().toString(36).substr(2, 9) };
+    setEvents(prev => [...prev, newEvt]);
+
+    fetch("/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvt),
+    }).catch(() => {});
   };
 
   const deleteEvent = (id: string) => {
     setEvents(prev => prev.filter(e => e.id !== id));
+
+    fetch(`/api/events?id=${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   };
 
   if (!mounted) return <div className="h-screen w-full bg-background" />;
