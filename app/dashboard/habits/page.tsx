@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Activity, Check, X } from "lucide-react";
+import { Plus, Activity, Check, X, Trash2 } from "lucide-react";
 import { useMockData } from "@/components/providers/MockDataProvider";
 
 export default function HabitsPage() {
-  const { habits, toggleHabit } = useMockData();
+  const { habits, addHabit, toggleHabit, deleteHabit } = useMockData();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -14,11 +14,11 @@ export default function HabitsPage() {
         <div className="flex items-center justify-between px-8 pt-6">
           <div>
             <h1 className="text-2xl font-bold">Habits 🌱</h1>
-            <p className="text-xs text-muted-foreground">Build consistency.</p>
+            <p className="text-xs text-muted-foreground">Build daily consistency.</p>
           </div>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors cursor-pointer"
           >
             <Plus className="h-4 w-4" /> Add Habit
           </button>
@@ -28,7 +28,7 @@ export default function HabitsPage() {
           <div className="rounded-2xl border border-border bg-card p-6">
             <div className="flex items-center justify-between mb-6">
               <div className="font-semibold text-lg">Your Habits</div>
-              <div className="text-xs text-muted-foreground">Click today's circle to mark as done</div>
+              <div className="text-xs text-muted-foreground">Click today&apos;s circle to mark as done</div>
             </div>
             <div className="space-y-6">
               {habits.map((habit) => (
@@ -37,40 +37,49 @@ export default function HabitsPage() {
                   name={habit.name} 
                   streak={habit.streak} 
                   completed={habit.completedToday} 
-                  onToggle={() => toggleHabit(habit.id)} 
+                  onToggle={() => toggleHabit(habit.id)}
+                  onDelete={() => deleteHabit(habit.id)} 
                 />
               ))}
             </div>
           </div>
         </div>
         
-        {isModalOpen && <NewHabitModal onClose={() => setIsModalOpen(false)} />}
+        {isModalOpen && (
+          <NewHabitModal 
+            onClose={() => setIsModalOpen(false)} 
+            onSave={(name) => addHabit(name)}
+          />
+        )}
       </div>
     </>
   );
 }
 
-function HabitRowExpanded({ name, streak, completed, onToggle }: { name: string; streak: number; completed: boolean; onToggle: () => void }) {
-  // Mock out 30 days of history for visual flair
-  // We place today at the far right
+function HabitRowExpanded({ name, streak, completed, onToggle, onDelete }: { name: string; streak: number; completed: boolean; onToggle: () => void; onDelete: () => void }) {
   const days = Array.from({ length: 30 });
   
   return (
-    <div className="flex items-start lg:items-center gap-4 flex-col lg:flex-row">
-      <div className="flex items-center gap-3 w-48 shrink-0">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground ring-1 ring-border">
-           <Activity className="h-5 w-5" />
+    <div className="flex items-start lg:items-center gap-4 flex-col lg:flex-row group">
+      <div className="flex items-center justify-between w-full lg:w-48 shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground ring-1 ring-border">
+             <Activity className="h-5 w-5" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold truncate w-32">{name}</div>
+            <div className="text-xs flex items-center gap-1"><span className="text-foreground">🔥</span> <b>{streak}</b> <span className="text-muted-foreground">days</span></div>
+          </div>
         </div>
-        <div>
-          <div className="text-sm font-semibold truncate w-32">{name}</div>
-          <div className="text-xs flex items-center gap-1"><span className="text-foreground">🔥</span> <b>{streak}</b> <span className="text-muted-foreground">days</span></div>
-        </div>
+        <button onClick={onDelete} className="p-1 text-muted-foreground hover:text-red-500 rounded opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer lg:hidden" title="Delete Habit">
+          <Trash2 className="h-4 w-4" />
+        </button>
       </div>
-      <div className="flex-1 overflow-x-auto w-full lg:w-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <div className="flex gap-1.5 min-w-max pb-2 lg:pb-0 justify-end">
+
+      <div className="flex-1 overflow-x-auto w-full lg:w-auto flex items-center gap-2">
+        <div className="flex gap-1.5 min-w-max pb-2 lg:pb-0 justify-end flex-1">
           {days.map((_, i) => {
             const isToday = i === 29;
-            // Mock random completions for past days based on streak length
             const isPastCompleted = i < 29 && i >= (29 - streak);
             const isCompleted = isToday ? completed : isPastCompleted;
             
@@ -85,34 +94,48 @@ function HabitRowExpanded({ name, streak, completed, onToggle }: { name: string;
             );
           })}
         </div>
+        <button onClick={onDelete} className="p-1.5 text-muted-foreground hover:text-red-500 rounded opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hidden lg:block" title="Delete Habit">
+          <Trash2 className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );
 }
 
-function NewHabitModal({ onClose }: { onClose: () => void }) {
+function NewHabitModal({ onClose, onSave }: { onClose: () => void; onSave: (name: string) => void }) {
+  const [name, setName] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    onSave(name.trim());
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold">New Habit</h2>
-          <button onClick={onClose} className="rounded-lg p-1 hover:bg-muted text-muted-foreground"><X className="h-5 w-5" /></button>
+          <button onClick={onClose} className="rounded-lg p-1 hover:bg-muted text-muted-foreground cursor-pointer"><X className="h-5 w-5" /></button>
         </div>
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-xs font-semibold text-muted-foreground mb-1 block">Habit Name</label>
             <input 
               autoFocus
               type="text" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm outline-none focus:border-foreground transition-colors" 
               placeholder="e.g. Meditate for 10 minutes"
             />
           </div>
           <div className="pt-4 flex justify-end gap-2">
-            <button onClick={onClose} className="rounded-xl px-4 py-2 text-sm font-medium hover:bg-muted transition-colors">Cancel</button>
-            <button onClick={onClose} className="rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors">Save Habit</button>
+            <button type="button" onClick={onClose} className="rounded-xl px-4 py-2 text-sm font-medium hover:bg-muted transition-colors cursor-pointer">Cancel</button>
+            <button type="submit" disabled={!name.trim()} className="rounded-xl bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors cursor-pointer disabled:opacity-50">Save Habit</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

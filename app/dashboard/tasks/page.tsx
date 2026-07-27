@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, MoreHorizontal, MessageSquare, ChevronRight, ChevronLeft, X, Sparkles, Loader2 } from "lucide-react";
+import { Plus, MoreHorizontal, MessageSquare, ChevronRight, ChevronLeft, X, Sparkles, Loader2, Trash2 } from "lucide-react";
 import { useMockData, Task, TaskStatus, Priority } from "@/components/providers/MockDataProvider";
 
 export default function TasksPage() {
-  const { tasks, addTask, updateTaskStatus } = useMockData();
+  const { tasks, addTask, updateTaskStatus, deleteTask } = useMockData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalStatus, setModalStatus] = useState<TaskStatus>("To Do");
 
@@ -42,7 +42,7 @@ export default function TasksPage() {
         <div className="flex gap-6 min-w-max h-full items-start">
           <TaskColumn title="To Do" count={todoTasks.length} onAdd={() => openModal("To Do")}>
             {todoTasks.map(t => (
-              <TaskCard key={t.id} task={t} onMoveRight={() => updateTaskStatus(t.id, "In Progress")} onAddSubtasks={(subtasks) => {
+              <TaskCard key={t.id} task={t} onDelete={() => deleteTask(t.id)} onMoveRight={() => updateTaskStatus(t.id, "In Progress")} onAddSubtasks={(subtasks) => {
                 subtasks.forEach(s => addTask({ title: s, tag: t.tag, priority: t.priority, status: "To Do" }));
               }} />
             ))}
@@ -50,7 +50,7 @@ export default function TasksPage() {
           
           <TaskColumn title="In Progress" count={inProgressTasks.length} onAdd={() => openModal("In Progress")}>
             {inProgressTasks.map(t => (
-              <TaskCard key={t.id} task={t} onMoveLeft={() => updateTaskStatus(t.id, "To Do")} onMoveRight={() => updateTaskStatus(t.id, "Done")} onAddSubtasks={(subtasks) => {
+              <TaskCard key={t.id} task={t} onDelete={() => deleteTask(t.id)} onMoveLeft={() => updateTaskStatus(t.id, "To Do")} onMoveRight={() => updateTaskStatus(t.id, "Done")} onAddSubtasks={(subtasks) => {
                 subtasks.forEach(s => addTask({ title: s, tag: t.tag, priority: t.priority, status: "In Progress" }));
               }} />
             ))}
@@ -58,7 +58,7 @@ export default function TasksPage() {
 
           <TaskColumn title="Done" count={doneTasks.length} onAdd={() => openModal("Done")}>
             {doneTasks.map(t => (
-              <TaskCard key={t.id} task={t} onMoveLeft={() => updateTaskStatus(t.id, "In Progress")} />
+              <TaskCard key={t.id} task={t} onDelete={() => deleteTask(t.id)} onMoveLeft={() => updateTaskStatus(t.id, "In Progress")} />
             ))}
           </TaskColumn>
         </div>
@@ -95,7 +95,7 @@ function TaskColumn({ title, count, children, onAdd }: { title: string; count: n
   );
 }
 
-function TaskCard({ task, onMoveLeft, onMoveRight, onAddSubtasks }: { task: Task; onMoveLeft?: () => void; onMoveRight?: () => void; onAddSubtasks?: (subtasks: string[]) => void }) {
+function TaskCard({ task, onDelete, onMoveLeft, onMoveRight, onAddSubtasks }: { task: Task; onDelete: () => void; onMoveLeft?: () => void; onMoveRight?: () => void; onAddSubtasks?: (subtasks: string[]) => void }) {
   const [loadingAi, setLoadingAi] = useState(false);
   const pColor = task.priority === "High" ? "text-red-500 bg-red-500/10" : task.priority === "Medium" ? "text-orange-500 bg-orange-500/10" : "text-green-500 bg-green-500/10";
 
@@ -123,7 +123,6 @@ function TaskCard({ task, onMoveLeft, onMoveRight, onAddSubtasks }: { task: Task
         onAddSubtasks(data.subtasks);
       }
     } catch {
-      // Fallback subtasks
       onAddSubtasks([
         `Spec out requirements for "${task.title}"`,
         `Execute core implementation`,
@@ -141,17 +140,22 @@ function TaskCard({ task, onMoveLeft, onMoveRight, onAddSubtasks }: { task: Task
           <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${pColor}`}>{task.priority}</span>
           <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground">{task.tag}</span>
         </div>
-        {onAddSubtasks && (
-          <button
-            onClick={handleAiBreakdown}
-            disabled={loadingAi}
-            className="text-[10px] font-bold text-foreground hover:bg-muted p-1 rounded inline-flex items-center gap-1 transition-colors cursor-pointer"
-            title="Use AI to break this task into subtasks"
-          >
-            {loadingAi ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3 text-emerald-500" />}
-            AI Breakdown
+        <div className="flex items-center gap-1">
+          {onAddSubtasks && (
+            <button
+              onClick={handleAiBreakdown}
+              disabled={loadingAi}
+              className="text-[10px] font-bold text-foreground hover:bg-muted p-1 rounded inline-flex items-center gap-1 transition-colors cursor-pointer"
+              title="Use AI to break this task into subtasks"
+            >
+              {loadingAi ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3 text-emerald-500" />}
+              AI Breakdown
+            </button>
+          )}
+          <button onClick={onDelete} className="p-1 text-muted-foreground hover:text-red-500 rounded opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" title="Delete Task">
+            <Trash2 className="h-3.5 w-3.5" />
           </button>
-        )}
+        </div>
       </div>
 
       <div className="text-sm font-medium">{task.title}</div>
