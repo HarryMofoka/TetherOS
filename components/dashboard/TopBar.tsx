@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Search, Plus, Bell, Sun, MessageSquare, X, Check, User, Shield, CreditCard, LogOut } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, Plus, Bell, Sun, Moon, MessageSquare, X, User, Shield, CreditCard, LogOut } from "lucide-react";
 import Link from "next/link";
 
 export function TopBar() {
@@ -9,12 +9,40 @@ export function TopBar() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [messagesOpen, setMessagesOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
-  const notifications = [
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("tetheros_theme");
+    if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("tetheros_theme", "light");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("tetheros_theme", "dark");
+      setIsDark(true);
+    }
+  };
+
+  const [notifications, setNotifications] = useState([
     { id: 1, title: "Task Due Soon", desc: "Build Auth Flow is due in 2 hours.", time: "10m ago", read: false },
     { id: 2, title: "Habit Streak!", desc: "You completed 5 days of Morning Workout.", time: "1h ago", read: false },
     { id: 3, title: "AI Coach Check-in", desc: "Your weekly reflection is ready to review.", time: "3h ago", read: true },
-  ];
+  ]);
+
+  const markAllRead = () => {
+    setNotifications(notifications.map(n => ({ ...n, read: true })));
+  };
 
   const messages = [
     { id: 1, sender: "AI Coach", text: "Remember to log your focus hours for today!", time: "09:30 AM" },
@@ -35,7 +63,7 @@ export function TopBar() {
         </div>
         
         {/* Action Controls */}
-        <Link href="/pages/form" className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm">
+        <Link href="/pages/form" className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm cursor-pointer">
           <Plus className="h-4 w-4" /> Quick Add
         </Link>
 
@@ -43,7 +71,7 @@ export function TopBar() {
         <div className="relative">
           <button 
             onClick={() => { setMessagesOpen(!messagesOpen); setNotificationsOpen(false); setProfileOpen(false); }}
-            className="relative rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95" 
+            className="relative rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95 cursor-pointer" 
             title="Messages & AI Prompts"
           >
             <MessageSquare className="h-4 w-4" />
@@ -78,18 +106,22 @@ export function TopBar() {
         <div className="relative">
           <button 
             onClick={() => { setNotificationsOpen(!notificationsOpen); setMessagesOpen(false); setProfileOpen(false); }}
-            className="relative rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95" 
+            className="relative rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95 cursor-pointer" 
             title="Notifications"
           >
             <Bell className="h-4 w-4" />
-            <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-[color:var(--brand-blue)] animate-pulse" />
+            {notifications.some(n => !n.read) && (
+              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            )}
           </button>
 
           {notificationsOpen && (
             <div className="absolute right-0 mt-3 w-80 rounded-2xl border border-border bg-card p-4 shadow-xl z-50 animate-in fade-in slide-in-from-top-2">
               <div className="flex items-center justify-between border-b border-border pb-3 mb-3">
                 <span className="font-bold text-sm">Notifications</span>
-                <span className="text-[10px] text-muted-foreground font-semibold">Mark all read</span>
+                <button onClick={markAllRead} className="text-[10px] text-muted-foreground hover:text-foreground font-semibold cursor-pointer">
+                  Mark all read
+                </button>
               </div>
               <div className="space-y-2.5">
                 {notifications.map(n => (
@@ -109,9 +141,13 @@ export function TopBar() {
           )}
         </div>
 
-        {/* Theme Button */}
-        <button className="rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95" title="Theme Toggle">
-          <Sun className="h-4 w-4" />
+        {/* Working Theme / Night Mode Button */}
+        <button 
+          onClick={toggleTheme}
+          className="rounded-full border border-border bg-card p-2 transition-all duration-200 hover:bg-muted active:scale-95 cursor-pointer" 
+          title={isDark ? "Switch to Light Mode" : "Switch to Night / Dark Mode"}
+        >
+          {isDark ? <Moon className="h-4 w-4 text-amber-400" /> : <Sun className="h-4 w-4" />}
         </button>
 
         {/* User Profile Avatar Popover */}
@@ -137,9 +173,6 @@ export function TopBar() {
                 <Link href="/dashboard/settings" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 p-2 rounded-xl hover:bg-muted transition-colors">
                   <Shield className="h-4 w-4" /> Account Settings
                 </Link>
-                <Link href="/pricing" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 p-2 rounded-xl hover:bg-muted transition-colors">
-                  <CreditCard className="h-4 w-4" /> TetherOS Pro Plan
-                </Link>
               </div>
               <div className="border-t border-border pt-2 mt-2">
                 <Link href="/auth/auth2/login" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 p-2 rounded-xl text-red-500 hover:bg-red-500/10 transition-colors text-xs font-semibold">
@@ -163,7 +196,7 @@ export function TopBar() {
                 placeholder="Search tasks, habits, notes or AI prompts..." 
                 className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
-              <button onClick={() => setSearchOpen(false)} className="p-1 rounded-lg hover:bg-muted">
+              <button onClick={() => setSearchOpen(false)} className="p-1 rounded-lg hover:bg-muted cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>
