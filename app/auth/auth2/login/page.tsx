@@ -16,7 +16,7 @@ export default function BoxedLoginPage() {
           <p className="text-xs text-muted-foreground">Access your daily operating system, habits & AI coach.</p>
         </div>
 
-        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); window.location.href = "/dashboard"; }}>
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); window.location.href = "/onboarding"; }}>
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-muted-foreground">Email Address</label>
             <div className="relative">
@@ -51,7 +51,7 @@ export default function BoxedLoginPage() {
           </div>
 
           <button type="submit" className="w-full rounded-xl bg-foreground text-background py-3 text-xs font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-            Sign In to Dashboard <ArrowRight className="h-4 w-4" />
+            Sign In to TetherOS <ArrowRight className="h-4 w-4" />
           </button>
         </form>
 

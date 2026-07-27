@@ -43,6 +43,7 @@ interface MockDataContextType {
   events: EventItem[];
   addTask: (task: Omit<Task, "id">) => void;
   updateTaskStatus: (id: string, status: TaskStatus) => void;
+  addHabit: (name: string) => void;
   toggleHabit: (id: string) => void;
   addProject: (project: Omit<Project, "id">) => void;
   addEvent: (event: Omit<EventItem, "id">) => void;
@@ -123,6 +124,11 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, status } : t));
   };
 
+  // Handler: Adds a new habit
+  const addHabit = (name: string) => {
+    setHabits(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), name, streak: 0, completedToday: false }]);
+  };
+
   // Handler: Toggles daily habit completion status & adjusts streak count
   const toggleHabit = (id: string) => {
     setHabits(prev => prev.map(h => {
@@ -152,7 +158,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
   if (!mounted) return <div className="h-screen w-full bg-background" />;
 
   return (
-    <MockDataContext.Provider value={{ tasks, habits, projects, events, addTask, updateTaskStatus, toggleHabit, addProject, addEvent }}>
+    <MockDataContext.Provider value={{ tasks, habits, projects, events, addTask, updateTaskStatus, addHabit, toggleHabit, addProject, addEvent }}>
       {children}
     </MockDataContext.Provider>
   );
