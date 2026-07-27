@@ -1,13 +1,15 @@
 -- ==============================================================================
--- Supabase Security Advisor Fix: Revoke Public Access to rls_auto_enable()
+-- Supabase Security Advisor Fix: Revoke Anon & Authenticated Execution
+-- Function: public.rls_auto_enable()
 -- ==============================================================================
 
--- Option A: Revoke RPC execution privileges from public, anon, and authenticated users
--- This prevents signed-in users from invoking administrative security definer functions via /rest/v1/rpc/rls_auto_enable
-REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC, anon, authenticated;
+-- 1. Revoke EXECUTE from PUBLIC, anon, and authenticated roles
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM anon;
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM authenticated;
 
--- Grant execution only to postgres superuser and service_role if needed internally
+-- 2. Grant EXECUTE privileges strictly to postgres superuser and internal service_role
 GRANT EXECUTE ON FUNCTION public.rls_auto_enable() TO postgres, service_role;
 
--- Option B (Alternative): If you prefer the function to execute with the caller's privileges instead of elevated superuser rights:
+-- 3. (Optional Alternative) Convert to SECURITY INVOKER:
 -- ALTER FUNCTION public.rls_auto_enable() SECURITY INVOKER;
