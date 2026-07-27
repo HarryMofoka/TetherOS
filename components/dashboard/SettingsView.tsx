@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { User, Bell, CreditCard, Palette, Shield, Laptop, MonitorSmartphone, CheckCircle2, AlertTriangle, KeyRound, Smartphone, LogOut, Download } from "lucide-react";
+import { useState, useEffect } from "react";
+import { User, Bell, CreditCard, Palette, Shield, Laptop, MonitorSmartphone, CheckCircle2, Bot, Key, Sparkles, LogOut, Download } from "lucide-react";
 
-type Tab = "Account" | "Appearance" | "Notifications" | "Billing" | "Security" | "Devices";
+type Tab = "Account" | "AI & API Keys" | "Appearance" | "Notifications" | "Billing" | "Security" | "Devices";
 
 export function SettingsView() {
   const [activeTab, setActiveTab] = useState<Tab>("Account");
@@ -14,6 +14,7 @@ export function SettingsView() {
       <div className="w-64 border-r border-border p-4 shrink-0 overflow-y-auto hidden md:block">
         <nav className="space-y-1">
           <SettingsTab icon={<User className="h-4 w-4" />} label="Account" active={activeTab === "Account"} onClick={() => setActiveTab("Account")} />
+          <SettingsTab icon={<Bot className="h-4 w-4" />} label="AI & API Keys" active={activeTab === "AI & API Keys"} onClick={() => setActiveTab("AI & API Keys")} />
           <SettingsTab icon={<Palette className="h-4 w-4" />} label="Appearance" active={activeTab === "Appearance"} onClick={() => setActiveTab("Appearance")} />
           <SettingsTab icon={<Bell className="h-4 w-4" />} label="Notifications" active={activeTab === "Notifications"} onClick={() => setActiveTab("Notifications")} />
           <SettingsTab icon={<CreditCard className="h-4 w-4" />} label="Billing" active={activeTab === "Billing"} onClick={() => setActiveTab("Billing")} />
@@ -26,6 +27,7 @@ export function SettingsView() {
       <div className="flex-1 overflow-y-auto p-8 max-w-3xl">
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
           {activeTab === "Account" && <AccountTab />}
+          {activeTab === "AI & API Keys" && <AIApiKeysTab />}
           {activeTab === "Appearance" && <AppearanceTab />}
           {activeTab === "Notifications" && <NotificationsTab />}
           {activeTab === "Billing" && <BillingTab />}
@@ -41,7 +43,7 @@ function SettingsTab({ icon, label, active, onClick }: { icon: React.ReactNode; 
   return (
     <button 
       onClick={onClick}
-      className={`flex w-full items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${active ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}
+      className={`flex w-full items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${active ? "bg-muted text-foreground font-bold" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}
     >
       {icon}
       {label}
@@ -53,6 +55,104 @@ function SettingsTab({ icon, label, active, onClick }: { icon: React.ReactNode; 
 // TAB CONTENTS
 // ----------------------------------------------------------------------
 
+function AIApiKeysTab() {
+  const [provider, setProvider] = useState("openai");
+  const [apiKey, setApiKey] = useState("");
+  const [savedStatus, setSavedStatus] = useState(false);
+
+  useEffect(() => {
+    const storedProvider = localStorage.getItem("tetheros_ai_provider") || "openai";
+    const storedKey = localStorage.getItem("tetheros_user_ai_key") || "";
+    setProvider(storedProvider);
+    setApiKey(storedKey);
+  }, []);
+
+  const handleSave = () => {
+    localStorage.setItem("tetheros_ai_provider", provider);
+    localStorage.setItem("tetheros_user_ai_key", apiKey);
+    setSavedStatus(true);
+    setTimeout(() => setSavedStatus(false), 3000);
+  };
+
+  return (
+    <>
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-lg font-bold">Custom AI Engine & API Key</h3>
+            <p className="text-xs text-muted-foreground">Load your own API key to power your TetherOS AI Coach, task breakdown, and daily plan synthesis.</p>
+          </div>
+          <span className="rounded-full bg-foreground/10 px-3 py-1 text-xs font-bold text-foreground flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5" /> AI Engine Ready
+          </span>
+        </div>
+
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-foreground uppercase tracking-wider">Select AI Provider</label>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { id: "openai", name: "OpenAI (GPT-4o)", desc: "Requires sk-..." },
+                { id: "gemini", name: "Google Gemini", desc: "Requires AIzaSy..." },
+                { id: "tetheros", name: "TetherOS Built-in", desc: "System default" }
+              ].map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setProvider(p.id)}
+                  className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                    provider === p.id 
+                      ? "border-foreground bg-foreground/5 font-bold" 
+                      : "border-border bg-background hover:border-foreground/30"
+                  }`}
+                >
+                  <div className="text-xs font-bold">{p.name}</div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5">{p.desc}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {provider !== "tetheros" && (
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center justify-between">
+                <span>{provider === "openai" ? "OpenAI API Key" : "Google Gemini API Key"}</span>
+                <span className="text-[10px] text-muted-foreground font-normal">Stored locally in client browser</span>
+              </label>
+              <div className="relative">
+                <Key className="absolute left-3.5 top-3 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="password"
+                  placeholder={provider === "openai" ? "sk-proj-..." : "AIzaSy..."}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className="w-full rounded-xl border border-border bg-background pl-10 pr-4 py-2.5 text-xs font-mono outline-none focus:border-foreground"
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="pt-2 flex items-center justify-between">
+            {savedStatus ? (
+              <span className="text-xs font-bold text-emerald-500 flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4" /> API Key & Preference Saved Successfully!
+              </span>
+            ) : (
+              <span className="text-[10px] text-muted-foreground">Your custom key will be used for all AI calls across TetherOS.</span>
+            )}
+            <button
+              onClick={handleSave}
+              className="px-5 py-2.5 rounded-xl bg-foreground text-background text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
+            >
+              Save Key & Preferences
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function AccountTab() {
   return (
     <>
@@ -61,10 +161,9 @@ function AccountTab() {
         <div className="bg-card border border-border rounded-2xl p-6">
           <div className="flex items-center gap-6 mb-6 pb-6 border-b border-border">
             <div className="relative">
-              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-orange-300 to-pink-500 shadow-inner" />
-              <button className="absolute -bottom-2 -right-2 bg-foreground text-background text-[10px] font-bold px-2 py-1 rounded-full border-2 border-card hover:opacity-90 transition-opacity">
-                Edit
-              </button>
+              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-neutral-300 to-neutral-700 shadow-inner flex items-center justify-center font-bold text-xl text-white">
+                HM
+              </div>
             </div>
             <div>
               <div className="font-semibold text-sm mb-1">Avatar</div>
@@ -77,309 +176,91 @@ function AccountTab() {
           <div className="space-y-4">
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Display Name</label>
-              <input type="text" defaultValue="HarryMofoka" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
+              <input type="text" defaultValue="Harry Mofoka" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-foreground" />
             </div>
             <div className="grid gap-2">
               <label className="text-xs font-semibold">Job Title</label>
-              <input type="text" defaultValue="Software Engineer" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
-            </div>
-            <div className="grid gap-2">
-              <label className="text-xs font-semibold">Bio</label>
-              <textarea defaultValue="Building cool things on the internet." className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50 resize-none h-24" />
+              <input type="text" defaultValue="Product & Software Creator" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-foreground" />
             </div>
           </div>
         </div>
       </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4 text-red-500">Danger Zone</h3>
-        <div className="border border-red-500/20 bg-red-500/5 rounded-2xl p-6 flex items-center justify-between">
-          <div>
-            <h4 className="font-semibold text-sm text-red-500 mb-1">Delete Account</h4>
-            <p className="text-xs text-red-500/80">Permanently delete your account and all associated data.</p>
-          </div>
-          <button className="px-4 py-2 bg-red-500 text-white text-xs font-bold rounded-lg hover:bg-red-600 transition-colors">
-            Delete Account
-          </button>
-        </div>
-      </section>
-
-      <SaveFooter />
     </>
   );
 }
 
 function AppearanceTab() {
   return (
-    <>
-      <section>
-        <h3 className="text-lg font-bold mb-4">Theme</h3>
-        <div className="bg-card border border-border rounded-2xl p-6">
-          <div className="grid grid-cols-3 gap-4">
-            <div className="border-2 border-[color:var(--brand-blue)] rounded-xl p-4 bg-zinc-950 flex flex-col items-center gap-3 cursor-pointer">
-              <MonitorSmartphone className="h-8 w-8 text-white" />
-              <span className="text-xs font-semibold text-white">System</span>
-            </div>
-            <div className="border border-border rounded-xl p-4 bg-white flex flex-col items-center gap-3 cursor-pointer hover:border-muted-foreground/30">
-              <SunIcon className="h-8 w-8 text-black" />
-              <span className="text-xs font-semibold text-black">Light</span>
-            </div>
-            <div className="border border-border rounded-xl p-4 bg-zinc-950 flex flex-col items-center gap-3 cursor-pointer hover:border-muted-foreground/30">
-              <Moon className="h-8 w-8 text-white" />
-              <span className="text-xs font-semibold text-white">Dark</span>
-            </div>
+    <section>
+      <h3 className="text-lg font-bold mb-4">Theme</h3>
+      <div className="bg-card border border-border rounded-2xl p-6">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="border-2 border-foreground rounded-xl p-4 bg-background flex flex-col items-center gap-3 cursor-pointer">
+            <MonitorSmartphone className="h-8 w-8 text-foreground" />
+            <span className="text-xs font-semibold">Monochrome System</span>
           </div>
         </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4">Accent Color</h3>
-        <div className="bg-card border border-border rounded-2xl p-6">
-          <div className="flex gap-4">
-            <ColorDot color="bg-blue-500" active />
-            <ColorDot color="bg-purple-500" />
-            <ColorDot color="bg-orange-500" />
-            <ColorDot color="bg-green-500" />
-            <ColorDot color="bg-pink-500" />
-            <ColorDot color="bg-zinc-500" />
-          </div>
-        </div>
-      </section>
-      <SaveFooter />
-    </>
+      </div>
+    </section>
   );
 }
 
 function NotificationsTab() {
   return (
-    <>
-      <section>
-        <h3 className="text-lg font-bold mb-4">Email Notifications</h3>
-        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
-          <ToggleRow label="Weekly Digest" desc="Receive a weekly summary of your productivity and habits." defaultChecked />
-          <ToggleRow label="Product Updates" desc="News, feature releases, and announcements." defaultChecked={false} />
-          <ToggleRow label="Tips & Tutorials" desc="Advice on how to get the most out of TetherOS." defaultChecked />
+    <section>
+      <h3 className="text-lg font-bold mb-4">Notifications</h3>
+      <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-sm font-bold">AI Habit Nudges</div>
+            <div className="text-xs text-muted-foreground">Receive daily AI recommendations for habit streaks.</div>
+          </div>
+          <div className="h-5 w-9 rounded-full bg-foreground p-0.5">
+            <div className="h-4 w-4 rounded-full bg-background translate-x-4 transition-transform" />
+          </div>
         </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4">Push Notifications</h3>
-        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
-          <ToggleRow label="Focus Session Alerts" desc="Get notified when a Pomodoro session or break ends." defaultChecked />
-          <ToggleRow label="Daily Reminders" desc="A gentle nudge to complete your daily habits." defaultChecked />
-          <ToggleRow label="Task Deadlines" desc="Alerts for tasks due within 24 hours." defaultChecked />
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
 function BillingTab() {
   return (
-    <>
-      <section>
-        <h3 className="text-lg font-bold mb-4">Current Plan</h3>
-        <div className="bg-card border border-[color:var(--brand-blue)]/50 rounded-2xl p-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[color:var(--brand-blue)]/10 rounded-bl-full" />
-          <div className="relative z-10 flex items-start justify-between">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[color:var(--brand-blue)]/10 text-[color:var(--brand-blue)] text-[10px] font-bold uppercase tracking-widest mb-3">
-                <CheckCircle2 className="h-3 w-3" /> Active
-              </div>
-              <h4 className="text-2xl font-bold mb-1">TetherOS Pro</h4>
-              <p className="text-sm text-muted-foreground mb-6">Unlimited projects, AI Coach, and priority support.</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-black">$12</span>
-                <span className="text-sm text-muted-foreground font-medium">/ month</span>
-              </div>
+    <section>
+      <h3 className="text-lg font-bold mb-4">Current Plan</h3>
+      <div className="bg-card border border-border rounded-2xl p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-foreground/10 text-foreground text-[10px] font-bold uppercase tracking-widest mb-2">
+              <CheckCircle2 className="h-3 w-3" /> Active Beta
             </div>
-            <button className="px-4 py-2 bg-foreground text-background text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
-              Manage Plan
-            </button>
+            <h4 className="text-2xl font-bold">TetherOS Enterprise Pro</h4>
           </div>
         </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4">Payment Method</h3>
-        <div className="bg-card border border-border rounded-2xl p-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-10 w-16 bg-muted rounded-md flex items-center justify-center font-bold text-xs border border-border">
-              VISA
-            </div>
-            <div>
-              <div className="font-semibold text-sm">Visa ending in 4242</div>
-              <div className="text-xs text-muted-foreground">Expires 12/2026</div>
-            </div>
-          </div>
-          <button className="text-xs font-semibold hover:text-[color:var(--brand-blue)] transition-colors">Edit</button>
-        </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4">Billing History</h3>
-        <div className="bg-card border border-border rounded-2xl overflow-hidden">
-          <div className="divide-y divide-border">
-            <InvoiceRow date="Feb 01, 2025" amount="$12.00" status="Paid" />
-            <InvoiceRow date="Jan 01, 2025" amount="$12.00" status="Paid" />
-            <InvoiceRow date="Dec 01, 2024" amount="$12.00" status="Paid" />
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
 function SecurityTab() {
   return (
-    <>
-      <section>
-        <h3 className="text-lg font-bold mb-4">Password</h3>
-        <div className="bg-card border border-border rounded-2xl p-6">
-          <div className="space-y-4 max-w-sm">
-            <div className="grid gap-2">
-              <label className="text-xs font-semibold">Current Password</label>
-              <input type="password" placeholder="********" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
-            </div>
-            <div className="grid gap-2">
-              <label className="text-xs font-semibold">New Password</label>
-              <input type="password" placeholder="********" className="bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-[color:var(--brand-blue)]/50" />
-            </div>
-            <button className="mt-2 px-4 py-2 bg-foreground text-background text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
-              Update Password
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-bold mb-4">Two-Factor Authentication</h3>
-        <div className="bg-card border border-border rounded-2xl p-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-12 w-12 bg-[color:var(--brand-blue)]/10 rounded-full flex items-center justify-center text-[color:var(--brand-blue)]">
-              <KeyRound className="h-6 w-6" />
-            </div>
-            <div>
-              <div className="font-semibold text-sm mb-1">Authenticator App</div>
-              <div className="text-xs text-muted-foreground">Add an extra layer of security to your account.</div>
-            </div>
-          </div>
-          <button className="px-4 py-2 bg-foreground text-background text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
-            Enable 2FA
-          </button>
-        </div>
-      </section>
-    </>
+    <section>
+      <h3 className="text-lg font-bold mb-4">Security</h3>
+      <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
+        <div className="text-sm font-bold">Password & 2FA</div>
+        <p className="text-xs text-muted-foreground">Two-factor authentication is active on your TetherOS account.</p>
+      </div>
+    </section>
   );
 }
 
 function DevicesTab() {
   return (
     <section>
-      <h3 className="text-lg font-bold mb-4">Logged In Devices</h3>
-      <p className="text-xs text-muted-foreground mb-6">These devices are currently signed in to your account. Revoke access if you don't recognize them.</p>
-      
-      <div className="bg-card border border-border rounded-2xl overflow-hidden divide-y divide-border">
-        <DeviceRow 
-          icon={<Laptop className="h-5 w-5" />}
-          name="MacBook Pro 16&quot;"
-          location="San Francisco, CA"
-          time="Active now"
-          current
-        />
-        <DeviceRow 
-          icon={<Smartphone className="h-5 w-5" />}
-          name="iPhone 14 Pro"
-          location="San Francisco, CA"
-          time="Last active 2 hours ago"
-        />
-        <DeviceRow 
-          icon={<Laptop className="h-5 w-5" />}
-          name="Chrome on Windows"
-          location="New York, NY"
-          time="Last active 3 days ago"
-        />
+      <h3 className="text-lg font-bold mb-4">Devices</h3>
+      <div className="bg-card border border-border rounded-2xl p-6">
+        <div className="text-xs text-muted-foreground">MacBook Pro 16&quot; • Active now</div>
       </div>
     </section>
   );
-}
-
-// ----------------------------------------------------------------------
-// HELPER COMPONENTS
-// ----------------------------------------------------------------------
-
-function SaveFooter() {
-  return (
-    <div className="flex justify-end gap-3 pt-6 border-t border-border">
-      <button className="px-4 py-2 rounded-lg text-sm font-medium hover:bg-muted transition-colors">Cancel</button>
-      <button className="px-4 py-2 rounded-lg bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity">Save Changes</button>
-    </div>
-  );
-}
-
-function ColorDot({ color, active }: { color: string; active?: boolean }) {
-  return (
-    <div className={`h-8 w-8 rounded-full ${color} cursor-pointer flex items-center justify-center transition-transform hover:scale-110 ${active ? "ring-2 ring-foreground ring-offset-2 ring-offset-background" : ""}`}>
-      {active && <CheckCircle2 className="h-4 w-4 text-white" />}
-    </div>
-  );
-}
-
-function ToggleRow({ label, desc, defaultChecked }: { label: string; desc: string; defaultChecked?: boolean }) {
-  const [checked, setChecked] = useState(defaultChecked);
-  return (
-    <div className="flex items-center justify-between cursor-pointer" onClick={() => setChecked(!checked)}>
-      <div>
-        <div className="font-semibold text-sm mb-0.5">{label}</div>
-        <div className="text-xs text-muted-foreground">{desc}</div>
-      </div>
-      <div className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${checked ? "bg-[color:var(--brand-blue)]" : "bg-muted"}`}>
-        <span className={`inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${checked ? "translate-x-4" : "translate-x-0"}`} />
-      </div>
-    </div>
-  );
-}
-
-function InvoiceRow({ date, amount, status }: { date: string; amount: string; status: string }) {
-  return (
-    <div className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
-      <div className="flex items-center gap-6">
-        <div className="text-sm font-semibold w-24">{date}</div>
-        <div className="text-sm font-medium">{amount}</div>
-        <div className="text-[10px] font-bold uppercase tracking-wider text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">{status}</div>
-      </div>
-      <button className="p-1.5 hover:bg-muted rounded-md text-muted-foreground"><Download className="h-4 w-4" /></button>
-    </div>
-  );
-}
-
-function DeviceRow({ icon, name, location, time, current }: { icon: React.ReactNode; name: string; location: string; time: string; current?: boolean }) {
-  return (
-    <div className="flex items-center justify-between p-4">
-      <div className="flex items-center gap-4">
-        <div className="h-10 w-10 bg-muted rounded-xl flex items-center justify-center text-foreground">
-          {icon}
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <div className="font-semibold text-sm">{name}</div>
-            {current && <span className="text-[9px] font-bold uppercase tracking-wider text-[color:var(--brand-blue)] bg-[color:var(--brand-blue)]/10 px-1.5 py-0.5 rounded-sm">Current</span>}
-          </div>
-          <div className="text-xs text-muted-foreground mt-0.5">{location} * {time}</div>
-        </div>
-      </div>
-      {!current && (
-        <button className="p-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors">
-          <LogOut className="h-4 w-4" />
-        </button>
-      )}
-    </div>
-  );
-}
-
-function SunIcon(props: any) {
-  return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
-}
-function Moon(props: any) {
-  return <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>;
 }

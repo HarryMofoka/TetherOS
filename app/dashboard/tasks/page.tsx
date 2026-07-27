@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, MoreHorizontal, MessageSquare, ChevronRight, ChevronLeft, X } from "lucide-react";
+import { Plus, MoreHorizontal, MessageSquare, ChevronRight, ChevronLeft, X, Sparkles, Loader2 } from "lucide-react";
 import { useMockData, Task, TaskStatus, Priority } from "@/components/providers/MockDataProvider";
 
 export default function TasksPage() {
@@ -22,12 +22,17 @@ export default function TasksPage() {
     <div className="flex flex-col h-full relative">
       <div className="flex items-center justify-between px-8 pt-6">
         <div>
-          <h1 className="text-2xl font-bold">Tasks ✅</h1>
-          <p className="text-xs text-muted-foreground">Manage your workflow.</p>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            Tasks ✅
+            <span className="rounded-full bg-foreground/10 text-foreground px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+              <Sparkles className="h-3 w-3" /> AI Breakdown Enabled
+            </span>
+          </h1>
+          <p className="text-xs text-muted-foreground">Manage your workflow and break down tasks using AI.</p>
         </div>
         <button 
           onClick={() => openModal("To Do")}
-          className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors cursor-pointer"
         >
           <Plus className="h-4 w-4" /> New Task
         </button>
@@ -37,13 +42,17 @@ export default function TasksPage() {
         <div className="flex gap-6 min-w-max h-full items-start">
           <TaskColumn title="To Do" count={todoTasks.length} onAdd={() => openModal("To Do")}>
             {todoTasks.map(t => (
-              <TaskCard key={t.id} task={t} onMoveRight={() => updateTaskStatus(t.id, "In Progress")} />
+              <TaskCard key={t.id} task={t} onMoveRight={() => updateTaskStatus(t.id, "In Progress")} onAddSubtasks={(subtasks) => {
+                subtasks.forEach(s => addTask({ title: s, tag: t.tag, priority: t.priority, status: "To Do" }));
+              }} />
             ))}
           </TaskColumn>
           
           <TaskColumn title="In Progress" count={inProgressTasks.length} onAdd={() => openModal("In Progress")}>
             {inProgressTasks.map(t => (
-              <TaskCard key={t.id} task={t} onMoveLeft={() => updateTaskStatus(t.id, "To Do")} onMoveRight={() => updateTaskStatus(t.id, "Done")} />
+              <TaskCard key={t.id} task={t} onMoveLeft={() => updateTaskStatus(t.id, "To Do")} onMoveRight={() => updateTaskStatus(t.id, "Done")} onAddSubtasks={(subtasks) => {
+                subtasks.forEach(s => addTask({ title: s, tag: t.tag, priority: t.priority, status: "In Progress" }));
+              }} />
             ))}
           </TaskColumn>
 
@@ -78,7 +87,7 @@ function TaskColumn({ title, count, children, onAdd }: { title: string; count: n
       </div>
       <div className="flex flex-col gap-3 rounded-2xl bg-card border border-border p-3 min-h-[500px]">
         {children}
-        <button onClick={onAdd} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground p-2 transition-colors">
+        <button onClick={onAdd} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground p-2 transition-colors cursor-pointer">
           <Plus className="h-3 w-3" /> Add task
         </button>
       </div>
@@ -86,27 +95,81 @@ function TaskColumn({ title, count, children, onAdd }: { title: string; count: n
   );
 }
 
-function TaskCard({ task, onMoveLeft, onMoveRight }: { task: Task; onMoveLeft?: () => void; onMoveRight?: () => void }) {
+function TaskCard({ task, onMoveLeft, onMoveRight, onAddSubtasks }: { task: Task; onMoveLeft?: () => void; onMoveRight?: () => void; onAddSubtasks?: (subtasks: string[]) => void }) {
+  const [loadingAi, setLoadingAi] = useState(false);
   const pColor = task.priority === "High" ? "text-red-500 bg-red-500/10" : task.priority === "Medium" ? "text-orange-500 bg-orange-500/10" : "text-green-500 bg-green-500/10";
+
+  const handleAiBreakdown = async () => {
+    if (loadingAi || !onAddSubtasks) return;
+    setLoadingAi(true);
+
+    try {
+      const userKey = localStorage.getItem("tetheros_user_ai_key") || "";
+      const provider = localStorage.getItem("tetheros_ai_provider") || "tetheros";
+
+      const res = await fetch("/api/ai/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "breakdown_task",
+          prompt: task.title,
+          apiKey: userKey,
+          provider,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.subtasks && Array.isArray(data.subtasks)) {
+        onAddSubtasks(data.subtasks);
+      }
+    } catch {
+      // Fallback subtasks
+      onAddSubtasks([
+        `Spec out requirements for "${task.title}"`,
+        `Execute core implementation`,
+        `Test and deploy`
+      ]);
+    } finally {
+      setLoadingAi(false);
+    }
+  };
+
   return (
-    <div className="group rounded-xl border border-border bg-background p-3 shadow-sm hover:shadow transition-all relative">
-      <div className="flex flex-wrap gap-2 mb-2">
-        <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${pColor}`}>{task.priority}</span>
-        <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground">{task.tag}</span>
+    <div className="group rounded-xl border border-border bg-background p-3 shadow-sm hover:shadow transition-all relative space-y-2">
+      <div className="flex items-center justify-between">
+        <div className="flex flex-wrap gap-1.5">
+          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${pColor}`}>{task.priority}</span>
+          <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground">{task.tag}</span>
+        </div>
+        {onAddSubtasks && (
+          <button
+            onClick={handleAiBreakdown}
+            disabled={loadingAi}
+            className="text-[10px] font-bold text-foreground hover:bg-muted p-1 rounded inline-flex items-center gap-1 transition-colors cursor-pointer"
+            title="Use AI to break this task into subtasks"
+          >
+            {loadingAi ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3 text-emerald-500" />}
+            AI Breakdown
+          </button>
+        )}
       </div>
-      <div className="text-sm font-medium mb-3">{task.title}</div>
-      <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/50 text-muted-foreground">
+
+      <div className="text-sm font-medium">{task.title}</div>
+
+      <div className="flex items-center justify-between pt-2 border-t border-border/50 text-muted-foreground">
         <div className="flex -space-x-2">
-          <div className="h-6 w-6 rounded-full border-2 border-background bg-gradient-to-br from-foreground/20 to-foreground/40" />
+          <div className="h-5 w-5 rounded-full border border-background bg-foreground text-background text-[9px] font-black flex items-center justify-center">
+            HM
+          </div>
         </div>
         <div className="flex items-center gap-2 text-[10px]">
           {onMoveLeft && (
-            <button onClick={onMoveLeft} className="p-1 hover:bg-muted rounded text-foreground transition-colors opacity-0 group-hover:opacity-100" title="Move Left">
+            <button onClick={onMoveLeft} className="p-1 hover:bg-muted rounded text-foreground transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Move Left">
               <ChevronLeft className="h-3 w-3" />
             </button>
           )}
           {onMoveRight && (
-            <button onClick={onMoveRight} className="p-1 hover:bg-muted rounded text-foreground transition-colors opacity-0 group-hover:opacity-100" title="Move Right">
+            <button onClick={onMoveRight} className="p-1 hover:bg-muted rounded text-foreground transition-colors opacity-0 group-hover:opacity-100 cursor-pointer" title="Move Right">
               <ChevronRight className="h-3 w-3" />
             </button>
           )}
