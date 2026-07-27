@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, CheckCircle2, Sparkles, Target, Zap, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Target, Zap, Clock, ShieldCheck, Key, Bot } from "lucide-react";
 import { MockDataProvider, useMockData } from "@/components/providers/MockDataProvider";
 
 function OnboardingContent() {
@@ -19,6 +19,8 @@ function OnboardingContent() {
     "No Distractions Focus Session"
   ]);
   const [topTask, setTopTask] = useState("");
+  const [aiProvider, setAiProvider] = useState("openai");
+  const [userApiKey, setUserApiKey] = useState("");
 
   const availableHabits = [
     "Morning 10m Meditation",
@@ -38,6 +40,12 @@ function OnboardingContent() {
   };
 
   const handleFinish = () => {
+    // Save AI Key & Provider
+    localStorage.setItem("tetheros_ai_provider", aiProvider);
+    if (userApiKey.trim()) {
+      localStorage.setItem("tetheros_user_ai_key", userApiKey.trim());
+    }
+
     // Populate user starter data
     selectedHabits.forEach(h => {
       addHabit(h);
@@ -245,38 +253,66 @@ function OnboardingContent() {
                 onClick={() => setStep(4)}
                 className="w-2/3 py-3.5 rounded-2xl bg-foreground text-background font-bold text-sm hover:opacity-90 flex items-center justify-center gap-2 cursor-pointer"
               >
-                Final Step <ArrowRight className="h-4 w-4" />
+                AI & API Key Setup <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </div>
         )}
 
         {step === 4 && (
-          <div className="space-y-6 text-center animate-fade-in-up">
-            <div className="mx-auto h-16 w-16 rounded-3xl bg-foreground text-background flex items-center justify-center shadow-lg">
-              <Sparkles className="h-8 w-8 animate-pulse" />
-            </div>
-
-            <div className="space-y-2">
-              <h1 className="text-3xl font-black tracking-tight">Your TetherOS workspace is ready!</h1>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                We customized your dashboard, habits tracker, and AI Coach parameters based on your <span className="font-bold text-foreground font-mono">{focusHours} hours/day</span> target.
+          <div className="space-y-6 animate-fade-in-up">
+            <div className="space-y-2 text-center md:text-left">
+              <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground inline-flex items-center gap-1.5">
+                <Bot className="h-3.5 w-3.5" /> Step 4 of 4
+              </span>
+              <h1 className="text-3xl font-extrabold tracking-tight">
+                Connect your AI Engine & Key
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Load your API key to power your AI Coach and task breakdown engine.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl border border-border bg-card text-left space-y-2 text-xs">
-              <div className="font-bold text-foreground">Summary of initial setup:</div>
-              <ul className="space-y-1.5 text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Focus Goal: {goal}
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Active Starter Habits: {selectedHabits.length} selected
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Daily Focus Target: {focusHours} Hours
-                </li>
-              </ul>
+            <div className="p-5 rounded-2xl border border-border bg-card space-y-4">
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider">AI Engine Provider</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { id: "openai", name: "OpenAI" },
+                    { id: "gemini", name: "Google Gemini" },
+                    { id: "tetheros", name: "TetherOS Default" }
+                  ].map((p) => (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => setAiProvider(p.id)}
+                      className={`p-3 rounded-xl border text-center text-xs font-bold transition-all cursor-pointer ${
+                        aiProvider === p.id ? "border-foreground bg-foreground text-background" : "border-border bg-background text-foreground"
+                      }`}
+                    >
+                      {p.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {aiProvider !== "tetheros" && (
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                    {aiProvider === "openai" ? "OpenAI API Key (sk-...)" : "Google Gemini Key (AIzaSy...)"}
+                  </label>
+                  <div className="relative">
+                    <Key className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <input
+                      type="password"
+                      placeholder={aiProvider === "openai" ? "sk-proj-..." : "AIzaSy..."}
+                      value={userApiKey}
+                      onChange={(e) => setUserApiKey(e.target.value)}
+                      className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs font-mono outline-none focus:border-foreground"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             <button

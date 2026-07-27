@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
+import { sanitizeObject } from "@/lib/security/sanitizer";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { action, prompt, contextData, apiKey, provider } = body;
-
-    // Header override or body key override
-    const activeApiKey = apiKey || request.headers.get("x-ai-api-key") || process.env.OPENAI_API_KEY || process.env.GEMINI_API_KEY;
+    const rawBody = await request.json();
+    const body = sanitizeObject(rawBody);
+    const { action, prompt, apiKey, provider } = body;
 
     if (!prompt && !action) {
       return NextResponse.json({ error: "Missing action or prompt" }, { status: 400 });
@@ -50,7 +49,6 @@ export async function POST(request: Request) {
 
     // 3. AI Journal Reflection Sentiment & Insights
     if (action === "analyze_journal") {
-      const journalText = prompt || "";
       return NextResponse.json({
         success: true,
         action,

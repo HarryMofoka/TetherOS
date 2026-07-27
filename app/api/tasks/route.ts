@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
+import { sanitizeObject } from "@/lib/security/sanitizer";
 
-// In-memory fallback dataset for initial testing
 let mockTasks = [
   { id: "1", title: "Draft Q1 OKRs", tag: "Work", priority: "High", status: "To Do" },
   { id: "2", title: "Buy groceries", tag: "Personal", priority: "Medium", status: "To Do" },
@@ -17,7 +17,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const rawBody = await request.json();
+    const body = sanitizeObject(rawBody);
+
     const newTask = {
       id: Math.random().toString(36).substring(2, 9),
       title: body.title || "Untitled Task",
@@ -34,8 +36,10 @@ export async function POST(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
-    const body = await request.json();
+    const rawBody = await request.json();
+    const body = sanitizeObject(rawBody);
     const { id, status, title, priority } = body;
+
     mockTasks = mockTasks.map((t) =>
       t.id === id ? { ...t, ...(status && { status }), ...(title && { title }), ...(priority && { priority }) } : t
     );

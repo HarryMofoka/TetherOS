@@ -7,8 +7,7 @@ import {
   Grid, Clock, Calendar as CalIcon, CheckSquare, Repeat, Folder, Book, 
   MessageSquare, BarChart, Timer, FileText, Bookmark, Plug, ChevronDown, 
   Settings as SettingsIcon, ChevronLeft, ChevronRight, Menu, X, Table2, 
-  FormInput, UserCircle, Ticket, BookOpen, Lock, LogIn, UserPlus, Key, 
-  ShieldCheck, AlertTriangle, LifeBuoy 
+  FormInput, UserCircle, LogIn, AlertTriangle
 } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 
@@ -50,27 +49,6 @@ const sidebarSections: MenuSection[] = [
       { icon: MessageSquare, label: "AI Coach", desc: "Personalized guidance", href: "/dashboard/coach" },
       { icon: BarChart, label: "Reports", desc: "Analytics & progress", href: "/dashboard/reports" },
       { icon: FileText, label: "Notes & Capture", desc: "Scratchpad & quick thoughts", href: "/apps/notes" },
-      {
-        icon: BookOpen,
-        label: "Insights & Articles",
-        desc: "Productivity guides",
-        subItems: [
-          { label: "Articles Listing", href: "/apps/blog/post" },
-          { label: "Article Detail", href: "/apps/blog/detail/1" },
-          { label: "Create Guide", href: "/apps/blog/create" },
-          { label: "Edit Guide", href: "/apps/blog/edit" },
-          { label: "Manage Content", href: "/apps/blog/manage-blog" },
-        ],
-      },
-      {
-        icon: Ticket,
-        label: "Support Tickets",
-        desc: "Feedback & requests",
-        subItems: [
-          { label: "Tickets List", href: "/apps/tickets" },
-          { label: "Create Ticket", href: "/apps/tickets/create" },
-        ],
-      },
     ],
   },
   {
@@ -122,8 +100,6 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({
-    "Insights & Articles": false,
-    "Support Tickets": false,
     "Authentication": false,
     "System Pages": false,
   });
@@ -170,16 +146,6 @@ export function Sidebar() {
             <div>
               <h4 className="font-bold leading-none">Harry</h4>
               <p className="text-xs text-muted-foreground mt-1">harry.mofoka@example.com</p>
-            </div>
-          </div>
-          <div className="space-y-3 text-xs mb-4">
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground font-medium">Subscription</span>
-              <span className="font-bold text-foreground bg-muted px-2 py-0.5 rounded-full uppercase tracking-wider text-[9px]">TetherOS Pro</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground font-medium">Cloud Storage</span>
-              <span className="font-semibold">4.2 GB <span className="text-muted-foreground font-normal">/ 10 GB</span></span>
             </div>
           </div>
           <button className="w-full rounded-xl bg-red-500/10 text-red-500 py-2.5 text-xs font-bold hover:bg-red-500/20 transition-colors">
