@@ -6,11 +6,15 @@ import { useMockData } from "@/components/providers/MockDataProvider";
 export function TotalAssets() {
   const { tasks, habits, projects } = useMockData();
 
+  const completedTasks = tasks.filter(t => t.status === "Done").length;
+  const maxStreak = habits.reduce((max, h) => Math.max(max, h.streak), 0);
+  const activeProjects = projects.filter(p => p.status !== "Completed").length;
+
   const assets = [
-    { title: "Tasks Completed", value: tasks.filter(t => t.status === "Done").length, icon: CheckSquare, label: "Total Done" },
-    { title: "Current Streak", value: "9 Days", icon: Flame, label: "Habits Streak" },
-    { title: "Focus Time", value: "18h 42m", icon: Timer, label: "This Week" },
-    { title: "Active Projects", value: projects.length, icon: Folder, label: "Milestones" },
+    { title: "Tasks Completed", value: completedTasks, icon: CheckSquare, label: "Total Done" },
+    { title: "Best Habit Streak", value: `${maxStreak} Days`, icon: Flame, label: "Current Best" },
+    { title: "Focus Time", value: "—", icon: Timer, label: "Use Focus Timer" },
+    { title: "Active Projects", value: activeProjects, icon: Folder, label: "In Progress" },
   ];
 
   return (

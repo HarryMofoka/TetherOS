@@ -3,11 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, Sparkles, Target, Zap, Clock, ShieldCheck, Key, Bot } from "lucide-react";
-import { MockDataProvider, useMockData } from "@/components/providers/MockDataProvider";
 
-function OnboardingContent() {
+export default function OnboardingPage() {
   const router = useRouter();
-  const { addTask, addHabit } = useMockData();
   const [step, setStep] = useState(1);
 
   // Form State
@@ -19,7 +17,7 @@ function OnboardingContent() {
     "No Distractions Focus Session"
   ]);
   const [topTask, setTopTask] = useState("");
-  const [aiProvider, setAiProvider] = useState("openai");
+  const [aiProvider, setAiProvider] = useState("tetheros");
   const [userApiKey, setUserApiKey] = useState("");
 
   const availableHabits = [
@@ -46,16 +44,38 @@ function OnboardingContent() {
       localStorage.setItem("tetheros_user_ai_key", userApiKey.trim());
     }
 
-    // Populate user starter data
-    selectedHabits.forEach(h => {
-      addHabit(h);
-    });
+    // Save user preferences
+    localStorage.setItem("tetheros_user_goal", goal);
+    localStorage.setItem("tetheros_focus_hours", focusHours);
 
+    // Populate starter habits
+    const starterHabits = selectedHabits.map((name, i) => ({
+      id: Math.random().toString(36).substr(2, 9),
+      name,
+      streak: 0,
+      completedToday: false,
+    }));
+    localStorage.setItem("tetheros_habits", JSON.stringify(starterHabits));
+
+    // Populate starter task (user's #1 priority or a sensible default)
+    const starterTasks = [];
     if (topTask.trim()) {
-      addTask({ title: topTask.trim(), tag: "Personal", priority: "High", status: "To Do" });
-    } else {
-      addTask({ title: "Set up first project milestone", tag: "Work", priority: "High", status: "To Do" });
+      starterTasks.push({
+        id: Math.random().toString(36).substr(2, 9),
+        title: topTask.trim(),
+        tag: "Personal",
+        priority: "High",
+        status: "To Do"
+      });
     }
+    localStorage.setItem("tetheros_tasks", JSON.stringify(starterTasks));
+
+    // Clear default projects and events — user starts fresh
+    localStorage.setItem("tetheros_projects", JSON.stringify([]));
+    localStorage.setItem("tetheros_events", JSON.stringify([]));
+
+    // Mark onboarding complete
+    localStorage.setItem("tetheros_onboarded", "true");
 
     router.push("/dashboard");
   };
@@ -95,7 +115,7 @@ function OnboardingContent() {
                 Welcome! What is your main focus with TetherOS?
               </h1>
               <p className="text-sm text-muted-foreground">
-                We will personalize your layout and intelligent AI assistant based on your primary objective.
+                We&apos;ll personalize your layout and AI assistant based on your primary objective.
               </p>
             </div>
 
@@ -269,7 +289,7 @@ function OnboardingContent() {
                 Connect your AI Engine & Key
               </h1>
               <p className="text-sm text-muted-foreground">
-                Load your API key to power your AI Coach and task breakdown engine.
+                Load your API key to power your AI Coach and task breakdown engine. You can skip this and add it later in Settings.
               </p>
             </div>
 
@@ -280,7 +300,7 @@ function OnboardingContent() {
                   {[
                     { id: "openai", name: "OpenAI" },
                     { id: "gemini", name: "Google Gemini" },
-                    { id: "tetheros", name: "TetherOS Default" }
+                    { id: "tetheros", name: "Skip for Now" }
                   ].map((p) => (
                     <button
                       key={p.id}
@@ -315,12 +335,20 @@ function OnboardingContent() {
               )}
             </div>
 
-            <button
-              onClick={handleFinish}
-              className="w-full py-4 rounded-2xl bg-foreground text-background font-black text-base hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-md cursor-pointer"
-            >
-              Launch My TetherOS Dashboard 🚀
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setStep(3)}
+                className="w-1/3 py-3.5 rounded-2xl border border-border bg-card font-bold text-sm hover:bg-muted cursor-pointer"
+              >
+                Back
+              </button>
+              <button
+                onClick={handleFinish}
+                className="w-2/3 py-4 rounded-2xl bg-foreground text-background font-black text-base hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              >
+                Launch My TetherOS Dashboard 🚀
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -330,13 +358,5 @@ function OnboardingContent() {
         TetherOS Intelligence • Powered by AI
       </div>
     </div>
-  );
-}
-
-export default function OnboardingPage() {
-  return (
-    <MockDataProvider>
-      <OnboardingContent />
-    </MockDataProvider>
   );
 }

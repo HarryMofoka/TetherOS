@@ -2,8 +2,14 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { useMockData } from "@/components/providers/MockDataProvider";
 
 export function UpdateBanner() {
+  const { tasks, habits } = useMockData();
+
+  const completedTasks = tasks.filter(t => t.status === "Done").length;
+  const completedHabits = habits.filter(h => h.completedToday).length;
+
   return (
     <div className="rounded-2xl border border-border bg-card p-4 shadow-sm flex items-center justify-between flex-wrap gap-4">
       <div className="flex flex-col gap-1">
@@ -12,14 +18,14 @@ export function UpdateBanner() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground" />
           </span>
-          <span className="font-bold">System Update</span>
+          <span className="font-bold">Daily Summary</span>
           <span className="text-muted-foreground">•</span>
           <span className="text-muted-foreground font-medium">
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </span>
         </div>
         <p className="text-sm font-semibold text-foreground">
-          Life Score increased <span className="text-emerald-500 font-bold">+40%</span> this week based on completed habits & focus sessions.
+          You have completed <span className="text-emerald-500 font-bold">{completedTasks} tasks</span> and <span className="text-emerald-500 font-bold">{completedHabits} habits</span> today. Keep going!
         </p>
       </div>
 

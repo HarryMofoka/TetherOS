@@ -53,42 +53,14 @@ interface MockDataContextType {
   deleteEvent: (id: string) => void;
 }
 
-const defaultTasks: Task[] = [
-  { id: "1", title: "Draft Q1 OKRs", tag: "Work", priority: "High", status: "To Do" },
-  { id: "2", title: "Buy groceries", tag: "Personal", priority: "Medium", status: "To Do" },
-  { id: "3", title: "Schedule dentist appt", tag: "Health", priority: "Low", status: "To Do" },
-  { id: "4", title: "Build Auth Flow", tag: "Project", priority: "High", status: "In Progress" },
-  { id: "5", title: "Read 'Atomic Habits'", tag: "Personal", priority: "Medium", status: "In Progress" },
-  { id: "6", title: "Weekly Team Sync", tag: "Work", priority: "Low", status: "Done" },
-  { id: "7", title: "Review PRs", tag: "Project", priority: "Medium", status: "Done" },
-];
-
-const defaultHabits: Habit[] = [
-  { id: "1", name: "Read 20 pages", streak: 12, completedToday: true },
-  { id: "2", name: "Morning Workout", streak: 5, completedToday: false },
-  { id: "3", name: "Meditate 10m", streak: 3, completedToday: true },
-  { id: "4", name: "No Social Media", streak: 1, completedToday: false },
-];
-
-const defaultProjects: Project[] = [
-  { id: "1", name: "TetherOS Mobile App", status: "Behind", dueDate: "Mar 5, 2025", progressPct: 42 },
-  { id: "2", name: "Q1 Marketing Campaign", status: "Active", dueDate: "Apr 1, 2025", progressPct: 15 },
-  { id: "3", name: "Website Redesign", status: "Completed", dueDate: "Jan 15, 2025", progressPct: 100 },
-];
-
-const defaultEvents: EventItem[] = [
-  { id: "1", title: "Product Sync", date: "2025-02-12", time: "10:00 AM", type: "Meeting" },
-  { id: "2", title: "Deep Work: API Design", date: "2025-02-14", time: "1:00 PM", type: "Focus" },
-  { id: "3", title: "Gym Session", date: "2025-02-15", time: "5:30 PM", type: "Personal" },
-];
-
 const MockDataContext = createContext<MockDataContextType | undefined>(undefined);
 
 export function MockDataProvider({ children }: { children: React.ReactNode }) {
-  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
-  const [habits, setHabits] = useState<Habit[]>(defaultHabits);
-  const [projects, setProjects] = useState<Project[]>(defaultProjects);
-  const [events, setEvents] = useState<EventItem[]>(defaultEvents);
+  // Start with empty arrays — real data comes from localStorage after onboarding
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [events, setEvents] = useState<EventItem[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

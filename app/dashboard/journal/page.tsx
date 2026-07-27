@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { PenLine, Calendar as CalIcon, Save, Sparkles, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { PenLine, Calendar as CalIcon, Save, Sparkles, Loader2, Trash2 } from "lucide-react";
 
 interface JournalEntry {
   id: string;
@@ -10,51 +10,73 @@ interface JournalEntry {
   content: string;
 }
 
-const mockEntries: JournalEntry[] = [
-  {
-    id: "1",
-    date: "Today, Feb 11",
-    title: "Productive morning but afternoon slump",
-    content: "Today started off really well. I managed to get through the entire morning routine and hit a 2.5 hour deep work session where I built out the authentication flow. I'm really proud of how clean the code turned out.\n\nHowever, after lunch I completely hit a wall. The context switch to implementing the API endpoints was harder than expected, and I spent an hour just staring at the screen. I think I need to start taking slightly longer breaks in the middle of the day, or maybe go for a walk outside to reset my brain."
-  },
-  {
-    id: "2",
-    date: "Yesterday, Feb 10",
-    title: "Planning the week ahead",
-    content: "Spent the evening looking over the OKRs and scheduling time blocks. I feel prepared."
-  },
-  {
-    id: "3",
-    date: "Sunday, Feb 9",
-    title: "Rest and recharge",
-    content: "Took the day off. Read a book and went for a long walk."
+function formatDate(date: Date): string {
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  if (date.toDateString() === today.toDateString()) {
+    return `Today, ${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
   }
-];
+  if (date.toDateString() === yesterday.toDateString()) {
+    return `Yesterday, ${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
+  }
+  return date.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+}
 
 export default function JournalPage() {
-  const [entries, setEntries] = useState<JournalEntry[]>(mockEntries);
-  const [activeId, setActiveId] = useState<string>(mockEntries[0].id);
+  const [entries, setEntries] = useState<JournalEntry[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [analyzingAi, setAnalyzingAi] = useState(false);
   const [aiInsights, setAiInsights] = useState<{ sentiment: string; clarityScore: string; insights: string[] } | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Load entries from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("tetheros_journal");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setEntries(parsed);
+      if (parsed.length > 0) setActiveId(parsed[0].id);
+    }
+    setMounted(true);
+  }, []);
+
+  // Persist entries to localStorage
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem("tetheros_journal", JSON.stringify(entries));
+    }
+  }, [entries, mounted]);
 
   const activeEntry = entries.find(e => e.id === activeId);
 
   const handleNewEntry = () => {
     const newEntry: JournalEntry = {
       id: Math.random().toString(36).substr(2, 9),
-      date: `Today, Feb 11`,
+      date: formatDate(new Date()),
       title: "",
       content: ""
     };
     setEntries([newEntry, ...entries]);
     setActiveId(newEntry.id);
+    setAiInsights(null);
+  };
+
+  const handleDeleteEntry = (id: string) => {
+    const filtered = entries.filter(e => e.id !== id);
+    setEntries(filtered);
+    if (activeId === id) {
+      setActiveId(filtered.length > 0 ? filtered[0].id : null);
+    }
+    setAiInsights(null);
   };
 
   const updateEntry = (field: "title" | "content", value: string) => {
     setEntries(prev => prev.map(e => e.id === activeId ? { ...e, [field]: value } : e));
     setIsSaving(true);
-    setTimeout(() => setIsSaving(false), 1000);
+    setTimeout(() => setIsSaving(false), 800);
   };
 
   const handleAiAnalyze = async () => {
@@ -98,6 +120,8 @@ export default function JournalPage() {
     }
   };
 
+  if (!mounted) return <div className="h-screen w-full bg-background" />;
+
   return (
     <div className="flex h-[calc(100vh-80px)]">
       {/* Sidebar for Journal entries */}
@@ -113,13 +137,19 @@ export default function JournalPage() {
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          {entries.length === 0 && (
+            <div className="text-center py-8 text-muted-foreground text-xs">
+              No journal entries yet.<br />Click &quot;New Entry&quot; to start writing.
+            </div>
+          )}
           {entries.map(entry => (
             <JournalEntryCard 
               key={entry.id}
               date={entry.date} 
               title={entry.title || "Untitled Entry"} 
               active={entry.id === activeId} 
-              onClick={() => setActiveId(entry.id)}
+              onClick={() => { setActiveId(entry.id); setAiInsights(null); }}
+              onDelete={() => handleDeleteEntry(entry.id)}
             />
           ))}
         </div>
@@ -136,8 +166,8 @@ export default function JournalPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleAiAnalyze}
-                  disabled={analyzingAi}
-                  className="rounded-full bg-foreground/10 px-3 py-1 text-xs font-bold text-foreground hover:bg-foreground/20 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  disabled={analyzingAi || (!activeEntry.title && !activeEntry.content)}
+                  className="rounded-full bg-foreground/10 px-3 py-1 text-xs font-bold text-foreground hover:bg-foreground/20 transition-colors inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-40"
                 >
                   {analyzingAi ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5 text-emerald-500" />}
                   AI Reflection Insights
@@ -174,7 +204,7 @@ export default function JournalPage() {
             />
             
             <textarea 
-              placeholder="Start writing..." 
+              placeholder="Start writing your thoughts..." 
               className="min-h-[300px] bg-transparent border-none outline-none resize-none text-foreground/80 leading-relaxed placeholder:text-muted-foreground/30 text-sm"
               value={activeEntry.content}
               onChange={(e) => updateEntry("content", e.target.value)}
@@ -183,7 +213,7 @@ export default function JournalPage() {
         ) : (
           <div className="flex-1 flex items-center justify-center text-muted-foreground flex-col">
              <PenLine className="h-12 w-12 mb-4 opacity-20" />
-             <p>Select an entry to read or write</p>
+             <p className="text-sm">Create a new entry to begin journaling</p>
           </div>
         )}
       </div>
@@ -191,11 +221,18 @@ export default function JournalPage() {
   );
 }
 
-function JournalEntryCard({ date, title, active, onClick }: { date: string; title: string; active?: boolean; onClick: () => void }) {
+function JournalEntryCard({ date, title, active, onClick, onDelete }: { date: string; title: string; active?: boolean; onClick: () => void; onDelete: () => void }) {
   return (
-    <div onClick={onClick} className={`p-4 rounded-xl cursor-pointer transition-colors border ${active ? "bg-muted border-border" : "bg-transparent border-transparent hover:bg-muted/50"}`}>
+    <div onClick={onClick} className={`group p-4 rounded-xl cursor-pointer transition-colors border relative ${active ? "bg-muted border-border" : "bg-transparent border-transparent hover:bg-muted/50"}`}>
       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">{date}</div>
       <div className={`text-sm font-medium line-clamp-2 ${active ? "text-foreground" : "text-foreground/80"}`}>{title}</div>
+      <button 
+        onClick={(e) => { e.stopPropagation(); onDelete(); }} 
+        className="absolute top-3 right-3 p-1 text-muted-foreground hover:text-red-500 rounded opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+        title="Delete Entry"
+      >
+        <Trash2 className="h-3.5 w-3.5" />
+      </button>
     </div>
   );
 }
